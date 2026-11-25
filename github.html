@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f6f3">
+  <meta name="description" content="Guia Essencial de Git e GitHub — Material didático com comandos explicados, botões de cópia rápida, fluxo de trabalho e publicação no GitHub Pages.">
+  <title>Guia Git & GitHub | Antigravity Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="./assets/js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="./index.html" aria-label="Antigravity Lab, início">
+        <span class="brand-mark"><i data-lucide="orbit"></i></span>
+        <span>antigravity<span class="brand-dot">.</span><small>LAB</small></span>
+      </a>
+
+      <div class="sidebar-label">NAVEGAÇÃO</div>
+      <a class="nav-link" href="./index.html"><i data-lucide="layout-dashboard"></i> Início</a>
+      <a class="nav-link" href="./sobre.html"><i data-lucide="info"></i> Sobre o curso</a>
+      <a class="nav-link" href="./produtos.html"><i data-lucide="book-open"></i> Aulas</a>
+      <a class="nav-link active" href="./github.html"><i data-lucide="git-branch"></i> GitHub <i class="nav-arrow" data-lucide="arrow-up-right"></i></a>
+      <a class="nav-link" href="./supabase.html"><i data-lucide="layers"></i> Supabase</a>
+      <a class="nav-link" href="./mongodb.html"><i data-lucide="database"></i> MongoDB</a>
+      <a class="nav-link" href="./contato.html"><i data-lucide="mail"></i> Contato</a>
+
+      <div class="sidebar-bottom">
+        <div class="side-card">
+          <div class="side-card-icon"><i data-lucide="sparkles"></i></div>
+          <strong>Ideias em movimento.</strong>
+          <p>Aprenda, experimente e construa algo seu com inteligência artificial.</p>
+        </div>
+        <div class="side-footer"><span class="status-dot"></span> SEU LABORATÓRIO CRIATIVO</div>
+      </div>
+    </aside>
+
+    <div class="main-wrap">
+      <header class="topbar">
+        <div class="topbar-left">
+          <a class="mobile-brand" href="./index.html"><span class="brand-mark"><i data-lucide="orbit"></i></span> antigravity<span class="brand-dot">.</span></a>
+          <div class="breadcrumb"><span>Material Didático</span><i data-lucide="chevron-right"></i><strong>Git & GitHub</strong></div>
+        </div>
+        <div class="topbar-right">
+          <span class="top-label">GUIA TÉCNICO</span>
+          <span class="avatar">AL</span>
+          <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+            <i data-lucide="menu"></i>
+          </button>
+        </div>
+      </header>
+
+      <nav class="mobile-nav" id="mobile-nav-menu" aria-label="Navegação mobile">
+        <a class="mobile-nav-link" href="./index.html"><i data-lucide="layout-dashboard"></i> Início</a>
+        <a class="mobile-nav-link" href="./sobre.html"><i data-lucide="info"></i> Sobre o curso</a>
+        <a class="mobile-nav-link" href="./produtos.html"><i data-lucide="book-open"></i> Aulas</a>
+        <a class="mobile-nav-link active" href="./github.html"><i data-lucide="git-branch"></i> GitHub</a>
+        <a class="mobile-nav-link" href="./supabase.html"><i data-lucide="layers"></i> Supabase</a>
+        <a class="mobile-nav-link" href="./mongodb.html"><i data-lucide="database"></i> MongoDB</a>
+        <a class="mobile-nav-link" href="./contato.html"><i data-lucide="mail"></i> Contato</a>
+      </nav>
+
+      <main id="github-main">
+        <div class="page-heading">
+          <div>
+            <div class="eyebrow"><span></span> REFERÊNCIA TÉCNICA E PRÁTICA</div>
+            <h1>Guia Essencial de<br><em>Git e GitHub.</em></h1>
+            <p>Conceitos fundamentais, comandos explicados, diferenças de sincronização, fluxo de trabalho e boas práticas de segurança.</p>
+          </div>
+          <div class="heading-note">
+            <i data-lucide="terminal"></i>
+            <span>CONTROLE DE VERSÃO.<br>FLUXO CONTÍNUO.</span>
+          </div>
+        </div>
+
+        <!-- Conceitos Fundamentais -->
+        <section class="cards-grid-2">
+          <article class="content-card">
+            <div class="content-card-icon"><i data-lucide="hard-drive"></i></div>
+            <h3>O que é o Git?</h3>
+            <p>O <strong>Git</strong> é um sistema distribuído de controle de versões executado localmente na sua máquina. Ele cria registros pontuais (snapshots) do estado de cada arquivo do seu projeto, permitindo alternar entre versões, comparar linhas modificadas e criar ramificações paralelas com segurança.</p>
+          </article>
+
+          <article class="content-card">
+            <div class="content-card-icon"><i data-lucide="cloud"></i></div>
+            <h3>O que é o GitHub?</h3>
+            <p>O <strong>GitHub</strong> é uma plataforma online de hospedagem e colaboração para repositórios Git. Além de garantir backup na nuvem, ele permite publicar sites estáticos gratuitamente através do <strong>GitHub Pages</strong>, servindo HTML, CSS e JavaScript via HTTPS.</p>
+          </article>
+        </section>
+
+        <!-- Destaque: Diferenças Cruciais entre Fetch, Pull e Push -->
+        <section style="background:#fff; border:1px solid var(--line); border-radius:6px; padding:28px; margin-top:20px;">
+          <h3 style="font-family:var(--display); font-size:18px; margin:0 0 16px;">Sincronização Remota: Entenda as Diferenças Cruciais</h3>
+          <div class="cards-grid-3" style="margin:0;">
+            <div style="background:#f9faf8; border:1px solid var(--line); border-radius:5px; padding:18px;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <span class="command-badge">LEITURA SEGURA</span>
+                <strong style="color:var(--ink); font-size:13px;">git fetch</strong>
+              </div>
+              <p style="font-size:12px; color:var(--muted); line-height:1.6; margin:0;">
+                <strong>Busca atualizações do remoto sem integrar automaticamente.</strong> Ele baixa metadados e novos commits para você inspecionar antes de mesclar com seu código local.
+              </p>
+            </div>
+
+            <div style="background:#f9faf8; border:1px solid var(--line); border-radius:5px; padding:18px;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <span class="command-badge">INTEGRAÇÃO LOCAL</span>
+                <strong style="color:var(--ink); font-size:13px;">git pull</strong>
+              </div>
+              <p style="font-size:12px; color:var(--muted); line-height:1.6; margin:0;">
+                <strong>Busca e integra alterações ao branch local.</strong> Equivale a um <code>git fetch</code> seguido imediatamente de um <code>git merge</code>, atualizando seu ambiente de trabalho.
+              </p>
+            </div>
+
+            <div style="background:#f9faf8; border:1px solid var(--line); border-radius:5px; padding:18px;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <span class="command-badge">ENVIO DEFINITIVO</span>
+                <strong style="color:var(--ink); font-size:13px;">git push</strong>
+              </div>
+              <p style="font-size:12px; color:var(--muted); line-height:1.6; margin:0;">
+                <strong>Envia commits locais ao repositório remoto.</strong> Publica seu histórico salvo no GitHub, tornando suas alterações visíveis aos outros e disparando o deploy no Pages.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tabela Completa de Comandos Obrigatória -->
+        <section style="margin-top: 40px;">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow"><span></span> COMANDOS INDISPENSÁVEIS</div>
+              <h2>Tabela de Comandos Git do Dia a Dia<span class="heading-period">.</span></h2>
+              <p>Consulte a finalidade e copie o exemplo de sintaxe exata para usar no seu terminal.</p>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="tech-table">
+              <thead>
+                <tr>
+                  <th>Comando</th>
+                  <th>Finalidade Técnica</th>
+                  <th>Exemplo de Sintaxe</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>git --version</code></td>
+                  <td>Verificar a versão instalada do Git no sistema operacional</td>
+                  <td><code>git --version</code></td>
+                  <td><button class="copy-btn" data-copy="git --version"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git config --global user.name</code></td>
+                  <td>Configurar o nome do autor associado a cada commit</td>
+                  <td><code>git config --global user.name "Seu Nome"</code></td>
+                  <td><button class="copy-btn" data-copy="git config --global user.name &quot;Seu Nome&quot;"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git config --global user.email</code></td>
+                  <td>Configurar o e-mail do autor associado aos commits</td>
+                  <td><code>git config --global user.email "seu@email.com"</code></td>
+                  <td><button class="copy-btn" data-copy="git config --global user.email &quot;seu@email.com&quot;"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git init</code></td>
+                  <td>Inicializar um novo repositório Git local na pasta atual</td>
+                  <td><code>git init</code></td>
+                  <td><button class="copy-btn" data-copy="git init"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git clone</code></td>
+                  <td>Clonar um repositório remoto existente para o computador</td>
+                  <td><code>git clone https://github.com/mednei/antigravity.git</code></td>
+                  <td><button class="copy-btn" data-copy="git clone https://github.com/mednei/antigravity.git"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git remote add</code></td>
+                  <td>Associar um repositório local a um endereço remoto no GitHub</td>
+                  <td><code>git remote add origin https://github.com/mednei/antigravity.git</code></td>
+                  <td><button class="copy-btn" data-copy="git remote add origin https://github.com/mednei/antigravity.git"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git remote -v</code></td>
+                  <td>Verificar as URLs configuradas para busca (fetch) e envio (push)</td>
+                  <td><code>git remote -v</code></td>
+                  <td><button class="copy-btn" data-copy="git remote -v"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git status</code></td>
+                  <td>Consultar o estado atual dos arquivos (modificados, staged e untracked)</td>
+                  <td><code>git status</code></td>
+                  <td><button class="copy-btn" data-copy="git status"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git add</code></td>
+                  <td>Preparar arquivos modificados para a área de preparação (staging)</td>
+                  <td><code>git add .</code></td>
+                  <td><button class="copy-btn" data-copy="git add ."><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git commit</code></td>
+                  <td>Registrar alterações preparadas com mensagem clara e descritiva</td>
+                  <td><code>git commit -m "feat: implementa nova funcionalidade"</code></td>
+                  <td><button class="copy-btn" data-copy="git commit -m &quot;feat: implementa nova funcionalidade&quot;"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git push</code></td>
+                  <td><strong>Enviar alterações</strong> locais para o repositório remoto</td>
+                  <td><code>git push origin main</code></td>
+                  <td><button class="copy-btn" data-copy="git push origin main"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git pull</code></td>
+                  <td><strong>Atualizar o repositório local</strong> integrando novidades do remoto</td>
+                  <td><code>git pull origin main</code></td>
+                  <td><button class="copy-btn" data-copy="git pull origin main"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git fetch</code></td>
+                  <td>Buscar atualizações remotas sem integrá-las de imediato ao código</td>
+                  <td><code>git fetch origin</code></td>
+                  <td><button class="copy-btn" data-copy="git fetch origin"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git log</code></td>
+                  <td>Consultar histórico e linha do tempo dos commits recentes</td>
+                  <td><code>git log --oneline -n 5</code></td>
+                  <td><button class="copy-btn" data-copy="git log --oneline -n 5"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git branch</code></td>
+                  <td>Consultar branches existentes ou criar uma nova ramificação</td>
+                  <td><code>git branch -a</code></td>
+                  <td><button class="copy-btn" data-copy="git branch -a"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git switch</code></td>
+                  <td>Criar e alternar entre branches de trabalho com segurança</td>
+                  <td><code>git switch -c feature/nova-secao</code></td>
+                  <td><button class="copy-btn" data-copy="git switch -c feature/nova-secao"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+                <tr>
+                  <td><code>git merge</code></td>
+                  <td>Integrar o histórico de uma branch secundária na branch ativa</td>
+                  <td><code>git merge feature/nova-secao</code></td>
+                  <td><button class="copy-btn" data-copy="git merge feature/nova-secao"><i data-lucide="copy"></i> Copiar</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Fluxo de Trabalho Completo -->
+        <section style="margin-top: 40px;">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow"><span></span> PASSO A PASSO PRÁTICO</div>
+              <h2>Fluxo Completo de Trabalho no Dia a Dia<span class="heading-period">.</span></h2>
+              <p>O ciclo padrão executado por profissionais para desenvolver e versionar novas funcionalidades.</p>
+            </div>
+          </div>
+
+          <div class="command-card">
+            <div class="command-card-header">
+              <strong style="font-size:13px;">Passo 1: Manter a branch local sincronizada antes de começar</strong>
+              <span class="command-badge">SINCRONIZAÇÃO</span>
+            </div>
+            <p style="font-size:12px; color:var(--muted); margin:0;">Sempre atualize sua branch de trabalho principal antes de iniciar novas alterações para evitar divergências de histórico.</p>
+            <div class="code-box">
+              <code>git switch main<br>git pull origin main</code>
+              <button class="copy-btn" data-copy="git switch main && git pull origin main"><i data-lucide="copy"></i> Copiar</button>
+            </div>
+          </div>
+
+          <div class="command-card">
+            <div class="command-card-header">
+              <strong style="font-size:13px;">Passo 2: Criar e alternar para uma branch dedicada</strong>
+              <span class="command-badge">RAMIFICAÇÃO</span>
+            </div>
+            <p style="font-size:12px; color:var(--muted); margin:0;">Trabalhe de forma isolada sem correr o risco de quebrar o site principal em produção.</p>
+            <div class="code-box">
+              <code>git switch -c feature/ajuste-design</code>
+              <button class="copy-btn" data-copy="git switch -c feature/ajuste-design"><i data-lucide="copy"></i> Copiar</button>
+            </div>
+          </div>
+
+          <div class="command-card">
+            <div class="command-card-header">
+              <strong style="font-size:13px;">Passo 3: Salvar alterações na branch</strong>
+              <span class="command-badge">VERSIONAMENTO</span>
+            </div>
+            <p style="font-size:12px; color:var(--muted); margin:0;">Verifique os arquivos alterados com status, prepare-os com add e registre com commit descritivo.</p>
+            <div class="code-box">
+              <code>git status<br>git add .<br>git commit -m "style: atualiza cores e botoes"</code>
+              <button class="copy-btn" data-copy="git status && git add . && git commit -m &quot;style: atualiza cores e botoes&quot;"><i data-lucide="copy"></i> Copiar</button>
+            </div>
+          </div>
+
+          <div class="command-card">
+            <div class="command-card-header">
+              <strong style="font-size:13px;">Passo 4: Enviar alterações e integrar à branch principal</strong>
+              <span class="command-badge">DEPLOY / MERGE</span>
+            </div>
+            <p style="font-size:12px; color:var(--muted); margin:0;">Retorne para a branch main, mescle as alterações testadas e envie para o GitHub com push.</p>
+            <div class="code-box">
+              <code>git switch main<br>git merge feature/ajuste-design<br>git push origin main</code>
+              <button class="copy-btn" data-copy="git switch main && git merge feature/ajuste-design && git push origin main"><i data-lucide="copy"></i> Copiar</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Seções Complementares Obrigatórias: .gitignore, Conflitos e Segurança -->
+        <section class="cards-grid-3" style="margin-top: 35px;">
+          <article class="content-card">
+            <div class="content-card-icon"><i data-lucide="file-minus"></i></div>
+            <h3>O que é o .gitignore?</h3>
+            <p>Um arquivo de texto na raiz do projeto onde você lista arquivos ou pastas que <strong>não devem ser versionados</strong> pelo Git (como pastas de dependências <code>node_modules/</code>, logs temporários ou arquivos locais de IDE como <code>.vscode/</code>).</p>
+          </article>
+
+          <article class="content-card">
+            <div class="content-card-icon"><i data-lucide="alert-triangle"></i></div>
+            <h3>Resolvendo Conflitos</h3>
+            <p>Conflitos ocorrem quando duas alterações afetam as mesmas linhas. O Git insere marcadores visuais (<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> e <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>). Abra o arquivo, escolha qual código manter, apague os marcadores, execute <code>git add</code> e faça o commit de resolução.</p>
+          </article>
+
+          <article class="content-card">
+            <div class="content-card-icon"><i data-lucide="lock"></i></div>
+            <h3>Proteção de Credenciais</h3>
+            <p><strong>Atenção máxima:</strong> Nunca adicione senhas, chaves de API secretas ou tokens pessoais em arquivos monitorados pelo Git. Uma vez feito o push para um repositório público no GitHub, essas credenciais ficam expostas a robôs e varreduras automatizadas.</p>
+          </article>
+        </section>
+
+        <footer>
+          <span>© 2026 ANTIGRAVITY LAB — PROJETO EDUCACIONAL ABERTO</span>
+          <span>FEITO PARA QUEM GOSTA DE CRIAR <i data-lucide="sparkles"></i></span>
+        </footer>
+      </main>
+    </div>
+  </div>
+  <!-- Bot�o Flutuante do WhatsApp com mensagem contextual -->
+  <a href="https://wa.me/551151922878?text=Ol%C3%A1!%20Conheci%20o%20Antigravity%20Lab%20e%20gostaria%20de%20obter%20mais%20informa%C3%A7%C3%B5es." class="whatsapp-float" id="whatsapp-floating-btn" target="_blank" rel="noopener noreferrer" aria-label="Falar conosco pelo WhatsApp" title="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+  </a>
+</body>
+</html>

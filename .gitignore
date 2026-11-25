@@ -1,0 +1,37 @@
+# Ambientes e arquivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs e arquivos de depuração
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Configurações de IDE e editores
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Variáveis de ambiente e credenciais
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+credentials.json
+
+# Diretórios temporários de build / pacotes
+node_modules/
+dist/
+tmp/
+scratch/
+
+.env.*
+*.env
+!.env.example
