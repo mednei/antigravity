@@ -22,9 +22,7 @@ Primeiros passos → formação em agentes → laboratórios → aplicação no 
 - [Artefatos e walkthrough](./02-formacao-agentes/04-artefatos-e-walkthrough.md)
 - [Hooks e validação](./02-formacao-agentes/05-hooks-e-validacao.md)
 - [MCP e integrações](./02-formacao-agentes/06-mcp-integracoes.md)
-- [Modelos e dimensionamento por tarefa](./02-formacao-agentes/07-modelos-e-dimensionamento.md)
-- [Privacidade corporativa](./02-formacao-agentes/08-privacidade-corporativa.md)
-- [Autenticação de infraestrutura](./02-formacao-agentes/09-autenticacao-infraestrutura.md)
+- [Módulo 14: provedores, privacidade e governança](./02-formacao-agentes/07-provedores-privacidade-governanca.md)
 - [Concorrência, filas e mensagens](./02-formacao-agentes/10-concorrencia-e-mensagens.md)
 - [Sessões, versionamento e rollback](./02-formacao-agentes/11-sessoes-versionamento-rollback.md)
 
@@ -66,7 +64,7 @@ Primeiros passos → formação em agentes → laboratórios → aplicação no 
 5. Separar conteúdo didático de instruções de montagem e publicação do repositório. Não incluir passos de preparação de commits ou envio ao remoto nos módulos. O fluxo operacional canônico continua em [github.html](../github.html). Os relatórios arquivados são exceção documental: seu conteúdo é imutável, inclusive instruções antigas.
 6. Cada conceito tem um arquivo canônico. Repetições devem ser substituídas por links relativos. Casos de aplicação podem apontar para a explicação geral, sem reproduzi-la.
 7. Fechar todos os blocos Markdown. Separar comando de parágrafo e usar linguagem de bloco adequada. Em fragmentos truncados, preservar somente o conteúdo visível, marcado como incompleto; não acrescentar argumentos ausentes.
-8. A seção 14.1 está em modelos e dimensionamento; 14.2, em privacidade corporativa; 14.3, em autenticação de infraestrutura. O desafio e o trecho de VPC Service Controls não foram recebidos. Seus destinos e pendências estão indicados, sem conteúdo inventado.
+8. O módulo 14 está no arquivo canônico de provedores, privacidade e governança, com seções 14.1 (modelos), 14.2 (privacidade) e 14.3 (infraestrutura). O complemento recebido foi incorporado com fontes oficiais para os conceitos confirmados. O desafio continua ausente; a aplicação de VPC Service Controls à ferramenta permanece pendente.
 9. Os cinco relatórios foram apenas movidos/renomeados para `historico/`, com os bytes preservados. Não corrigir caminhos, Markdown ou afirmações dentro deles. A preparação do ambiente tem arquivo próprio, pois também foi expressamente incluída no pedido de arquivamento.
 10. Os guias em `guias/` apontam para as páginas HTML existentes. A extração completa está pendente; não reescrever nem duplicar os guias antes dessa tarefa.
 11. Manter links locais relativos. Não executar os comandos citados em pendências como parte de limpeza editorial. Mudanças no site, publicação ou novas integrações dependem de tarefa própria.
@@ -88,17 +86,17 @@ Primeiros passos → formação em agentes → laboratórios → aplicação no 
 | Módulo 11 | Hooks e validação. |
 | Módulo 12 | MCP e integrações. |
 | Módulo 13 | Laboratório multiagente. |
-| Módulo 14 | Modelos, privacidade, infraestrutura; notas e lacunas no registro único. |
+| Módulo 14 e complemento recebido | Provedores, privacidade e governança em um único arquivo, com notas corrigidas, fontes oficiais e lacunas no registro único. |
 | Juriel | Capa de aplicação, com requisitos propostos e referências aos conceitos canônicos. |
 | Pendências antigas | Tabela única numerada e notas originais preservadas. |
 | Cinco relatórios anteriores | Histórico, sem alteração de conteúdo. |
 
-Foram acrescentados arquivos de formação para preservar os temas de modelos, privacidade, infraestrutura, concorrência e sessões que não cabiam nos seis nomes iniciais da estrutura alvo.
+Além dos seis arquivos iniciais, a formação inclui o módulo 14 consolidado, concorrência e sessões. Os três arquivos intermediários de modelos, privacidade e infraestrutura foram reunidos no módulo 14 para evitar duplicação.
 
 ## Lacunas que aguardam material ou decisão
 
 - Enunciado do Desafio Prático com GitHub Actions: item 70.
-- Conteúdo de VPC Service Controls em 14.3: item 65.
+- Aplicação de VPC Service Controls ao ambiente do curso: item 65. O complemento recebido trouxe a explicação geral, verificada na fonte oficial.
 - Seção 3.4, exemplo vazio de 5.1 e complementos dos módulos parciais: item 75.
 - Atribuições e complementos editoriais do material de origem: item 74.
 

@@ -24,4 +24,4 @@ A apostila discute conta, postura de trabalho e separação entre ambientes de e
 
 > VERIFICAR: ver pendencias-verificacao.md, item 11
 
-O tratamento de regras e fronteiras do workspace está concentrado em [governança](../02-formacao-agentes/03-ciclo-agentico-e-governanca.md). A autenticação de infraestrutura tem [arquivo próprio](../02-formacao-agentes/09-autenticacao-infraestrutura.md).
+O tratamento de regras e fronteiras do workspace está concentrado em [governança](../02-formacao-agentes/03-ciclo-agentico-e-governanca.md). A autenticação de infraestrutura tem [seção própria no módulo 14](../02-formacao-agentes/07-provedores-privacidade-governanca.md#infraestrutura).

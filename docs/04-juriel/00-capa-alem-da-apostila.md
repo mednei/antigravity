@@ -52,7 +52,7 @@ O documento propõe comparar qualidade por tarefa, quantizações e disputa de r
 
 > VERIFICAR: ver pendencias-verificacao.md, item 68
 
-O critério geral de seleção está em [modelos e dimensionamento](../02-formacao-agentes/07-modelos-e-dimensionamento.md).
+O critério geral de seleção está em [modelos e dimensionamento](../02-formacao-agentes/07-provedores-privacidade-governanca.md#criterios-de-escolha).
 
 <a id="revisao-humana"></a>
 ## Revisão humana

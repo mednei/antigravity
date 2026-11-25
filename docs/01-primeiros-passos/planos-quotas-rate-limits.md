@@ -22,4 +22,4 @@ O material aborda limites de uso e resiliência sob saturação. Os comportament
 
 > VERIFICAR: ver pendencias-verificacao.md, item 17
 
-O catálogo e os critérios de escolha de modelos estão em [dimensionamento por tarefa](../02-formacao-agentes/07-modelos-e-dimensionamento.md).
+O catálogo e os critérios de escolha de modelos estão em [dimensionamento por tarefa](../02-formacao-agentes/07-provedores-privacidade-governanca.md#criterios-de-escolha).
