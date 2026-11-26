@@ -792,3 +792,31 @@ footer svg{width:13px;height:13px;color:#9abd68}
   .database-guide .code-box{padding:12px}
   .database-guide .guide-section h2{font-size:22px}
 }
+
+/* Fase B — anotações de texto e prints por URL no detalhe da aula. */
+.lesson-notes{margin:26px 0;padding:22px;background:#fff;border:1px solid var(--line);border-radius:6px;min-width:0}
+.lesson-notes-title{font-family:var(--display);font-size:15px;letter-spacing:.6px;margin:0 0 18px;color:var(--ink)}
+.lesson-notes [hidden]{display:none}
+.lesson-notes-invitation{margin:0;font-size:14px;color:var(--muted)}
+.lesson-notes-invitation a{text-decoration:underline;text-underline-offset:3px}
+.lesson-notes-form{display:grid;gap:10px;min-width:0}
+.lesson-notes-form .form-label{font-size:14px;letter-spacing:0;margin:0}
+.lesson-notes-form .form-textarea,.lesson-notes-form .form-input{font-size:16px;min-width:0;max-width:100%;width:100%}
+.lesson-notes-form .form-textarea{resize:vertical;min-height:110px}
+.lesson-notes-form [aria-invalid="true"]{border-color:#b44932}
+.lesson-notes .form-feedback{font-size:14px;overflow-wrap:anywhere}
+.lesson-notes-list{display:grid;gap:16px;margin-top:20px;min-width:0}
+.lesson-notes-empty{color:var(--muted);font-size:14px;margin:0}
+.lesson-note-card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:18px;min-width:0;overflow-wrap:anywhere}
+.lesson-note-date{display:block;font-size:12px;color:var(--muted);margin-bottom:10px}
+.lesson-note-text{white-space:pre-wrap;font-size:15px;line-height:1.7;margin:0 0 12px;overflow-wrap:anywhere}
+.lesson-note-image{display:block;max-width:100%;height:auto;margin:12px 0;border:1px solid var(--line);border-radius:4px}
+.lesson-note-image-error,.lesson-note-image-link{font-size:14px;line-height:1.6;overflow-wrap:anywhere}
+.lesson-note-image-link{text-decoration:underline;text-underline-offset:3px}
+.lesson-note-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.lesson-note-actions button{min-height:44px;max-width:100%;font-size:13px;white-space:normal}
+.lesson-note-delete{color:#8d3929}
+.lesson-notes button:disabled{opacity:.6;cursor:wait}
+@media(max-width:900px){.lesson-notes{padding:18px}.lesson-note-actions{gap:8px}}
+@media(max-width:680px){.lesson-notes{padding:16px;margin:22px 0}.lesson-note-card{padding:14px}}
+@media(max-width:370px){.lesson-notes{padding:12px}.lesson-note-card{padding:12px}.lesson-note-actions button{flex:1 1 100%;justify-content:center}}
