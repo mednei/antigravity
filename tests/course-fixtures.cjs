@@ -110,3 +110,15 @@ function progress(env) { return JSON.parse(env.storage.get(progressKey)); }
 
 
 module.exports = { node, environment, fakeAuth, fakeDatabase, clickLesson, toggle, progress, tick, lessonData, progressKey };
+
+// Exceções editoriais autorizadas pelo usuário: só orientações sobre pastas.
+function assertLessonPreservation(actual, expected) {
+  const clean = values => values.map((lesson, index) => {
+    const copy = { ...lesson };
+    const fields = { 1: ['objective','body','exercise','expected'], 7: ['body'], 10: ['body'] };
+    (fields[index] || []).forEach(field => { delete copy[field]; });
+    return copy;
+  });
+  require('node:assert/strict').deepEqual(clean(actual), clean(expected));
+}
+module.exports.assertLessonPreservation = assertLessonPreservation;

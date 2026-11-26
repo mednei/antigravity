@@ -1,3 +1,4 @@
+const { assertLessonPreservation } = require('./course-fixtures.cjs');
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -18,7 +19,7 @@ const original = path => execFileSync('git', ['show', `af1c552:${path}`], { enco
 
 test('Lote 1 preserva as quatro aulas e os dez objetos anteriores', () => {
   assert.ok(totalLessons >= 14);
-  assert.deepEqual(lessons.slice(0, 10), lessonData(original('assets/js/course.js')));
+  assertLessonPreservation(lessons.slice(0, 10), lessonData(original('assets/js/course.js')));
   assert.deepEqual(lessons.slice(10,14).map(lesson => lesson.title), [
     'Contas, perfis e workspaces', 'Arquitetura do agente e ambientes de trabalho',
     'Ciclo, regras e permissões', 'Planos, artefatos e relatório de entrega'

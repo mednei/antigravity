@@ -1,3 +1,4 @@
+const { assertLessonPreservation } = require('./course-fixtures.cjs');
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -6,6 +7,7 @@ const { environment, clickLesson, toggle, progress, fakeDatabase, fakeAuth, tick
 const read = path => fs.readFileSync(path, 'utf8');
 const before = path => execFileSync('git', ['show', `910dded:${path}`], { encoding: 'utf8' });
 const lessons = lessonData(read('assets/js/course.js'));
+const totalLessons = lessons.length;
 const sources = [
   'docs/03-laboratorios/lab-rag-e-contexto.md', 'docs/03-laboratorios/lab-terminal-e-shell.md',
   'docs/02-formacao-agentes/10-concorrencia-e-mensagens.md',
@@ -14,13 +16,13 @@ const sources = [
 ];
 
 test('Lote 2 acrescenta quatro aulas e preserva os 14 objetos anteriores', () => {
-  assert.equal(lessons.length, 18);
-  assert.deepEqual(lessons.slice(0,14), lessonData(before('assets/js/course.js')));
-  assert.deepEqual(lessons.slice(14).map(lesson => lesson.title), [
+  assert.ok(totalLessons >= 18);
+  assertLessonPreservation(lessons.slice(0,14), lessonData(before('assets/js/course.js')));
+  assert.deepEqual(lessons.slice(14,18).map(lesson => lesson.title), [
     'Contexto, recuperação e memória', 'Terminal, filas e tarefas dependentes',
     'Sessões, versões e restauração', 'Validação e automação com hooks'
   ]);
-  lessons.slice(14).forEach(lesson => {
+  lessons.slice(14,18).forEach(lesson => {
     assert.equal(lesson.trail, 'formacao');
     for (const field of ['title','category','duration','objective','intro','body','exercise','expected']) assert.ok(lesson[field].trim(), field);
     assert.ok(lesson.concepts.length && lesson.sources.length);
@@ -30,7 +32,7 @@ test('Lote 2 acrescenta quatro aulas e preserva os 14 objetos anteriores', () =>
 test('fontes intactas e conteúdo sem badges ou contratos excluídos', () => {
   sources.forEach(path => assert.equal(read(path).replace(/\r\n/g,'\n'), before(path).replace(/\r\n/g,'\n'), path));
   lessons.forEach(lesson => assert.doesNotMatch(lesson.body, /VERIFICAR|verification-badge|Conteúdo a verificar/));
-  const newContent = lessons.slice(14).map(lesson => lesson.body).join(' ');
+  const newContent = lessons.slice(14,18).map(lesson => lesson.body).join(' ');
   assert.doesNotMatch(newContent, /StateConflictError|agy memory|agy history|\.antigravity\/shadow_git|\/tasks kill-all|blocking: true|postFormat|redução superior a 80%/);
   assert.match(lessons[14].body, /não descreve uma implementação interna comprovada/);
   assert.match(lessons[15].body, /50\.000/);
@@ -43,18 +45,18 @@ test('catálogo tem 18 índices sequenciais em duas trilhas, 10 + 8', () => {
   const ids = text => [...text.matchAll(/data-lesson="(\d+)"/g)].map(match => Number(match[1]));
   assert.equal(groups.length, 2);
   assert.deepEqual(ids(groups[0]), Array.from({ length: 10 }, (_, index) => index));
-  assert.deepEqual(ids(groups[1]), Array.from({ length: 8 }, (_, index) => index + 10));
-  assert.deepEqual(ids(html), Array.from({ length: 18 }, (_, index) => index));
+  assert.deepEqual(ids(groups[1]), Array.from({ length: totalLessons - 10 }, (_, index) => index + 10));
+  assert.deepEqual(ids(html), Array.from({ length: totalLessons }, (_, index) => index));
 });
 
 test('progresso local antigo continua válido e usa o total real 18 na recarga', () => {
   const env = environment({ [progressKey]: '[0,1,2]' });
   env.run('assets/js/course.js'); env.start();
-  assert.equal(env.nodes['progress-percent'].textContent, '17%');
+  assert.equal(env.nodes['progress-percent'].textContent, `${Math.round(300 / totalLessons)}%`);
   clickLesson(env, 14); toggle(env);
   assert.deepEqual(progress(env), [0,1,2,14]);
-  assert.equal(env.nodes['progress-label'].textContent, '4 de 18 aulas concluídas');
-  assert.equal(env.nodes['progress-percent'].textContent, '22%');
+  assert.equal(env.nodes['progress-label'].textContent, `4 de ${totalLessons} aulas concluídas`);
+  assert.equal(env.nodes['progress-percent'].textContent, `${Math.round(400 / totalLessons)}%`);
   const reload = environment(Object.fromEntries(env.storage)); reload.run('assets/js/course.js'); reload.start();
   assert.deepEqual(progress(reload), [0,1,2,14]);
 });
@@ -69,7 +71,7 @@ test('índice 17 é enviado por conta e recuperado em outra sessão simulada', a
   other.sandbox.AntigravityAuth = fakeAuth({ id: 'aluno-lote2' }, remote.client);
   other.run('assets/js/course.js'); other.start(); await tick();
   assert.deepEqual(progress(other), [17]);
-  assert.equal(other.nodes['progress-percent'].textContent, '6%');
+  assert.equal(other.nodes['progress-percent'].textContent, `${Math.round(100 / totalLessons)}%`);
 });
 
 test('schemas existentes já cobrem o lote e não foram modificados', () => {

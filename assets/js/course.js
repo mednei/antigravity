@@ -15,12 +15,12 @@ const lessons = [
     title: 'Prepare seu ambiente',
     category: 'CONFIGURAÇÃO',
     duration: '8 min',
-    objective: 'Organizar as ferramentas fundamentais, isolamento de pastas e controle de versões.',
+    objective: 'Organizar as ferramentas fundamentais, as pastas do projeto e o controle de versões.',
     intro: 'Organize o espaço de trabalho antes de começar a criar.',
-    body: '<h4>Comece pelo essencial</h4><p>Acesse o site oficial do Antigravity para verificar a disponibilidade, os requisitos e as instruções de instalação atualizadas. Crie ou entre na sua conta quando solicitado.</p><ul><li>Separe uma pasta para seu projeto.</li><li>Tenha um navegador e o Git instalados, se necessário.</li><li>Evite incluir senhas ou informações privadas nos seus pedidos.</li></ul>',
+    body: '<h4>Uma organização que você pode adaptar</h4><p>A organização de pastas apresentada no curso é um modelo sugerido, não uma obrigatoriedade. Você pode adaptar nomes e diretórios à sua forma de trabalhar. Caminhos exigidos por uma ferramenta devem seguir a documentação dessa ferramenta.</p><h4>Comece pelo essencial</h4><p>Acesse o site oficial do Antigravity para verificar a disponibilidade, os requisitos e as instruções de instalação atualizadas. Crie ou entre na sua conta quando solicitado.</p><ul><li>Separe uma pasta para seu projeto.</li><li>Tenha um navegador e o Git instalados, se necessário.</li><li>Evite incluir senhas ou informações privadas nos seus pedidos.</li></ul>',
     concepts: ['Estrutura de diretórios', 'Controle de versão com Git', 'Segurança de credenciais'],
-    exercise: 'Crie uma pasta para seu primeiro projeto e anote o que você quer construir.',
-    expected: 'Diretório de trabalho criado na máquina e arquivo de notas ou README inicial configurado.'
+    exercise: 'Escolha uma pasta existente ou crie uma para seu primeiro projeto e anote o que você quer construir; a organização é uma sugestão adaptável.',
+    expected: 'Local de trabalho escolhido e objetivo registrado em notas ou README, conforme a organização escolhida pelo aluno.'
   },
   {
     title: 'Escreva bons prompts',
@@ -87,7 +87,7 @@ const lessons = [
     "duration": "15 min",
     "objective": "Entender documentos e coleções e documentar cuidados com credenciais de banco.",
     "intro": "Conheça o modelo documental com segurança desde o primeiro contato.",
-    "body": "<h4>Documentos, coleções e credenciais</h4><p>MongoDB organiza documentos BSON em coleções. Uma connection string contém as credenciais de um usuário do banco: nunca coloque a chamada “senha master” no código nem use o administrador na aplicação. Crie um usuário específico com o menor privilégio e restrinja o acesso por IP.</p><p>Guarde o .env fora do projeto, por exemplo em <code>D:/projetos/credenciais/mongodb.env</code>, e carregue-o somente no backend. Se estiver dentro do projeto, ignore-o antes do primeiro commit. O .gitignore não remove arquivos já rastreados: use <code>git rm --cached .env</code> e registre a remoção. Se já houve push, troque a senha imediatamente, revogue acessos e revise o histórico; versões antigas continuam no Git.</p><p>Consulte o <a href=\"./mongodb.html#seguranca\">Guia MongoDB e a seção de segurança</a>. Esta aula não conecta o site ao banco.</p>",
+    "body": "<h4>Documentos, coleções e credenciais</h4><p>MongoDB organiza documentos BSON em coleções. Uma connection string contém as credenciais de um usuário do banco: nunca coloque a chamada “senha master” no código nem use o administrador na aplicação. Crie um usuário específico com o menor privilégio e restrinja o acesso por IP.</p><p>Uma opção é guardar o .env fora do projeto, por exemplo em <code>D:/projetos/credenciais/mongodb.env</code>. Esse caminho é apenas um modelo de organização, não uma obrigatoriedade; adapte o local e carregue as credenciais somente no backend. Se estiver dentro do projeto, ignore-o antes do primeiro commit. O .gitignore não remove arquivos já rastreados: use <code>git rm --cached .env</code> e registre a remoção. Se já houve push, troque a senha imediatamente, revogue acessos e revise o histórico; versões antigas continuam no Git.</p><p>Consulte o <a href=\"./mongodb.html#seguranca\">Guia MongoDB e a seção de segurança</a>. Esta aula não conecta o site ao banco.</p>",
     "concepts": [
       "Documentos e coleções",
       "Princípio do menor privilégio",
@@ -141,7 +141,7 @@ const lessons = [
     ],
     "objective": "Organizar conta, postura de trabalho e ambientes de estudo e produção, protegendo credenciais.",
     "intro": "Organizar conta, postura de trabalho e ambientes de estudo e produção, protegendo credenciais.",
-    "body": "<h4>Credenciais fora do código</h4><p>O princípio do material é não escrever senhas em arquivos de configuração nem na linha de comando. Quando possível, mantenha credenciais fora da pasta do projeto. Os <a href=\"./mongodb.html#seguranca\">cuidados do guia MongoDB</a> e o <a href=\"./supabase.html\">guia Supabase</a> continuam como referências, sem duplicar seus exemplos.</p><h4>Conta, perfil e ambiente</h4><p>O material propõe separar a postura de estudo da de produção. Essa organização de trabalho não comprova a existência de perfis automáticos com políticas próprias no produto.</p><p>O <a href=\"https://antigravity.google/docs/install/\" target=\"_blank\" rel=\"noopener noreferrer\">guia oficial de autenticação</a> documenta login por conta Google e fluxos distintos conforme a modalidade. Na CLI, há autenticação com chave da Gemini API sob configuração específica; isso não equivale a um fallback automático da IDE.</p><h4>Workspace e permissões</h4><p>O workspace delimita o contexto do projeto; as regras e fronteiras de acesso devem ser consideradas junto com a governança. Autenticar uma conta e definir as permissões do trabalho são decisões diferentes.</p>",
+    "body": "<h4>Credenciais fora do código</h4><p>O princípio do material é não escrever senhas em arquivos de configuração nem na linha de comando. Quando possível, mantenha credenciais fora da pasta do projeto. A organização de pastas é um modelo sugerido: o aluno pode escolher outros nomes e locais, preservando os cuidados com credenciais e os caminhos exigidos pela ferramenta utilizada. Os <a href=\"./mongodb.html#seguranca\">cuidados do guia MongoDB</a> e o <a href=\"./supabase.html\">guia Supabase</a> continuam como referências, sem duplicar seus exemplos.</p><h4>Conta, perfil e ambiente</h4><p>O material propõe separar a postura de estudo da de produção. Essa organização de trabalho não comprova a existência de perfis automáticos com políticas próprias no produto.</p><p>O <a href=\"https://antigravity.google/docs/install/\" target=\"_blank\" rel=\"noopener noreferrer\">guia oficial de autenticação</a> documenta login por conta Google e fluxos distintos conforme a modalidade. Na CLI, há autenticação com chave da Gemini API sob configuração específica; isso não equivale a um fallback automático da IDE.</p><h4>Workspace e permissões</h4><p>O workspace delimita o contexto do projeto; as regras e fronteiras de acesso devem ser consideradas junto com a governança. Autenticar uma conta e definir as permissões do trabalho são decisões diferentes.</p>",
     "concepts": [
       "Proteção de credenciais",
       "Separação entre estudo e produção",
@@ -290,6 +290,66 @@ const lessons = [
     ],
     "exercise": "Observe um script de verificação receber os arquivos de uma tarefa e retornar seu resultado, conforme a prática proposta. Registre a automação somente depois de conferir eventos e formatos documentados; não crie configuração presumida.",
     "expected": "Resultado da verificação registrado e apresentado para revisão, com distinção entre execução manual e automação de hook efetivamente configurada."
+  },
+  {
+    "title": "MCP e integrações",
+    "category": "FORMAÇÃO EM AGENTES",
+    "trail": "formacao",
+    "duration": "10 min (estimativa)",
+    "sources": [
+      "./docs/02-formacao-agentes/06-mcp-integracoes.md"
+    ],
+    "objective": "Distinguir cliente, servidor, capacidades e autorização em uma integração MCP.",
+    "intro": "Distinguir cliente, servidor, capacidades e autorização em uma integração MCP.",
+    "body": "<h4>Cliente e servidores</h4><p>O material apresenta MCP como protocolo aberto de integração entre um cliente e servidores que expõem recursos e ferramentas. O cliente utiliza as capacidades anunciadas; esse modelo permite expandir as ferramentas disponíveis para um agente.</p><h4>Conexão não é autorização</h4><p>Evite segredos escritos diretamente nas configurações e separe autenticação de uso das ferramentas. Conectar um servidor não concede, por si só, autorização para qualquer operação.</p><p>A <a href=\"https://antigravity.google/docs/mcp/\" target=\"_blank\" rel=\"noopener noreferrer\">documentação do Antigravity</a> descreve configuração MCP e OAuth com PKCE para servidores remotos compatíveis. O suporte depende da modalidade e do servidor; não é uma garantia universal de isolamento ou ocultação automática de segredos.</p><p>A <a href=\"https://modelcontextprotocol.io/specification/latest/basic/transports\" target=\"_blank\" rel=\"noopener noreferrer\">especificação de transportes</a> distingue stdio e Streamable HTTP. O transporte define como as mensagens são entregues; um processo local pode ter outros acessos, conforme suas permissões.</p><h4>Consulta em laboratório</h4><p>O objetivo da prática é consultar um estoque em SQLite descartável: identificar o produto de maior preço e o valor total. Confirme um servidor compatível e sua documentação antes de instalar ou configurar a integração. Os nomes de banco e pastas do exercício são exemplos adaptáveis.</p>",
+    "concepts": [
+      "Cliente, servidor e capacidades MCP",
+      "Autenticação e autorização",
+      "Transportes e permissões",
+      "Consulta a banco descartável"
+    ],
+    "exercise": "Em um SQLite de laboratório, com servidor compatível e configuração documentada, pergunte qual produto tem maior preço e qual o valor total do estoque. Use somente os dados descartáveis do exercício.",
+    "expected": "Respostas conferidas com os dados do laboratório, identificando a ferramenta consultada e as permissões necessárias, sem acesso a dados reais."
+  },
+  {
+    "title": "Trabalho com múltiplos agentes",
+    "category": "FORMAÇÃO EM AGENTES",
+    "trail": "formacao",
+    "duration": "10 min (estimativa)",
+    "sources": [
+      "./docs/03-laboratorios/lab-multi-agentes.md"
+    ],
+    "objective": "Dividir trabalho com escopo definido e consolidar resultados sem presumir isolamento automático.",
+    "intro": "Dividir trabalho com escopo definido e consolidar resultados sem presumir isolamento automático.",
+    "body": "<h4>Divida responsabilidades</h4><p>O material propõe distribuir tarefas com escopo definido e consolidar cada frente. Seus exemplos incluem testes de faturamento, análise de dependências de um legado e investigação de um erro de produção.</p><h4>Delegar não dispensa conferir</h4><p>Observe o que cada frente recebeu, os resultados apresentados e como o retorno é consolidado. Os exemplos ilustram divisão de trabalho, sem comprovar paralelismo ou isolamento automático no ambiente utilizado.</p><p>A <a href=\"https://antigravity.google/docs/subagents/\" target=\"_blank\" rel=\"noopener noreferrer\">documentação de subagentes do Antigravity</a> descreve delegação e opções de workspace, incluindo herdar, compartilhar e criar worktree. Essa distinção exige conferir o modo efetivamente usado; uma worktree não significa risco zero nem substitui revisão.</p><h4>Prática recebida</h4><p>Delegue uma auditoria de segurança de um arquivo e um plano de documentação. Acompanhe o trabalho e confira o relatório consolidado. Reutilize o ciclo e as permissões da Aula 13 e a coordenação de tarefas da Aula 16.</p>",
+    "concepts": [
+      "Escopo de cada frente",
+      "Delegação e consolidação",
+      "Workspace compartilhado ou separado",
+      "Revisão dos resultados"
+    ],
+    "exercise": "No ambiente de laboratório escolhido, delegue a auditoria de segurança de um arquivo e um plano de documentação; observe os retornos e confira a consolidação, conforme a prática proposta.",
+    "expected": "Escopos identificados e retorno consolidado conferido, distinguindo o isolamento observado das capacidades apenas presumidas."
+  },
+  {
+    "title": "Validação no navegador",
+    "category": "FORMAÇÃO EM AGENTES",
+    "trail": "formacao",
+    "duration": "10 min (estimativa)",
+    "sources": [
+      "./docs/03-laboratorios/lab-navegador-sandbox.md"
+    ],
+    "objective": "Acompanhar uma interação real com formulário e reunir evidências do resultado no navegador.",
+    "intro": "Acompanhar uma interação real com formulário e reunir evidências do resultado no navegador.",
+    "body": "<h4>Da página à evidência</h4><p>A prática original propõe criar uma página de laboratório com formulário simples, servir por HTTP, abrir no navegador, preencher um campo, enviar e confirmar a mensagem de sucesso.</p><h4>Organização adaptável</h4><p>A pasta <code>public/</code> e a porta <code>8080</code> são exemplos do exercício, não uma obrigatoriedade. O aluno pode escolher outra organização de pastas e outra porta disponível, ajustando o caminho servido e a URL de acesso. Isso não altera caminhos que uma ferramenta realmente exija.</p><h4>O que observar</h4><p>Confira navegação, preenchimento, clique e mensagem resultante. Reúna evidência visual e examine erros no console e falhas de rede, como proposto no material.</p><p>A <a href=\"https://antigravity.google/docs/browser/\" target=\"_blank\" rel=\"noopener noreferrer\">documentação de navegador do Antigravity</a> distingue navegador integrado e conexão com Chrome conforme modalidade e disponibilidade. A existência desse recurso não comprova os nomes de ferramentas ou um sandbox universal citados na apostila.</p><p>Reutilize a Aula 16 para acompanhar o servidor e a Aula 14 para apresentar as evidências da entrega.</p>",
+    "concepts": [
+      "Interação real com formulário",
+      "Pasta e porta como exemplos",
+      "Mensagem de sucesso e evidência visual",
+      "Console e rede"
+    ],
+    "exercise": "Crie uma página de laboratório com formulário simples. Solicite ao agente servir a pasta escolhida por HTTP, abrir sua URL, preencher o campo, enviar e confirmar a mensagem de sucesso. Você pode adotar public/ e 8080 como modelo ou adaptá-los.",
+    "expected": "Resultado do envio conferido no navegador, evidência visual registrada e observações de console/rede quando aplicáveis."
   }
 ];
 

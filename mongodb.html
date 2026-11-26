@@ -118,10 +118,10 @@
           <div class="eyebrow"><span></span> PRIORIDADE: PROTEÇÃO DE ACESSO</div>
           <h2 id="mongo-seguranca">Segurança de Credenciais</h2>
           <p><strong>Nunca escreva a connection string com senha diretamente no código.</strong> A expressão “senha master” serve de alerta: uma URI contém as credenciais de um usuário de banco, cujos privilégios precisam ser limitados. Nunca use o administrador na aplicação.</p>
-          <h3>Mantenha o segredo fora do projeto</h3>
-          <p>Guarde o arquivo <code>.env</code> fora da pasta do projeto, por exemplo em <code>D:\projetos\credenciais\mongodb.env</code>. Se ficar dentro, inclua-o no <code>.gitignore</code> <strong>antes do primeiro commit</strong>. Não copie o arquivo para pastas públicas, builds ou mensagens de IA.</p>
+          <h3>Um modelo para organizar as credenciais</h3>
+          <p>Uma opção é guardar o arquivo <code>.env</code> fora da pasta do projeto. A organização de pastas e o caminho a seguir são um modelo sugerido, não uma obrigatoriedade: <code>D:\projetos\credenciais\mongodb.env</code>. Se ficar dentro, inclua-o no <code>.gitignore</code> <strong>antes do primeiro commit</strong>. Não copie o arquivo para pastas públicas, builds ou mensagens de IA.</p>
           <div class="command-card"><h3>Arquivo mongodb.env externo — exemplo ilustrativo</h3><div class="code-box"><button type="button" class="copy-btn" data-copy="MONGO_URI=&quot;mongodb+srv://usuario:SENHA@cluster0.xxxxx.mongodb.net/meubanco&quot;" aria-label="Copiar Arquivo mongodb.env externo — exemplo ilustrativo"><i data-lucide="copy"></i> Copiar</button><pre><code>MONGO_URI=&quot;mongodb+srv://usuario:SENHA@cluster0.xxxxx.mongodb.net/meubanco&quot;</code></pre></div></div>
-          <p>Em um backend Node.js com o pacote <code>dotenv</code> instalado, o carregamento pode ser feito assim:</p>
+          <p>Em um backend Node.js com o pacote <code>dotenv</code> instalado, o carregamento pode ser feito como no exemplo abaixo; ajuste o campo <code>path</code> ao local que você escolheu:</p>
           <div class="command-card"><h3>Carregamento no backend Node.js</h3><div class="code-box"><button type="button" class="copy-btn" data-copy="require(&#x27;dotenv&#x27;).config({ path: &#x27;D:/projetos/credenciais/mongodb.env&#x27; });
 // process.env.MONGO_URI disponível; mantenha o arquivo externo fora do Git" aria-label="Copiar Carregamento no backend Node.js"><i data-lucide="copy"></i> Copiar</button><pre><code>require(&#x27;dotenv&#x27;).config({ path: &#x27;D:/projetos/credenciais/mongodb.env&#x27; });
 // process.env.MONGO_URI disponível; mantenha o arquivo externo fora do Git</code></pre></div></div>
@@ -139,7 +139,7 @@
         <section class="guide-section security-highlight" aria-labelledby="mongo-checklist">
           <h2 id="mongo-checklist">Checklist de segurança</h2>
           <ul class="security-checklist">
-            <li>Guardar o arquivo de credenciais fora da pasta do projeto.</li>
+            <li>Escolher um local protegido para as credenciais; uma opção é fora da pasta do projeto.</li>
             <li>Configurar o .gitignore antes do primeiro commit e conferir os arquivos preparados.</li>
             <li>Criar um usuário de banco por aplicação com o menor privilégio.</li>
             <li>Restringir a lista de IPs às origens necessárias.</li>

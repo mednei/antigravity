@@ -1,3 +1,4 @@
+const { assertLessonPreservation } = require('./course-fixtures.cjs');
 // Preparado para o usuário executar. Sem rede e sem banco real.
 const test = require('node:test');
 const assert = require('node:assert/strict');
@@ -12,7 +13,7 @@ const normalize = value => value.replace(/\r\n/g, '\n');
 
 test('preserva a Aula 10, os nove objetos anteriores e a chave de progresso', () => {
   assert.ok(totalLessons >= 10);
-  assert.deepEqual(lessons.slice(0, 9), lessonData(baseline('assets/js/course.js')));
+  assertLessonPreservation(lessons.slice(0, 9), lessonData(baseline('assets/js/course.js')));
   assert.equal(lessons[9].title, 'Planos, quotas e limites de uso');
   assert.equal(lessons[9].trail, 'primeiros-passos');
   assert.match(read('assets/js/course.js'), /const storageKey = 'antigravity-lab-progress-v1'/);

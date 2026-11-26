@@ -1,3 +1,4 @@
+const { assertLessonPreservation } = require('./course-fixtures.cjs');
 // Preparado para o usuário executar. Sem rede e sem banco real.
 const test = require('node:test');
 const assert = require('node:assert/strict');
@@ -22,7 +23,7 @@ function startAccount(storage = {}, error = null, userId = 'aluno-a', rows = [])
 test('preserva a Aula 09 e os oito objetos anteriores', () => {
   const before = execFileSync('git', ['show', '874e923:assets/js/course.js'], { encoding: 'utf8' });
   assert.ok(totalLessons >= 9);
-  assert.deepEqual(lessons.slice(0, 8), lessonData(before));
+  assertLessonPreservation(lessons.slice(0, 8), lessonData(before));
   assert.equal(lessons[8].trail, 'primeiros-passos');
   assert.equal(lessons[8].title, 'Instalação e requisitos');
 });
