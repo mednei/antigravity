@@ -101,3 +101,7 @@ Além dos seis arquivos iniciais, a formação inclui o módulo 14 consolidado, 
 - Atribuições e complementos editoriais do material de origem: item 74.
 
 Nenhum arquivo inteiro ficou sem classificação. As lacunas acima não foram preenchidas; a implementação didática correspondente aguarda os trechos de origem.
+
+## Implementação do site: Fase A
+
+A integração opcional de conta e progresso com Supabase tem [instruções próprias](./supabase/README.md) e [schema SQL](./supabase/fase-a-schema.sql). A instalação e a verificação no projeto real ficam com o responsável pelo site; o registro único acompanha as pendências 76 a 78. Os conceitos e comandos específicos de Antigravity da trilha acima mantêm seu status editorial.

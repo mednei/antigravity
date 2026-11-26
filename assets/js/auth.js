@@ -206,6 +206,9 @@
       tabs.forEach(tab => tab.setAttribute('aria-pressed', String(tab.dataset.authMode === mode)));
       notice.textContent = '';
       notice.className = 'form-feedback';
+      if (initialized && !client) {
+        feedback(notice, 'O acesso à conta ainda não está disponível. Você pode continuar nas aulas sem entrar.');
+      }
     }
 
     tabs.forEach(tab => tab.addEventListener('click', () => chooseMode(tab.dataset.authMode)));

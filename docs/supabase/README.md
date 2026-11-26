@@ -32,6 +32,17 @@ Implementação de estudo: Supabase Auth e tabela de progresso, com funcionament
 
 As simulações de Auth, leitura, upsert, exclusão, cache e falhas estão em [fase-a.test.cjs](../../tests/fase-a.test.cjs). Elas não acessam rede nem um banco real.
 
+```powershell
+node --check assets/js/supabase-client.js
+node --check assets/js/auth.js
+node --check assets/js/course.js
+node --check assets/js/app.js
+node --test tests/fase-a.test.cjs
+python tests/fase-a-estrutura.py
+```
+
+Resultado da verificação em 26/11/2026: 17 simulações aprovadas, JavaScript sem erros de sintaxe e 198 referências locais válidas nas oito páginas. A chave original, os oito objetos de aula e o `app.js` foram comparados à versão anterior e preservados. As regras CSS para 900px, 680px e 370px foram conferidas; a revisão visual não pôde ser feita porque a ferramenta de navegador estava indisponível (pendência 78).
+
 Depois de preencher seu projeto, verificar manualmente:
 
 1. Cadastrar, confirmar e-mail se necessário, entrar e sair.

@@ -222,6 +222,34 @@ test('resposta atrasada de uma conta não sobrescreve o visitante após logout',
   assert.deepEqual(progress(env), [3]);
 });
 
+test('trocar contas com rede indisponível mantém os caches separados', async () => {
+  const env = environment({
+    [progressKey]: '[0]',
+    [`${progressKey}:conta-teste-a`]: '[2]',
+    [`${progressKey}:conta-teste-b`]: '[7]'
+  });
+  const db = fakeDatabase([], { readError: new Error('offline') });
+  const auth = fakeAuth({ id: 'conta-teste-a' }, db.client);
+  env.sandbox.AntigravityAuth = auth;
+  env.run('assets/js/course.js'); env.start(); await tick();
+  assert.deepEqual(progress(env), [2]);
+  auth.change({ id: 'conta-teste-b' }); await tick();
+  assert.deepEqual(progress(env), [7]);
+  auth.change(null); await tick();
+  assert.deepEqual(progress(env), [0]);
+});
+
+test('a barra da home recebe o progresso remoto sem depender do catálogo', async () => {
+  const env = environment({ [progressKey]: '[0]' });
+  delete env.nodes['lesson-list']; delete env.nodes['lesson-detail'];
+  const db = fakeDatabase([{ aula_index: 2 }, { aula_index: 6 }, { aula_index: 7 }]);
+  env.sandbox.AntigravityAuth = fakeAuth({ id: 'conta-teste-a' }, db.client);
+  env.run('assets/js/course.js'); env.start(); await tick();
+  assert.equal(env.nodes['progress-label'].textContent, '3 de 8 aulas concluídas');
+  assert.equal(env.nodes['progress-percent'].textContent, '38%');
+  assert.equal(env.nodes['progress-bar'].style.width, '38%');
+});
+
 test('cadastro envia nome em metadata; confirmação de e-mail não inventa uma sessão', async () => {
   const env = environment();
   const calls = [];

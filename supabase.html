@@ -11,6 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="./assets/js/supabase-client.js" defer></script>
+  <script src="./assets/js/auth.js" defer></script>
   <script src="./assets/js/app.js" defer></script>
 </head>
 <body>
@@ -29,6 +31,7 @@
       <a class="nav-link active" href="./supabase.html" aria-current="page"><i data-lucide="layers"></i> Supabase</a>
       <a class="nav-link" href="./mongodb.html"><i data-lucide="database"></i> MongoDB</a>
       <a class="nav-link" href="./contato.html"><i data-lucide="mail"></i> Contato</a>
+      <a class="nav-link" href="./login.html" data-auth-link><i data-lucide="log-in"></i><span data-auth-label>Entrar</span></a>
 
       <div class="sidebar-bottom">
         <div class="side-card">
@@ -63,6 +66,7 @@
         <a class="mobile-nav-link active" href="./supabase.html" aria-current="page"><i data-lucide="layers"></i> Supabase</a>
         <a class="mobile-nav-link" href="./mongodb.html"><i data-lucide="database"></i> MongoDB</a>
         <a class="mobile-nav-link" href="./contato.html"><i data-lucide="mail"></i> Contato</a>
+        <a class="mobile-nav-link" href="./login.html" data-auth-link><i data-lucide="log-in"></i><span data-auth-label>Entrar</span></a>
       </nav>
 
       <main id="supabase-main" class="database-guide">
@@ -99,10 +103,10 @@
           <p>Com RLS habilitada, sem uma policy que permita o acesso, a API com chave pública não recebe autorização para ler as linhas. Chaves privilegiadas podem contornar essa proteção.</p>
         </section>
         <section class="guide-section security-highlight" aria-labelledby="supa-futuro">
-          <h2 id="supa-futuro">Preparação para uma fase futura</h2>
-          <p><strong>A integração real com o Supabase será feita em uma fase futura do curso.</strong> Esta página é preparação conceitual. Não há cliente Supabase, autenticação ou conexão com banco neste site.</p>
+          <h2 id="supa-futuro">Conta e progresso na Fase A</h2>
+          <p><strong>O site oferece uma integração opcional de conta e progresso com o Supabase.</strong> Quando o projeto está configurado, o aluno pode entrar para salvar as aulas concluídas. Sem configuração ou sem login, o estudo continua com o progresso neste navegador. Este guia apresenta os conceitos usados nessa integração.</p>
           <p>Exercício: crie uma conta gratuita e explore as áreas disponíveis do painel, sem criar projetos, tabelas, usuários ou buckets. Se uma área exigir um projeto, consulte a documentação ou a demonstração do painel para reconhecer sua função.</p>
-          <div class="guide-links"><a class="secondary-button" href="./produtos.html">Voltar às aulas</a><a class="secondary-button" href="./mongodb.html">Conhecer o MongoDB</a></div>
+          <div class="guide-links"><a class="secondary-button" href="./login.html">Acessar minha conta</a><a class="secondary-button" href="./produtos.html">Voltar às aulas</a><a class="secondary-button" href="./mongodb.html">Conhecer o MongoDB</a></div>
           <p>Referências oficiais: <a href="https://supabase.com/docs/guides/getting-started/api-keys" target="_blank" rel="noopener noreferrer">tipos de chaves</a> e <a href="https://supabase.com/docs/guides/database/secure-data" target="_blank" rel="noopener noreferrer">segurança dos dados</a>.</p>
         </section>
 
