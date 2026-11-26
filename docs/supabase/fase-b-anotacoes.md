@@ -1,6 +1,6 @@
 # Fase B — anotações por aula
 
-Implementação de estudo sobre a Fase A: o aluno autenticado pode manter várias anotações por aula, contendo texto, URL de print ou ambos. O catálogo continua com oito aulas, índices 0 a 7.
+Implementação de estudo sobre a Fase A: o aluno autenticado pode manter várias anotações por aula, contendo texto, URL de print ou ambos. Após o Lote 1, o catálogo tem 14 aulas, índices 0 a 13. O schema inicial já aceita 0 a 25, preparando 26 aulas sem migrations incrementais; seguir o [README de ativação atual](./README.md).
 
 ## Preparação manual
 

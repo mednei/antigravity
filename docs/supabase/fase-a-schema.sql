@@ -2,8 +2,8 @@
 -- No painel do SEU projeto Supabase, abra SQL Editor > New query,
 -- cole este arquivo inteiro e execute com Run. Não executar no navegador.
 -- Os alunos são as identidades de auth.users; não há tabela própria de alunos.
--- O projeto atual possui 8 aulas: índices 0 a 7, na ordem de course.js.
--- Ao acrescentar aulas, amplie também o limite desta constraint.
+-- Capacidade preparada para 26 aulas: índices 0 a 25; o catálogo atual tem 14.
+-- As aulas futuras até o índice 25 não precisam de migrations incrementais.
 -- O script pode ser reaplicado na tabela desta fase, sem apagar seu progresso.
 
 begin;
@@ -12,7 +12,7 @@ create table if not exists public.progresso (
   id uuid primary key default gen_random_uuid(),
   aluno_id uuid not null references auth.users(id) on delete cascade,
   aula_index int not null constraint progresso_aula_index_check
-    check (aula_index between 0 and 7),
+    check (aula_index between 0 and 25),
   concluida_em timestamptz not null default now(),
   unique (aluno_id, aula_index)
 );
@@ -20,7 +20,7 @@ create table if not exists public.progresso (
 -- Também permite atualizar uma instalação anterior limitada às seis aulas.
 alter table public.progresso drop constraint if exists progresso_aula_index_check;
 alter table public.progresso add constraint progresso_aula_index_check
-  check (aula_index between 0 and 7);
+  check (aula_index between 0 and 25);
 
 alter table public.progresso enable row level security;
 
