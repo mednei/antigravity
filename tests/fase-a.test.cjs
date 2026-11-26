@@ -19,7 +19,7 @@ test('as oito aulas e a chave originais são preservadas', () => {
   const before = execFileSync('git', ['show', '15c1a66:assets/js/course.js'], { encoding: 'utf8' });
   const originals = lessonData(before);
   assert.deepEqual(lessonData(read('assets/js/course.js')).slice(0, originals.length), originals);
-  assert.match(read('docs/supabase/fase-a-schema.sql'), /between 0 and 7/);
+  assert.match(read('docs/supabase/fase-a-schema.sql'), /between 0 and 25/);
   assert.equal((read('docs/supabase/fase-a-schema.sql').match(/create policy /g) || []).length, 4);
 });
 

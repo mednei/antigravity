@@ -130,6 +130,85 @@ const lessons = [
     ],
     "exercise": "Consulte as fontes oficiais da modalidade que você usa e identifique onde acompanhar a cota, quando ela renova e se há uso de créditos adicionais.",
     "expected": "Registro da modalidade consultada, da fonte e da data, distinguindo métricas da API das cotas do Antigravity."
+  },
+  {
+    "title": "Contas, perfis e workspaces",
+    "category": "FORMAÇÃO EM AGENTES",
+    "trail": "formacao",
+    "duration": "5 min (estimativa)",
+    "sources": [
+      "./docs/01-primeiros-passos/contas-perfis-workspaces.md"
+    ],
+    "objective": "Organizar conta, postura de trabalho e ambientes de estudo e produção, protegendo credenciais.",
+    "intro": "Organizar conta, postura de trabalho e ambientes de estudo e produção, protegendo credenciais.",
+    "body": "<h4>Credenciais fora do código</h4><p>O princípio do material é não escrever senhas em arquivos de configuração nem na linha de comando. Quando possível, mantenha credenciais fora da pasta do projeto. Os <a href=\"./mongodb.html#seguranca\">cuidados do guia MongoDB</a> e o <a href=\"./supabase.html\">guia Supabase</a> continuam como referências, sem duplicar seus exemplos.</p><h4>Conta, perfil e ambiente</h4><p>O material propõe separar a postura de estudo da de produção. Essa organização de trabalho não comprova a existência de perfis automáticos com políticas próprias no produto.</p><p>O <a href=\"https://antigravity.google/docs/install/\" target=\"_blank\" rel=\"noopener noreferrer\">guia oficial de autenticação</a> documenta login por conta Google e fluxos distintos conforme a modalidade. Na CLI, há autenticação com chave da Gemini API sob configuração específica; isso não equivale a um fallback automático da IDE.</p><h4>Workspace e permissões</h4><p>O workspace delimita o contexto do projeto; as regras e fronteiras de acesso devem ser consideradas junto com a governança. Autenticar uma conta e definir as permissões do trabalho são decisões diferentes.</p>",
+    "concepts": [
+      "Proteção de credenciais",
+      "Separação entre estudo e produção",
+      "Conta e contexto do projeto"
+    ],
+    "exercise": "Faça uma leitura orientada dos cuidados com credenciais e da separação de ambientes descritos no material, usando os guias existentes como consulta.",
+    "expected": "Identificação dos cuidados com credenciais e da distinção entre conta, postura de trabalho e ambiente do projeto."
+  },
+  {
+    "title": "Arquitetura do agente e ambientes de trabalho",
+    "category": "FORMAÇÃO EM AGENTES",
+    "trail": "formacao",
+    "duration": "8 min (estimativa)",
+    "sources": [
+      "./docs/02-formacao-agentes/01-fundamentos-plataforma-agentica.md",
+      "./docs/02-formacao-agentes/02-os-4-pilares.md"
+    ],
+    "objective": "Distinguir modelo, harness e ferramentas, relacionando-os às quatro frentes didáticas do curso.",
+    "intro": "Distinguir modelo, harness e ferramentas, relacionando-os às quatro frentes didáticas do curso.",
+    "body": "<h4>Três componentes</h4><ul><li><strong>Modelo de linguagem:</strong> raciocínio, planejamento e hipóteses de código.</li><li><strong>Harness:</strong> orquestração da sessão, contexto, políticas e delegação.</li><li><strong>Ambiente e ferramentas:</strong> operações sobre arquivos, terminal, busca e navegador, conforme os recursos disponíveis.</li></ul><h4>Como uma ação acontece</h4><p>O modelo isolado não opera disco, rede ou janelas. Ele solicita chamadas estruturadas; o ambiente valida e executa as ferramentas e devolve os resultados para a decisão seguinte.</p><h4>Quatro frentes didáticas</h4><ul><li>Gestão de agentes: acompanhar tarefas e decisões que exigem revisão humana.</li><li>Editor: examinar código e alterações.</li><li>Terminal: interagir com tarefas pelo shell.</li><li>Integração programática: acionar trabalho por software.</li></ul><p>Essa divisão organiza o material; não é uma nomenclatura comercial oficial.</p><p>A CLI <code>agy</code>, a consulta <code>agy --version</code> e a interface de terminal estão no <a href=\"https://antigravity.google/docs/getting-started/\" target=\"_blank\" rel=\"noopener noreferrer\">guia inicial</a>. O <a href=\"https://antigravity.google/docs/sdk/overview/\" target=\"_blank\" rel=\"noopener noreferrer\">SDK Python oficial</a> oferece integração programática; o <a href=\"https://codelabs.developers.google.com/agy-cli-sdk-code-review?hl=en\" target=\"_blank\" rel=\"noopener noreferrer\">codelab do Google</a> mostra revisão de Pull Requests em CI.</p>",
+    "concepts": [
+      "Modelo, harness e ambiente",
+      "Chamadas estruturadas de ferramentas",
+      "Quatro frentes como organização didática"
+    ],
+    "exercise": "Relacione, por leitura orientada, os três componentes da arquitetura às quatro frentes apresentadas no material.",
+    "expected": "Distinção entre produzir uma hipótese, coordenar o trabalho e executar uma operação por ferramenta."
+  },
+  {
+    "title": "Ciclo, regras e permissões",
+    "category": "FORMAÇÃO EM AGENTES",
+    "trail": "formacao",
+    "duration": "8 min (estimativa)",
+    "sources": [
+      "./docs/02-formacao-agentes/03-ciclo-agentico-e-governanca.md"
+    ],
+    "objective": "Acompanhar o ciclo de execução e distinguir princípios de engenharia, regras operacionais e permissões.",
+    "intro": "Acompanhar o ciclo de execução e distinguir princípios de engenharia, regras operacionais e permissões.",
+    "body": "<h4>O ciclo de execução</h4><p>Objetivo → observação dos arquivos → planejamento → seleção de ferramentas → execução → análise do resultado → correção ou conclusão.</p><p>O ambiente aplica a política de acesso às chamadas. Saída, erros e código de retorno alimentam a decisão seguinte; os detalhes dependem da ferramenta disponível.</p><h4>Princípios e regras</h4><p>O material distingue postura de engenharia de regras operacionais do projeto. Propõe preferir funções puras e imutabilidade quando possível, justificar dependências e documentar padrões de arquitetura, dados, frontend e validação.</p><p>A <a href=\"https://antigravity.google/docs/rules/\" target=\"_blank\" rel=\"noopener noreferrer\">documentação atual de regras</a> reconhece AGENTS.md e GEMINI.md, com escopos de projeto e globais. Isso não comprova os caminhos antigos da apostila nem uma precedência presumida entre arquivos.</p><h4>Autonomia acompanha o risco</h4><p>Defina o grau de autonomia e as permissões conforme o trabalho. Instruções ao modelo e diretivas interpretadas pelo ambiente têm papéis diferentes.</p><p>No App, o preset Request Review exige revisão de comandos de terminal. Os controles e escopos atuais estão em <a href=\"https://antigravity.google/docs/agent-settings/\" target=\"_blank\" rel=\"noopener noreferrer\">configurações do agente</a>. Uma regra escrita não substitui a política efetiva de acesso.</p>",
+    "concepts": [
+      "Ciclo de execução e retorno das ferramentas",
+      "Princípios e regras operacionais",
+      "Permissões proporcionais ao risco"
+    ],
+    "exercise": "Faça a leitura do ciclo e dos princípios propostos, distinguindo orientação ao agente de permissão aplicada pelo ambiente.",
+    "expected": "Identificação das etapas do ciclo, das regras do projeto e das decisões de acesso que dependem do ambiente."
+  },
+  {
+    "title": "Planos, artefatos e relatório de entrega",
+    "category": "FORMAÇÃO EM AGENTES",
+    "trail": "formacao",
+    "duration": "8 min (estimativa)",
+    "sources": [
+      "./docs/01-primeiros-passos/planos-quotas-rate-limits.md",
+      "./docs/02-formacao-agentes/04-artefatos-e-walkthrough.md"
+    ],
+    "objective": "Transformar demanda, plano e entrega em informações revisáveis, considerando também o consumo do trabalho.",
+    "intro": "Transformar demanda, plano e entrega em informações revisáveis, considerando também o consumo do trabalho.",
+    "body": "<h4>Da demanda ao plano</h4><p>A conversa alinha o trabalho; os artefatos tornam plano, decisões e entrega revisáveis. Notas provisórias e hipóteses têm finalidade diferente de um plano apresentado para revisão.</p><p>O plano proposto pelo material reúne problema e contexto, alterações por arquivo, estratégia de validação e riscos ou efeitos colaterais. O fluxo é demanda → inspeção → plano → revisão humana → execução.</p><h4>Entrega com evidências</h4><p>O walkthrough reúne resumo, mapa das alterações, trechos relevantes, resultados das verificações e evidências visuais quando aplicáveis. Um relato de conclusão deve ser confrontado com os resultados apresentados.</p><p>A documentação oficial descreve o <a href=\"https://antigravity.google/docs/implementation-plan/\" target=\"_blank\" rel=\"noopener noreferrer\">plano e seus comentários</a> e o <a href=\"https://antigravity.google/docs/walkthrough/\" target=\"_blank\" rel=\"noopener noreferrer\">walkthrough</a>. Comentários permitem ajustar o plano; isso não comprova todos os atalhos ou mecanismos automáticos citados no original.</p><h4>Planejamento e consumo</h4><p>Uma tarefa com agente pode encadear várias chamadas. RPM, TPM e RPD são as métricas apresentadas no material para discutir consumo. A Aula 10 concentra a consulta de planos e limites; não se deve atribuir a todos os planos os limites de outra modalidade.</p>",
+    "concepts": [
+      "Plano de implementação revisável",
+      "Relatório de entrega e evidências",
+      "Comentários para ajustar o plano",
+      "Consumo em chamadas encadeadas"
+    ],
+    "exercise": "Solicite um validador de CPF com histórico de consultas e acompanhe plano, revisão, execução e relatório, conforme a prática proposta no material.",
+    "expected": "Plano revisável, alterações acompanhadas e relatório de entrega com resultados das verificações, sem presumir aprovação ou execução automática."
   }
 ];
 

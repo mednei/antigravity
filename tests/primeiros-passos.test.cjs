@@ -46,7 +46,7 @@ test('catálogo agrupa duas trilhas sem renumerar ou duplicar índices', () => {
   env.run('assets/js/course.js'); env.start();
   const html = env.nodes['lesson-list'].innerHTML;
   assert.match(html, /Trilha principal/);
-  assert.match(html, /Primeiros passos/);
+  assert.match(html, /Formação em agentes/);
   assert.equal((html.match(/class="lesson-trail"/g) || []).length, 2);
   const indices = [...html.matchAll(/data-lesson="(\d+)"/g)].map(match => Number(match[1]));
   assert.deepEqual(indices, Array.from({ length: totalLessons }, (_, index) => index));
@@ -107,7 +107,7 @@ test('após migration, desmarcar e remarcar limpa a pendência local de schema',
 
 test('migration contempla progresso e anotações sem remover tabelas ou políticas', () => {
   const sql = read('docs/supabase/20261126-primeiros-passos.sql');
-  assert.equal((sql.match(/between 0 and 8/g) || []).length, 2);
+  assert.equal((sql.match(/between 0 and 25/g) || []).length, 2);
   assert.match(sql, /progresso_aula_index_check/);
   assert.match(sql, /anotacoes_aula_index_check/);
   assert.match(sql, /to_regclass\('public.anotacoes'\)/);
