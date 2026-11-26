@@ -11,6 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="./assets/js/supabase-client.js" defer></script>
+  <script src="./assets/js/auth.js" defer></script>
   <script src="./assets/js/app.js" defer></script>
   <script src="./assets/js/course.js" defer></script>
 </head>
@@ -90,6 +92,7 @@
           </div>
           <strong class="progress-percent" id="progress-percent">0%</strong>
         </section>
+        <p id="progress-sync-status" class="progress-sync-status" role="status" aria-live="polite"></p>
 
         <section class="learning-section" id="aulas">
           <div class="section-heading">

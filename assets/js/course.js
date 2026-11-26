@@ -99,14 +99,148 @@ const lessons = [
 ];
 
 const storageKey = 'antigravity-lab-progress-v1';
-let completed = [];
-try {
-  const saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
-  if (Array.isArray(saved)) {
-    completed = saved.filter(index => Number.isInteger(index) && index >= 0 && index < lessons.length);
+const progressOwnerKey = `${storageKey}:owner`;
+const progressMemory = new Map();
+let progressUserId = null;
+let progressInitialized = false;
+let progressEpoch = 0;
+let progressLoad = Promise.resolve();
+let progressWrites = Promise.resolve();
+let progressEdits = new Map();
+
+function validProgress(value) {
+  return Array.isArray(value)
+    ? [...new Set(value.filter(index => Number.isInteger(index) && index >= 0 && index < lessons.length))]
+    : [];
+}
+
+function readLocalProgress(key) {
+  try { return validProgress(JSON.parse(localStorage.getItem(key) || '[]')); }
+  catch (error) { return []; }
+}
+
+function readProgressOwner() {
+  try { return localStorage.getItem(progressOwnerKey) || 'guest'; }
+  catch (error) { return 'guest'; }
+}
+
+function contextProgressKey(userId) {
+  return `${storageKey}:${userId || 'guest'}`;
+}
+
+function readContextProgress(userId) {
+  const context = userId || 'guest';
+  if (progressMemory.has(context)) return [...progressMemory.get(context)];
+  // O array legado pertence ao visitante até a primeira troca de contexto.
+  const value = readProgressOwner() === context
+    ? readLocalProgress(storageKey)
+    : readLocalProgress(contextProgressKey(userId));
+  progressMemory.set(context, value);
+  return [...value];
+}
+
+// Mantém a cópia ativa anterior mesmo se uma gravação parcial tiver perdido o cache separado.
+progressMemory.set(readProgressOwner(), readLocalProgress(storageKey));
+let completed = readContextProgress(null);
+
+function cacheProgress() {
+  progressMemory.set(progressUserId || 'guest', [...completed]);
+  try {
+    const value = JSON.stringify(completed);
+    // Preserva a chave e o formato original, agora usados como cache ativo.
+    localStorage.setItem(contextProgressKey(progressUserId), value);
+    localStorage.setItem(storageKey, value);
+    localStorage.setItem(progressOwnerKey, progressUserId || 'guest');
+  } catch (error) {
+    /* O progresso continua disponível nesta sessão mesmo com storage bloqueado. */
   }
-} catch (error) {
-  completed = [];
+}
+
+function progressStatus(message) {
+  const status = document.getElementById('progress-sync-status');
+  if (status) status.textContent = message;
+}
+
+function refreshProgress() {
+  renderCourseDashboard();
+}
+
+function synchronizeProgress(state) {
+  const nextUserId = state.user ? state.user.id : null;
+  if (progressInitialized && nextUserId === progressUserId) return;
+  // Guarda o visitante antes de ativar o cache da conta; nunca importa seu progresso silenciosamente.
+  cacheProgress();
+  progressUserId = nextUserId;
+  progressInitialized = true;
+  const epoch = ++progressEpoch;
+  progressEdits = new Map();
+  progressWrites = Promise.resolve();
+  completed = readContextProgress(nextUserId);
+  cacheProgress();
+  refreshProgress();
+
+  if (!nextUserId || !state.client) {
+    progressLoad = Promise.resolve();
+    progressStatus('Progresso salvo neste navegador. Entre para salvar na sua conta.');
+    return;
+  }
+
+  progressStatus('Buscando o progresso da sua conta…');
+  progressLoad = (async () => {
+    try {
+      const { data, error } = await state.client.from('progresso')
+        .select('aula_index').eq('aluno_id', nextUserId);
+      if (error) throw error;
+      if (epoch !== progressEpoch) return;
+      const remote = new Set(validProgress((data || []).map(row => row.aula_index)));
+      // Cliques feitos durante a leitura prevalecem sobre a resposta antiga.
+      progressEdits.forEach((done, index) => done ? remote.add(index) : remote.delete(index));
+      completed = [...remote].sort((a, b) => a - b);
+      cacheProgress();
+      refreshProgress();
+      progressStatus('Progresso da conta carregado.');
+    } catch (error) {
+      if (epoch !== progressEpoch) return;
+      progressStatus('Não foi possível buscar sua conta. Usando o progresso salvo neste navegador.');
+    }
+  })();
+}
+
+function saveLessonProgress(index, done) {
+  cacheProgress();
+  const auth = window.AntigravityAuth;
+  const state = auth && auth.getState();
+  if (!progressUserId || !state || !state.user || state.user.id !== progressUserId || !state.client) {
+    progressStatus('Progresso salvo neste navegador.');
+    return;
+  }
+  const userId = progressUserId;
+  const epoch = progressEpoch;
+  progressEdits.set(index, done);
+  progressStatus('Progresso salvo neste navegador. Sincronizando com sua conta…');
+  // Serializa marcação/desmarcação para que respostas fora de ordem não invertam o resultado.
+  progressWrites = progressWrites.then(async () => {
+    await progressLoad;
+    const current = auth.getState();
+    if (epoch !== progressEpoch || !current.user || current.user.id !== userId) return;
+    try {
+      const query = done
+        ? state.client.from('progresso').upsert(
+          { aluno_id: userId, aula_index: index },
+          { onConflict: 'aluno_id,aula_index' }
+        )
+        : state.client.from('progresso').delete().eq('aluno_id', userId).eq('aula_index', index);
+      const { error } = await query;
+      if (error) throw error;
+      if (epoch === progressEpoch) progressStatus('Progresso salvo na sua conta.');
+    } catch (error) {
+      if (epoch === progressEpoch) {
+        progressStatus('Salvo neste navegador. Não foi possível sincronizar com sua conta.');
+      }
+    }
+  }).catch(() => {
+    if (epoch === progressEpoch) progressStatus('Salvo neste navegador. A sincronização não foi concluída.');
+  });
 }
 
 let selected = 0;
@@ -215,11 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
           completed = completed.includes(selected) 
             ? completed.filter(index => index !== selected) 
             : [...completed, selected];
-          try {
-            localStorage.setItem(storageKey, JSON.stringify(completed));
-          } catch (error) {
-            /* Mantém progresso na sessão */
-          }
+          saveLessonProgress(selected, completed.includes(selected));
           renderCourseDashboard();
         } else if (event.target.closest('#next-button')) {
           selected += 1;
@@ -232,5 +362,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   } else {
     updateProgressUI();
+  }
+
+  if (window.AntigravityAuth) {
+    window.AntigravityAuth.subscribe(synchronizeProgress);
+    window.AntigravityAuth.ready.then(synchronizeProgress).catch(() => {
+      progressStatus('Progresso salvo neste navegador.');
+    });
+  } else {
+    progressStatus('Progresso salvo neste navegador.');
   }
 });

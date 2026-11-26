@@ -571,6 +571,8 @@ main{max-width:1320px;width:100%;margin:0 auto;padding:45px 6% 0;flex:1}
 .form-feedback.is-visible{display:block}
 .form-feedback.info{background:#eff5e8;border-left:4px solid #82a83e;color:#3d5624}
 .form-feedback.error{background:#fdf2f0;border-left:4px solid #e06c53;color:#78291a}
+.progress-sync-status{font-size:13px;color:var(--muted);line-height:1.6;margin:10px 0;overflow-wrap:anywhere}
+.progress-sync-status:empty{display:none}
 
 /* Resources & Links */
 .resources-section{
