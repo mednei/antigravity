@@ -5,6 +5,7 @@ const { execFileSync } = require('node:child_process');
 const { environment, clickLesson, toggle, progress, lessonData, progressKey } = require('./course-fixtures.cjs');
 const read = path => fs.readFileSync(path, 'utf8');
 const lessons = lessonData(read('assets/js/course.js'));
+const totalLessons = lessons.length;
 const sourceFiles = [
   'docs/01-primeiros-passos/contas-perfis-workspaces.md',
   'docs/02-formacao-agentes/01-fundamentos-plataforma-agentica.md',
@@ -15,14 +16,14 @@ const sourceFiles = [
 ];
 const original = path => execFileSync('git', ['show', `af1c552:${path}`], { encoding: 'utf8' });
 
-test('Lote 1 tem exatamente 14 aulas e preserva os dez objetos anteriores', () => {
-  assert.equal(lessons.length, 14);
+test('Lote 1 preserva as quatro aulas e os dez objetos anteriores', () => {
+  assert.ok(totalLessons >= 14);
   assert.deepEqual(lessons.slice(0, 10), lessonData(original('assets/js/course.js')));
-  assert.deepEqual(lessons.slice(10).map(lesson => lesson.title), [
+  assert.deepEqual(lessons.slice(10,14).map(lesson => lesson.title), [
     'Contas, perfis e workspaces', 'Arquitetura do agente e ambientes de trabalho',
     'Ciclo, regras e permissões', 'Planos, artefatos e relatório de entrega'
   ]);
-  lessons.slice(10).forEach(lesson => {
+  lessons.slice(10,14).forEach(lesson => {
     assert.equal(lesson.trail, 'formacao');
     for (const field of ['title','category','duration','objective','intro','body','exercise','expected']) assert.ok(lesson[field].trim(), field);
     assert.ok(lesson.concepts.length);
@@ -37,7 +38,7 @@ test('as seis fontes permanecem intactas e nenhuma aula exibe marcação de dúv
   assert.match(lessons[13].body, /Aula 10/);
 });
 
-test('trilhas contêm índices únicos 0–13: dez existentes e quatro de formação', () => {
+test('trilhas preservam dez existentes e os índices seguintes de formação', () => {
   const env = environment(); env.run('assets/js/course.js'); env.start();
   const html = env.nodes['lesson-list'].innerHTML;
   const groups = html.split('<section class="lesson-trail"').slice(1);
@@ -46,17 +47,17 @@ test('trilhas contêm índices únicos 0–13: dez existentes e quatro de forma�
   assert.match(groups[1], /Formação em agentes/);
   const indices = text => [...text.matchAll(/data-lesson="(\d+)"/g)].map(match => Number(match[1]));
   assert.deepEqual(indices(groups[0]), Array.from({ length: 10 }, (_, index) => index));
-  assert.deepEqual(indices(groups[1]), [10,11,12,13]);
-  assert.deepEqual(indices(html), Array.from({ length: 14 }, (_, index) => index));
+  assert.deepEqual(indices(groups[1]), Array.from({ length: totalLessons - 10 }, (_, index) => index + 10));
+  assert.deepEqual(indices(html), Array.from({ length: totalLessons }, (_, index) => index));
 });
 
-test('progresso local preserva índices e calcula sobre 14, não capacidade 26', () => {
+test('progresso local preserva índices e calcula sobre o total real, não capacidade 26', () => {
   const env = environment({ [progressKey]: '[0,1,2]' });
   env.run('assets/js/course.js'); env.start();
-  assert.equal(env.nodes['progress-percent'].textContent, '21%');
+  assert.equal(env.nodes['progress-percent'].textContent, `${Math.round(300 / totalLessons)}%`);
   clickLesson(env, 10); toggle(env);
   assert.deepEqual(progress(env), [0,1,2,10]);
-  assert.equal(env.nodes['progress-percent'].textContent, '29%');
+  assert.equal(env.nodes['progress-percent'].textContent, `${Math.round(400 / totalLessons)}%`);
   const reload = environment(Object.fromEntries(env.storage));
   reload.run('assets/js/course.js'); reload.start();
   assert.deepEqual(progress(reload), [0,1,2,10]);

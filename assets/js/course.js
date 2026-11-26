@@ -209,6 +209,87 @@ const lessons = [
     ],
     "exercise": "Solicite um validador de CPF com histórico de consultas e acompanhe plano, revisão, execução e relatório, conforme a prática proposta no material.",
     "expected": "Plano revisável, alterações acompanhadas e relatório de entrega com resultados das verificações, sem presumir aprovação ou execução automática."
+  },
+  {
+    "title": "Contexto, recuperação e memória",
+    "category": "FORMAÇÃO EM AGENTES",
+    "trail": "formacao",
+    "duration": "10 min (estimativa)",
+    "sources": [
+      "./docs/03-laboratorios/lab-rag-e-contexto.md"
+    ],
+    "objective": "Selecionar contexto relevante e distinguir recuperação de informação, regras e memória.",
+    "intro": "Selecionar contexto relevante e distinguir recuperação de informação, regras e memória.",
+    "body": "<h4>Escolha o contexto da tarefa</h4><p>O material discute atenção em contextos longos, latência e consumo de tokens. A proposta é recuperar trechos relevantes em vez de enviar indiscriminadamente todo o projeto.</p><h4>Estrutura e recuperação</h4><p>AST é a estrutura sintática de um programa. A leitura estrutural permite organizar funções, classes, métodos e imports e concentrar a inspeção nos símbolos relevantes.</p><ol><li>Dividir o código em trechos com significado, como funções e classes.</li><li>Representar esses trechos por embeddings.</li><li>Comparar a consulta com as representações.</li><li>Recuperar os trechos mais relacionados para a tarefa.</li></ol><p>Esse pipeline explica o conceito de recuperação; não descreve uma implementação interna comprovada do Antigravity.</p><h4>Regras e memória</h4><p>Regras são diretrizes prescritivas. Memória reúne fatos e observações. Esses papéis não demonstram aprendizado ou persistência automática no produto.</p><p>A <a href=\"https://antigravity.google/docs/at-mentions/\" target=\"_blank\" rel=\"noopener noreferrer\">documentação de menções</a> descreve como apontar arquivos e pastas com @. Para a pergunta lateral da prática, <a href=\"https://antigravity.google/docs/commands/btw/\" target=\"_blank\" rel=\"noopener noreferrer\">/btw</a> mantém a troca fora do histórico principal. É um recurso com comportamento próprio, não garantia de isolamento separado das permissões da sessão.</p>",
+    "concepts": [
+      "Seleção de contexto",
+      "AST e recuperação por embeddings como conceitos",
+      "Regras e memória",
+      "Pergunta lateral com escopo documentado"
+    ],
+    "exercise": "Compare o contexto antes e depois de uma pergunta lateral sobre valores padrão mutáveis em Python, conforme o objetivo da prática recebida. Use a documentação da modalidade para consultar o contexto disponível.",
+    "expected": "Comparação registrada do contexto principal e da pergunta lateral, distinguindo o que foi observado de hipóteses sobre memória ou indexação."
+  },
+  {
+    "title": "Terminal, filas e tarefas dependentes",
+    "category": "FORMAÇÃO EM AGENTES",
+    "trail": "formacao",
+    "duration": "12 min (estimativa)",
+    "sources": [
+      "./docs/03-laboratorios/lab-terminal-e-shell.md",
+      "./docs/02-formacao-agentes/10-concorrencia-e-mensagens.md"
+    ],
+    "objective": "Observar execução, erros e resultados, coordenando tarefas dependentes com base no estado real.",
+    "intro": "Observar execução, erros e resultados, coordenando tarefas dependentes com base no estado real.",
+    "body": "<h4>Observe antes de corrigir</h4><p>Execução, saída, erro e correção fazem parte do trabalho no terminal. Uma verificação pontual termina e devolve um resultado; servidores e observadores de arquivos podem permanecer ativos e precisam de acompanhamento próprio.</p><h4>Fila, direção e interrupção</h4><p>O material distingue deixar uma demanda seguinte na fila, corrigir a direção do trabalho em andamento e interromper uma execução. São decisões diferentes: antes de iniciar uma tarefa dependente, considere os arquivos e o resultado deixados pela anterior.</p><p>Na CLI, a opção Queued Messages distingue Queue de Send Immediately. O escopo e os controles atuais estão nas <a href=\"https://antigravity.google/docs/settings?tab=cli\" target=\"_blank\" rel=\"noopener noreferrer\">configurações oficiais</a>; não se presume uma garantia universal de preservação de processos.</p><h4>Dois exercícios do material</h4><p>Primeiro, uma calculadora recebe uma lista com números e a string “trinta”. Observe o erro de soma e peça a correção para ignorar valores não convertíveis.</p><p>Depois, solicite um programa que calcule primos até 50.000 e registre o tempo. A documentação seguinte deve usar o resultado efetivamente obtido, sem inventar medições.</p>",
+    "concepts": [
+      "Saída e erro de execução",
+      "Processos pontuais e contínuos",
+      "Fila, direcionamento e interrupção",
+      "Dependência entre tarefas"
+    ],
+    "exercise": "Execute a prática da calculadora e acompanhe a correção. Na prática de primos até 50.000, solicite em seguida instruções e tempo médio, conferindo se o documento usa medições reais; não apresente uma média sem medições que a sustentem.",
+    "expected": "Erro observado e correção da calculadora; documento da segunda tarefa coerente com os resultados medidos da primeira."
+  },
+  {
+    "title": "Sessões, versões e restauração",
+    "category": "FORMAÇÃO EM AGENTES",
+    "trail": "formacao",
+    "duration": "8 min (estimativa)",
+    "sources": [
+      "./docs/02-formacao-agentes/11-sessoes-versionamento-rollback.md"
+    ],
+    "objective": "Distinguir o histórico da conversa do estado dos arquivos e conferir uma restauração em laboratório.",
+    "intro": "Distinguir o histórico da conversa do estado dos arquivos e conferir uma restauração em laboratório.",
+    "body": "<h4>Conversa e arquivos são estados diferentes</h4><p>Desfazer uma mensagem no chat não equivale a restaurar arquivos no disco. Apagar uma mensagem também não demonstra recuperação do código.</p><ul><li>Rollback de conversa altera o histórico ou o contexto.</li><li>Rollback de arquivos altera o conteúdo no sistema de arquivos.</li></ul><h4>Retomar e explorar alternativas</h4><p>O material propõe retomar tarefas e explorar caminhos alternativos de conversa. Na CLI, o <a href=\"https://antigravity.google/docs/cli/conversations/\" target=\"_blank\" rel=\"noopener noreferrer\">gerenciamento de conversas</a> documenta /resume e sessões relacionadas ao diretório de trabalho. Retomar a conversa não comprova o isolamento dos arquivos de uma ramificação.</p><h4>Compare o que foi restaurado</h4><p>O objetivo é recuperar alterações preservando o trabalho manual anterior e inspecionar as ações realizadas. Examine as diferenças e compare os arquivos antes e depois; a <a href=\"https://antigravity.google/docs/review-changes/\" target=\"_blank\" rel=\"noopener noreferrer\">documentação de revisão</a> é uma referência para avaliar mudanças.</p><p>A prática deve ocorrer em uma cópia de laboratório. Não se presume um mecanismo automático capaz de preservar toda alteração manual.</p>",
+    "concepts": [
+      "Histórico de conversa e estado de arquivos",
+      "Retomada de sessão",
+      "Comparação antes/depois",
+      "Preservação do trabalho manual"
+    ],
+    "exercise": "Em uma cópia de laboratório, crie um arquivo com alterações manuais, solicite uma mudança e compare o conteúdo antes e depois de uma restauração. Use somente o mecanismo documentado e disponível no ambiente escolhido.",
+    "expected": "Registro do que mudou na conversa e nos arquivos, verificando se o trabalho manual foi preservado, sem presumir o resultado."
+  },
+  {
+    "title": "Validação e automação com hooks",
+    "category": "FORMAÇÃO EM AGENTES",
+    "trail": "formacao",
+    "duration": "10 min (estimativa)",
+    "sources": [
+      "./docs/02-formacao-agentes/05-hooks-e-validacao.md"
+    ],
+    "objective": "Avaliar entregas com verificações reproduzíveis e compreender o papel dos hooks e dos procedimentos reutilizáveis.",
+    "intro": "Avaliar entregas com verificações reproduzíveis e compreender o papel dos hooks e dos procedimentos reutilizáveis.",
+    "body": "<h4>Engenharia valida o resultado</h4><p>O material contrapõe geração probabilística a verificações reproduzíveis. Considere linters, checagens estáticas, formatadores, verificadores de tipos, testes e cobertura conforme a tarefa.</p><p>Planejar → executar → verificar → corrigir quando necessário → apresentar evidências para revisão. Não aceite uma tarefa como pronta apenas porque o agente declarou sucesso.</p><h4>Hooks no ciclo de trabalho</h4><p>Hooks associam scripts a momentos do trabalho para preparar ou verificar alterações. A <a href=\"https://antigravity.google/docs/hooks/\" target=\"_blank\" rel=\"noopener noreferrer\">documentação atual de hooks</a> descreve eventos como PreToolUse e PostToolUse, antes e depois de uma ferramenta. Esses eventos não confirmam o schema antigo citado na apostila.</p><h4>Operação e procedimento</h4><p>Uma ferramenta é uma operação; uma habilidade ou procedimento encadeia operações. Empacotar procedimentos evita repetir a distribuição manual de regras e integrações entre projetos.</p><p>O <a href=\"https://antigravity.google/docs/build-plugins/\" target=\"_blank\" rel=\"noopener noreferrer\">guia de plugins</a> documenta manifesto plugin.json, habilidades em SKILL.md e hooks.json. A existência desses componentes não comprova qualquer configuração presumida de plugin ou hook.</p>",
+    "concepts": [
+      "Verificações reproduzíveis",
+      "Evidências para revisão",
+      "Eventos de hooks com escopo documentado",
+      "Ferramentas e procedimentos reutilizáveis"
+    ],
+    "exercise": "Observe um script de verificação receber os arquivos de uma tarefa e retornar seu resultado, conforme a prática proposta. Registre a automação somente depois de conferir eventos e formatos documentados; não crie configuração presumida.",
+    "expected": "Resultado da verificação registrado e apresentado para revisão, com distinção entre execução manual e automação de hook efetivamente configurada."
   }
 ];
 
