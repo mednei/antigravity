@@ -1,4 +1,4 @@
-// course.js — Dashboard e gerenciamento educacional das 8 aulas
+// course.js — Dashboard e gerenciamento educacional do curso
 const lessons = [
   {
     title: 'Conheça o Antigravity',
@@ -95,12 +95,30 @@ const lessons = [
     ],
     "exercise": "Escreva um checklist pessoal com 5 regras de segurança para credenciais de banco.",
     "expected": "Checklist documentado com cinco regras práticas de proteção de credenciais."
+  },
+  {
+    "title": "Instalação e requisitos",
+    "category": "PRIMEIROS PASSOS",
+    "trail": "primeiros-passos",
+    "duration": "5 min (estimativa)",
+    "source": "./docs/01-primeiros-passos/instalacao-e-requisitos.md",
+    "objective": "Distinguir a IDE independente da extensão para VS Code e conhecer a instalação e as configurações documentadas.",
+    "intro": "Editor, extensões e preferências compõem o ambiente de desenvolvimento.",
+    "body": "<h4>Escolha o ambiente</h4><p>Você pode baixar a IDE independente do Antigravity ou usar sua extensão oficial no VS Code. Para a IDE, escolha o instalador do seu sistema no site oficial. Consulte os requisitos da opção escolhida no <a href=\"https://antigravity.google/docs/getting-started\" target=\"_blank\" rel=\"noopener noreferrer\">guia de instalação do Google</a>.</p><h4>Instale a extensão no VS Code</h4><p>O guia exige VS Code 1.90 ou posterior, em Windows, Linux ou macOS, e uma conta com acesso ao Antigravity.</p><ol><li>Abra Extensões: Ctrl+Shift+X no Windows/Linux ou Cmd+Shift+X no macOS.</li><li>Procure Google Antigravity, publicado pelo Google, e clique em Install.</li><li>Abra o ícone Antigravity e faça login. Na primeira abertura, a extensão instala o serviço local agy.</li></ol><h4>Extensões de linguagem</h4><p>A Microsoft documenta que Pylance usa Pyright para verificação de tipos. Sua <a href=\"https://github.com/microsoft/pylance-release/blob/main/FAQ.md\" target=\"_blank\" rel=\"noopener noreferrer\">FAQ oficial</a> restringe o uso de Pylance aos produtos e serviços Microsoft indicados nela.</p><h4>Ambiente remoto</h4><p>O Antigravity App, a partir da versão 2.33.0, documenta conexão SSH a hosts Linux de 64 bits com glibc 2.26 ou posterior. Consulte os demais <a href=\"https://antigravity.google/docs/ssh/\" target=\"_blank\" rel=\"noopener noreferrer\">requisitos oficiais de SSH do App</a> antes de preparar o acesso remoto.</p><h4>Ajuste suas preferências</h4><p>No VS Code, abra Settings e pesquise antigravity; a extensão também aceita configuração em settings.json. Seu painel permite conversar com o agente e revisar alterações no editor.</p><p><a href=\"https://antigravity.google/docs/ide/extensions/vscode/\" target=\"_blank\" rel=\"noopener noreferrer\">Procedimento e configurações oficiais para VS Code</a>. Fontes consultadas em 26/11/2026.</p>",
+    "concepts": [
+      "IDE independente e extensão para VS Code",
+      "Instalação pelo painel de extensões",
+      "Configurações pessoais do editor"
+    ],
+    "exercise": "Consulte o guia oficial da opção escolhida e identifique o instalador ou a extensão e os requisitos correspondentes.",
+    "expected": "Identificação da opção de ambiente, de sua origem oficial e dos requisitos aplicáveis."
   }
 ];
 
 const storageKey = 'antigravity-lab-progress-v1';
 const progressOwnerKey = `${storageKey}:owner`;
 const progressMemory = new Map();
+const schemaPendingMemory = new Map();
 let progressUserId = null;
 let progressInitialized = false;
 let progressEpoch = 0;
@@ -122,6 +140,21 @@ function readLocalProgress(key) {
 function readProgressOwner() {
   try { return localStorage.getItem(progressOwnerKey) || 'guest'; }
   catch (error) { return 'guest'; }
+}
+
+// Conclusões rejeitadas por um schema antigo ficam separadas por conta.
+function schemaPending(userId) {
+  if (!schemaPendingMemory.has(userId)) {
+    schemaPendingMemory.set(userId, readLocalProgress(`${storageKey}:schema-pending:${userId}`));
+  }
+  return [...schemaPendingMemory.get(userId)];
+}
+
+function setSchemaPending(userId, values) {
+  const pending = validProgress(values);
+  schemaPendingMemory.set(userId, pending);
+  try { localStorage.setItem(`${storageKey}:schema-pending:${userId}`, JSON.stringify(pending)); }
+  catch (error) { /* A cópia em memória continua disponível nesta sessão. */ }
 }
 
 function contextProgressKey(userId) {
@@ -193,12 +226,17 @@ function synchronizeProgress(state) {
       if (error) throw error;
       if (epoch !== progressEpoch) return;
       const remote = new Set(validProgress((data || []).map(row => row.aula_index)));
+      const pending = schemaPending(nextUserId).filter(index => !remote.has(index));
+      setSchemaPending(nextUserId, pending);
+      pending.forEach(index => { if (completed.includes(index)) remote.add(index); });
       // Cliques feitos durante a leitura prevalecem sobre a resposta antiga.
       progressEdits.forEach((done, index) => done ? remote.add(index) : remote.delete(index));
       completed = [...remote].sort((a, b) => a - b);
       cacheProgress();
       refreshProgress();
-      progressStatus('Progresso da conta carregado.');
+      progressStatus(pending.length
+        ? 'Progresso carregado. Há aulas salvas só neste navegador; aplique a migration e marque-as novamente para sincronizar.'
+        : 'Progresso da conta carregado.');
     } catch (error) {
       if (epoch !== progressEpoch) return;
       progressStatus('Não foi possível buscar sua conta. Usando o progresso salvo neste navegador.');
@@ -216,6 +254,7 @@ function saveLessonProgress(index, done) {
   }
   const userId = progressUserId;
   const epoch = progressEpoch;
+  if (!done) setSchemaPending(userId, schemaPending(userId).filter(value => value !== index));
   progressEdits.set(index, done);
   progressStatus('Progresso salvo neste navegador. Sincronizando com sua conta…');
   // Serializa marcação/desmarcação para que respostas fora de ordem não invertam o resultado.
@@ -232,10 +271,16 @@ function saveLessonProgress(index, done) {
         : state.client.from('progresso').delete().eq('aluno_id', userId).eq('aula_index', index);
       const { error } = await query;
       if (error) throw error;
+      setSchemaPending(userId, schemaPending(userId).filter(value => value !== index));
       if (epoch === progressEpoch) progressStatus('Progresso salvo na sua conta.');
     } catch (error) {
       if (epoch === progressEpoch) {
-        progressStatus('Salvo neste navegador. Não foi possível sincronizar com sua conta.');
+        if (done && error.code === '23514' && progressEdits.get(index) === true && completed.includes(index)) {
+          setSchemaPending(userId, [...schemaPending(userId), index]);
+          progressStatus('Salvo neste navegador. Atualize o schema do curso no Supabase para sincronizar esta aula.');
+        } else {
+          progressStatus('Salvo neste navegador. Não foi possível sincronizar com sua conta.');
+        }
       }
     }
   }).catch(() => {
@@ -547,6 +592,10 @@ function updateProgressUI() {
   if (percentEl) percentEl.textContent = `${percent}%`;
   if (bar) bar.style.width = `${percent}%`;
   if (track) track.setAttribute('aria-valuenow', String(percent));
+  document.querySelectorAll('[data-course-count]').forEach(node => {
+    node.textContent = node.getAttribute('data-course-count') === 'pad'
+      ? String(lessons.length).padStart(2, '0') : String(lessons.length);
+  });
 }
 
 function renderCourseDashboard() {

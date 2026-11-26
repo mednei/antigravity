@@ -71,6 +71,8 @@ Primeiros passos → formação em agentes → laboratórios → aplicação no 
 
 ## Consolidação e proveniência
 
+Na conversão dos MDs em aulas, `VERIFICAR` é uma tarefa editorial do Codex: consultar fontes oficiais atuais antes de publicar. Só a parte confirmada e pertinente entra no site, com fonte e data. Trechos refutados ou não confirmados ficam no Markdown e no registro único, sem badges no site. Nesta primeira conversão, o MD-fonte permanece intacto; as decisões estão em [evidências de instalação e requisitos](./01-primeiros-passos/instalacao-e-requisitos-verificacao.md).
+
 | Material recebido | Destino canônico |
 |---|---|
 | Módulo 1 | Fundamentos, quatro pilares, governança e validação. |
