@@ -703,7 +703,7 @@ function renderCourseDashboard() {
     const trails = new Map();
     lessons.forEach((lesson, index) => {
       const done = completed.includes(index);
-      const trail = lesson.trail || 'principal';
+      const trail = index < 10 ? 'principal' : (lesson.trail || 'principal');
       if (!trails.has(trail)) trails.set(trail, []);
       trails.get(trail).push(`<button class="lesson-button ${selected === index ? 'selected' : ''}" type="button" data-lesson="${index}" aria-pressed="${selected === index}">
         <span class="lesson-index">${String(index + 1).padStart(2, '0')}</span>
@@ -716,7 +716,7 @@ function renderCourseDashboard() {
     });
     if (trails.size > 1) {
       list.classList.add('lesson-list-grouped');
-      const labels = { principal: 'Trilha principal', 'primeiros-passos': 'Primeiros passos' };
+      const labels = { principal: 'Trilha principal', 'primeiros-passos': 'Primeiros passos', formacao: 'Formação em agentes' };
       list.innerHTML = [...trails].map(([trail, buttons], groupIndex) => `
         <section class="lesson-trail" aria-labelledby="lesson-trail-${groupIndex}">
           <h3 class="lesson-trail-title" id="lesson-trail-${groupIndex}">${labels[trail] || 'Outras aulas'} <span>${buttons.length} ${buttons.length === 1 ? 'aula' : 'aulas'}</span></h3>
