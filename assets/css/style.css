@@ -586,7 +586,8 @@ main{max-width:1320px;width:100%;margin:0 auto;padding:45px 6% 0;flex:1}
 .auth-mode-switch{display:flex;gap:8px;margin:0 0 24px;flex-wrap:wrap}
 .auth-mode-switch button{flex:1;min-width:110px;min-height:44px;padding:10px 16px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);cursor:pointer;font-weight:700}
 .auth-mode-switch button[aria-pressed="true"]{background:var(--green);border-color:var(--green)}
-.auth-mode-switch button:disabled,.auth-card button:disabled{cursor:wait;opacity:.65}
+.auth-mode-switch button:disabled,.auth-card button:disabled{cursor:not-allowed;opacity:.65}
+.auth-card form[aria-busy="true"] button:disabled{cursor:wait}
 .auth-card [hidden]{display:none}
 .auth-card form{margin-top:4px}
 .auth-submit{width:100%;justify-content:center;margin-top:8px;min-height:46px}
@@ -831,3 +832,49 @@ footer svg{width:13px;height:13px;color:#9abd68}
 @media(max-width:900px){.lesson-trail-lessons{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:680px){.lesson-trail-lessons{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:370px){.lesson-trail-title{font-size:14px}.lesson-trail-title span{font-size:10px}}
+
+/* Conteúdo interativo: menu recolhível com fixação opcional. */
+.lesson-menu{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:12px}
+.lesson-menu-header{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.lesson-menu-header[hidden],.lesson-menu #course-layout[hidden]{display:none}
+.lesson-menu-toggle,.lesson-menu-pin{display:flex;align-items:center;gap:8px;min-height:44px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);font:inherit;cursor:pointer;padding:10px}
+.lesson-menu-toggle{flex:1;min-width:0;text-align:left;font-family:var(--display);font-size:13px;font-weight:700}
+.lesson-menu-toggle span{flex:1;overflow-wrap:anywhere}
+.lesson-menu-toggle svg,.lesson-menu-pin svg{flex-shrink:0;width:16px;height:16px}
+.lesson-menu-chevron{transform:rotate(180deg)}
+.lesson-menu-toggle[aria-expanded="false"] .lesson-menu-chevron{transform:rotate(0)}
+.lesson-menu-pin{font-size:12px;flex-shrink:0}
+.lesson-menu-pin[aria-pressed="true"]{background:var(--green);border-color:#a6c779}
+.lesson-menu.is-pinned .lesson-menu-header{position:sticky;top:88px;z-index:10;background:var(--paper);padding:10px 0;box-shadow:0 8px 16px rgba(29,37,35,.08)}
+.lesson-menu .lesson-list{max-height:calc(100dvh - 190px);overflow-y:auto;overscroll-behavior:contain;padding:4px;scrollbar-gutter:stable}
+#lesson-detail{scroll-margin-top:92px;min-width:0}
+@media(max-width:900px){.learning-grid{display:block}.lesson-menu .lesson-list{max-height:40dvh;margin-bottom:20px}.lesson-menu-header{margin-bottom:10px}}
+@media(max-width:680px){.lesson-menu{padding:10px}.lesson-menu.is-pinned .lesson-menu-header{top:77px}.lesson-menu-toggle{font-size:12px}.lesson-menu-toggle,.lesson-menu-pin{padding:8px}#lesson-detail{scroll-margin-top:82px}}
+@media(max-width:370px){.lesson-menu-header{gap:5px}.lesson-menu-toggle{gap:5px}.lesson-menu-pin{gap:4px;font-size:11px}}
+
+/* Cada trilha é um menu: as aulas ficam dentro de seu desdobramento. */
+.lesson-trail-menu{border:1px solid var(--line);border-radius:5px;background:#fff;padding:0}
+.lesson-trail-menu>.lesson-trail-title{display:flex;align-items:center;gap:10px;min-height:48px;margin:0;padding:12px;cursor:pointer;list-style:none;font-size:14px}
+.lesson-trail-title::-webkit-details-marker{display:none}
+.lesson-trail-menu>.lesson-trail-title::before{content:'›';font-size:22px;line-height:1;transform:rotate(0deg)}
+.lesson-trail-menu[open]>.lesson-trail-title::before{transform:rotate(90deg)}
+.lesson-trail-menu[open]>.lesson-trail-title{border-bottom:1px solid var(--line);background:#f0f3eb}
+.lesson-trail-menu>.lesson-trail-title span{margin-left:auto}
+.lesson-trail-menu>.lesson-trail-lessons{padding:10px}
+.lesson-trail-menu:not([open])>.lesson-trail-lessons{display:none}
+.lesson-trail-menu>summary:focus-visible{outline:3px solid #6f9c32;outline-offset:2px}
+.lesson-navigation .lesson-menu-header{justify-content:space-between;font-size:13px}
+.lesson-menu.lesson-navigation.is-pinned{position:sticky;top:88px;z-index:10;box-shadow:0 8px 24px rgba(29,37,35,.08)}
+.lesson-menu.lesson-navigation.is-pinned .lesson-menu-header{position:static;padding:0;box-shadow:none}
+@media(max-width:680px){.lesson-menu.lesson-navigation.is-pinned{top:77px}}
+
+/* Sem fixação, a navegação ocupa apenas uma faixa acima da leitura. */
+.learning-grid.has-trail-navigation{display:grid;grid-template-columns:minmax(0,1fr)}
+.has-trail-navigation:not(.course-nav-pinned) .lesson-navigation{display:flex;align-items:flex-start;gap:12px}
+.has-trail-navigation:not(.course-nav-pinned) .lesson-menu-header{order:2;margin:0;min-height:48px}
+.has-trail-navigation:not(.course-nav-pinned) .lesson-menu-header>strong{display:none}
+.has-trail-navigation:not(.course-nav-pinned) .lesson-list{display:flex;flex:1;flex-wrap:wrap;align-items:flex-start;gap:10px;max-height:none;overflow:visible;margin:0;padding:0;scrollbar-gutter:auto}
+.has-trail-navigation:not(.course-nav-pinned) .lesson-trail{flex:1 1 230px;min-width:0}
+.has-trail-navigation:not(.course-nav-pinned) .lesson-trail-lessons{grid-template-columns:minmax(0,1fr);max-height:40dvh;overflow-y:auto}
+.learning-grid.has-trail-navigation.course-nav-pinned{grid-template-columns:minmax(250px,.7fr) minmax(0,1.3fr)}
+@media(max-width:900px){.learning-grid.has-trail-navigation.course-nav-pinned{grid-template-columns:minmax(0,1fr)}.has-trail-navigation:not(.course-nav-pinned) .lesson-navigation{flex-wrap:wrap}.has-trail-navigation:not(.course-nav-pinned) .lesson-menu-header{order:0}.has-trail-navigation:not(.course-nav-pinned) .lesson-list{flex-basis:100%}}

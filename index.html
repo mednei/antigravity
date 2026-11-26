@@ -9,12 +9,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/style.css?v=20261126-trilhas-3">
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
   <script src="./assets/js/supabase-client.js" defer></script>
   <script src="./assets/js/auth.js" defer></script>
   <script src="./assets/js/app.js" defer></script>
   <script src="./assets/js/course.js" defer></script>
+  <script src="./assets/js/course-menu.js?v=20261126-trilhas-3" defer></script>
 </head>
 <body>
   <div class="app-shell">
@@ -187,7 +188,19 @@
             <a class="secondary-button" href="./produtos.html">Ver no catálogo interativo <i data-lucide="arrow-right"></i></a>
           </div>
 
-          <div class="cards-grid-3">
+          <section class="lesson-menu" id="course-menu" aria-label="Conteúdo interativo das aulas">
+              <div class="lesson-menu-header" id="course-menu-header" hidden>
+                <button class="lesson-menu-toggle" id="course-menu-toggle" type="button" aria-expanded="true" aria-controls="course-layout">
+                  <i data-lucide="list-tree" aria-hidden="true"></i>
+                  <span>Conteúdo interativo</span>
+                  <i class="lesson-menu-chevron" data-lucide="chevron-down" aria-hidden="true"></i>
+                </button>
+                <button class="lesson-menu-pin" id="course-menu-pin" type="button" aria-pressed="false" aria-controls="course-menu" title="Manter o menu visível durante a rolagem">
+                  <i data-lucide="pin" aria-hidden="true"></i>
+                  <span id="course-menu-pin-label">Fixar</span>
+                </button>
+              </div>
+          <div class="cards-grid-3" id="course-layout">
             <div class="content-card">
               <span class="banner-tag" style="color:#769b43;"><span></span> AULA 01 · 5 MIN</span>
               <h3>Conheça o Antigravity</h3>
@@ -241,6 +254,7 @@
               <a class="secondary-button" href="./produtos.html">Abrir trilha Primeiros passos</a>
             </div>
           </div>
+          </section>
         </section>
 
         <!-- Seção: Recursos e Documentações Externas -->

@@ -354,6 +354,12 @@ const lessons = [
 ];
 
 const storageKey = 'antigravity-lab-progress-v1';
+const trailMenuKey = 'antigravity-lab-trail-menus-v1';
+let trailMenus = {};
+try {
+  const saved = JSON.parse(localStorage.getItem(trailMenuKey) || '{}');
+  if (saved && typeof saved === 'object' && !Array.isArray(saved)) trailMenus = saved;
+} catch (error) { /* Trilhas começam recolhidas sem preferências válidas. */ }
 const progressOwnerKey = `${storageKey}:owner`;
 const progressMemory = new Map();
 const schemaPendingMemory = new Map();
@@ -841,6 +847,10 @@ function renderCourseDashboard() {
   const detail = document.getElementById('lesson-detail');
 
   if (list) {
+    // Preserva a abertura ao marcar progresso ou redesenhar a aula.
+    if (list.querySelectorAll) list.querySelectorAll('details[data-trail]').forEach(menu => {
+      trailMenus[menu.dataset.trail] = menu.open;
+    });
     const trails = new Map();
     lessons.forEach((lesson, index) => {
       const done = completed.includes(index);
@@ -860,8 +870,10 @@ function renderCourseDashboard() {
       const labels = { principal: 'Trilha principal', 'primeiros-passos': 'Primeiros passos', formacao: 'Formação em agentes' };
       list.innerHTML = [...trails].map(([trail, buttons], groupIndex) => `
         <section class="lesson-trail" aria-labelledby="lesson-trail-${groupIndex}">
-          <h3 class="lesson-trail-title" id="lesson-trail-${groupIndex}">${labels[trail] || 'Outras aulas'} <span>${buttons.length} ${buttons.length === 1 ? 'aula' : 'aulas'}</span></h3>
-          <div class="lesson-trail-lessons">${buttons.join('')}</div>
+          <details class="lesson-trail-menu" data-trail="${trail}" ${trailMenus[trail] === true ? 'open' : ''}>
+            <summary class="lesson-trail-title" id="lesson-trail-${groupIndex}">${labels[trail] || 'Outras aulas'} <span>${buttons.length} ${buttons.length === 1 ? 'aula' : 'aulas'}</span></summary>
+            <div class="lesson-trail-lessons">${buttons.join('')}</div>
+          </details>
         </section>`).join('');
     } else {
       list.classList.remove('lesson-list-grouped');
@@ -924,6 +936,13 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCourseDashboard();
 
     if (list) {
+      list.addEventListener('toggle', event => {
+        const menu = event.target;
+        if (!menu.matches || !menu.matches('details[data-trail]') || !list.contains(menu)) return;
+        trailMenus[menu.dataset.trail] = menu.open;
+        try { localStorage.setItem(trailMenuKey, JSON.stringify(trailMenus)); }
+        catch (error) { /* A abertura continua funcionando nesta página. */ }
+      }, true);
       list.addEventListener('click', event => {
         const button = event.target.closest('[data-lesson]');
         if (!button) return;

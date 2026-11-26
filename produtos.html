@@ -9,12 +9,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/style.css?v=20261126-trilhas-3">
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
   <script src="./assets/js/supabase-client.js" defer></script>
   <script src="./assets/js/auth.js" defer></script>
   <script src="./assets/js/app.js" defer></script>
   <script src="./assets/js/course.js" defer></script>
+  <script src="./assets/js/course-menu.js?v=20261126-trilhas-3" defer></script>
 </head>
 <body>
   <div class="app-shell">
@@ -106,8 +107,17 @@
             <div class="lesson-count"><i data-lucide="layers-2"></i> <span data-course-count="pad">21</span> AULAS</div>
           </div>
 
-          <div class="learning-grid">
-            <div class="lesson-list" id="lesson-list" aria-label="Aulas do curso"></div>
+          <div class="learning-grid" id="course-layout">
+            <aside class="lesson-menu lesson-navigation" id="course-menu" aria-label="Trilhas e aulas do curso">
+              <div class="lesson-menu-header" id="course-menu-header">
+                <strong>Trilhas do curso</strong>
+                <button class="lesson-menu-pin" id="course-menu-pin" type="button" aria-pressed="false" title="Fixar o menu de aulas durante a rolagem">
+                  <i data-lucide="pin" aria-hidden="true"></i>
+                  <span id="course-menu-pin-label">Fixar</span>
+                </button>
+              </div>
+              <div class="lesson-list" id="lesson-list" aria-label="Aulas do curso"></div>
+            </aside>
             <article class="lesson-detail" id="lesson-detail" aria-live="polite"></article>
           </div>
         </section>
