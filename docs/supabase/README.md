@@ -1,6 +1,6 @@
 # Fase A — conta e progresso no Supabase
 
-Implementação de estudo: Supabase Auth e tabela de progresso, com funcionamento local quando o serviço não estiver configurado ou acessível. O catálogo atual tem **nove aulas**, índices **0 a 8**. As oito anteriores mantêm seus índices e conteúdos.
+Implementação de estudo: Supabase Auth e tabela de progresso, com funcionamento local quando o serviço não estiver configurado ou acessível. O catálogo atual tem **dez aulas**, índices **0 a 9**. As nove anteriores mantêm seus índices e conteúdos.
 
 ## Preparar o projeto
 
@@ -51,7 +51,15 @@ Depois de preencher seu projeto, verificar manualmente:
 4. Usar duas contas de teste e conferir que uma não lê nem altera as linhas da outra, validando as políticas RLS na instalação real.
 5. Conferir o cadastro/login e os menus em 900px, 680px e 370px.
 
-## Migration: primeiros passos, nove aulas
+## Migration atual: planos e quotas, dez aulas
+
+Após os schemas instalados, execute [20261126-planos-quotas.sql](./20261126-planos-quotas.sql) no **SQL Editor → New query → Run** do mesmo projeto. Este é o arquivo a aplicar **por último**: amplia `progresso` e, se existir, `anotacoes` para **0 a 9**, contemplando as aulas 09 e 10. Preserva registros e políticas RLS. Basta ter a Fase A instalada; a migration anterior de nove aulas não é pré-requisito.
+
+Se instalar/reaplicar B ou qualquer script anterior depois, reaplique esta migration atual. Sem ela, a Aula 10 pode funcionar apenas com o cache local de progresso ao receber erro de constraint; após aplicar, desmarque e marque novamente a conclusão para sincronizar. Não existe fallback local de anotações. O mecanismo de progresso já implementado não precisou ser alterado nesta conversão.
+
+Na consulta SQL abaixo, o resultado **atual** esperado é limite `aula_index >= 0 AND aula_index <= 9` nas tabelas instaladas. Confira `aula_index = 9` em `progresso` e a recuperação em outro navegador. Aplicação e validações reais ficam com o usuário, pendências 84–85.
+
+## Histórico da migration anterior: nove aulas
 
 Os schemas históricos A e B têm limite superior 7. Após instalar os schemas que utilizar, execute o arquivo completo [20261126-primeiros-passos.sql](./20261126-primeiros-passos.sql) no **SQL Editor → New query → Run** do mesmo projeto Supabase. A migration amplia o limite de `progresso` e, se existir, `anotacoes` para **0 a 8**, sem apagar registros ou alterar as políticas RLS. A ampliação de anotações é necessária para a Aula 09 também aceitar a funcionalidade da Fase B.
 
@@ -70,7 +78,7 @@ where connamespace = 'public'::regnamespace
   and conname in ('progresso_aula_index_check', 'anotacoes_aula_index_check');
 ```
 
-Esperado: limite `aula_index >= 0 AND aula_index <= 8` nas tabelas instaladas. Depois, conferir uma conclusão da Aula 09 (`aula_index = 8`) em outro navegador. Execução do SQL, testes reais e validações do aplicativo permanecem com o usuário, pendências 82 e 83.
+Resultado histórico desta migration anterior: limite `aula_index >= 0 AND aula_index <= 8`. Para o catálogo atual, use a migration de dez aulas acima; aplicar somente o arquivo antigo não contempla a Aula 10. As pendências 82–83 não foram declaradas encerradas por esta atualização.
 
 ## Fontes oficiais consultadas em 26/11/2026
 
