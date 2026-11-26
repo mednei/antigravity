@@ -43,11 +43,11 @@ Esperado: `aula_index >= 0 AND aula_index <= 25` nas tabelas instaladas. Conclui
 
 ```powershell
 node --check assets/js/course.js
-node --test tests/fase-a.test.cjs tests/fase-b.test.cjs tests/primeiros-passos.test.cjs tests/planos-quotas.test.cjs tests/lote1.test.cjs
+node --test tests/fase-a.test.cjs tests/fase-b.test.cjs tests/primeiros-passos.test.cjs tests/planos-quotas.test.cjs tests/lote1.test.cjs tests/lote2.test.cjs
 python tests/fase-a-estrutura.py
 ```
 
-Simulações não comprovam SQL/RLS no projeto real. Resultados e roteiro manual estão no [registro ant_06](../../registros/ant/ant_06_lote1-aulas-11-14.md).
+Simulações não comprovam SQL/RLS no projeto real. Resultados atuais e roteiro manual estão no [registro ant_07](../../registros/ant/ant_07_lote2-aulas-15-18.md); o [registro ant_06](../../registros/ant/ant_06_lote1-aulas-11-14.md) preserva os resultados do lote anterior.
 
 ## Referências da integração
 
