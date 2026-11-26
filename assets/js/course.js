@@ -603,17 +603,32 @@ function renderCourseDashboard() {
   const detail = document.getElementById('lesson-detail');
 
   if (list) {
-    list.innerHTML = lessons.map((lesson, index) => {
+    const trails = new Map();
+    lessons.forEach((lesson, index) => {
       const done = completed.includes(index);
-      return `<button class="lesson-button ${selected === index ? 'selected' : ''}" type="button" data-lesson="${index}" aria-pressed="${selected === index}">
+      const trail = lesson.trail || 'principal';
+      if (!trails.has(trail)) trails.set(trail, []);
+      trails.get(trail).push(`<button class="lesson-button ${selected === index ? 'selected' : ''}" type="button" data-lesson="${index}" aria-pressed="${selected === index}">
         <span class="lesson-index">${String(index + 1).padStart(2, '0')}</span>
         <span class="lesson-name">
           <strong>${lesson.title}</strong>
           <small>${lesson.category} · ${lesson.duration}</small>
         </span>
         <i class="lesson-state ${done ? 'complete' : ''}" data-lucide="${done ? 'circle-check' : 'chevron-right'}"></i>
-      </button>`;
-    }).join('');
+      </button>`);
+    });
+    if (trails.size > 1) {
+      list.classList.add('lesson-list-grouped');
+      const labels = { principal: 'Trilha principal', 'primeiros-passos': 'Primeiros passos' };
+      list.innerHTML = [...trails].map(([trail, buttons], groupIndex) => `
+        <section class="lesson-trail" aria-labelledby="lesson-trail-${groupIndex}">
+          <h3 class="lesson-trail-title" id="lesson-trail-${groupIndex}">${labels[trail] || 'Outras aulas'} <span>${buttons.length} ${buttons.length === 1 ? 'aula' : 'aulas'}</span></h3>
+          <div class="lesson-trail-lessons">${buttons.join('')}</div>
+        </section>`).join('');
+    } else {
+      list.classList.remove('lesson-list-grouped');
+      list.innerHTML = [...trails.values()].flat().join('');
+    }
   }
 
   if (detail) {

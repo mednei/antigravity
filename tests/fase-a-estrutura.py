@@ -66,5 +66,5 @@ assert '.auth-card .form-input{font-size:16px;min-height:46px}' in css
 baseline = subprocess.check_output(['git','show','15c1a66:assets/js/app.js'],cwd=root).replace(b'\r\n',b'\n')
 assert (root/'assets/js/app.js').read_bytes().replace(b'\r\n',b'\n') == baseline
 print(f'OK: {len(pages)} páginas e {total} referências locais válidas; menus desktop/mobile completos.')
-print('OK: scripts em ordem, labels e feedback acessíveis, configuração de oito aulas e app.js preservado.')
+print('OK: scripts em ordem, labels e feedback acessíveis, configuração de conta e app.js preservado.')
 print('OK: regras CSS verificadas em 900px, 680px e 370px. Revisão visual pendente: registro 78.')

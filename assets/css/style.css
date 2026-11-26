@@ -820,3 +820,14 @@ footer svg{width:13px;height:13px;color:#9abd68}
 @media(max-width:900px){.lesson-notes{padding:18px}.lesson-note-actions{gap:8px}}
 @media(max-width:680px){.lesson-notes{padding:16px;margin:22px 0}.lesson-note-card{padding:14px}}
 @media(max-width:370px){.lesson-notes{padding:12px}.lesson-note-card{padding:12px}.lesson-note-actions button{flex:1 1 100%;justify-content:center}}
+
+/* Catálogo: trilhas preservam os índices globais das aulas. */
+.lesson-list.lesson-list-grouped{grid-template-columns:minmax(0,1fr);gap:22px}
+.lesson-trail{min-width:0}
+.lesson-trail-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 0 10px;font-family:var(--display);font-size:15px;color:var(--ink);line-height:1.4}
+.lesson-trail-title span{flex-shrink:0;font-family:var(--font);font-size:11px;font-weight:400;color:var(--muted)}
+.lesson-trail-lessons{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+.lesson-trail-lessons .lesson-button{min-width:0}
+@media(max-width:900px){.lesson-trail-lessons{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){.lesson-trail-lessons{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:370px){.lesson-trail-title{font-size:14px}.lesson-trail-title span{font-size:10px}}
