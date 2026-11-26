@@ -73,6 +73,8 @@ Primeiros passos → formação em agentes → laboratórios → aplicação no 
 
 Na conversão dos MDs em aulas, `VERIFICAR` é uma tarefa editorial do Codex: consultar fontes oficiais atuais antes de publicar. Só a parte confirmada e pertinente entra no site, com fonte e data. Trechos refutados ou não confirmados ficam no Markdown e no registro único, sem badges no site. Nesta primeira conversão, o MD-fonte permanece intacto; as decisões estão em [evidências de instalação e requisitos](./01-primeiros-passos/instalacao-e-requisitos-verificacao.md).
 
+A conversão seguinte, [planos, quotas e limites](./01-primeiros-passos/planos-quotas-rate-limits-verificacao.md), mantém esse padrão: uma aula no índice 9, fontes e escopos documentados, MD original preservado. O catálogo passa a dez aulas; aplicar a [migration atual](./supabase/20261126-planos-quotas.sql) por último, conforme o [README do Supabase](./supabase/README.md).
+
 | Material recebido | Destino canônico |
 |---|---|
 | Módulo 1 | Fundamentos, quatro pilares, governança e validação. |

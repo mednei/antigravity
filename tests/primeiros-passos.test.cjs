@@ -8,6 +8,7 @@ const {
 } = require('./course-fixtures.cjs');
 const read = path => fs.readFileSync(path, 'utf8');
 const lessons = lessonData(read('assets/js/course.js'));
+const totalLessons = lessons.length;
 const normalize = text => text.replace(/\r\n/g, '\n');
 
 function startAccount(storage = {}, error = null, userId = 'aluno-a', rows = []) {
@@ -18,9 +19,9 @@ function startAccount(storage = {}, error = null, userId = 'aluno-a', rows = [])
   return { env, db };
 }
 
-test('acrescenta somente a Aula 09 e mantém os oito objetos anteriores', () => {
+test('preserva a Aula 09 e os oito objetos anteriores', () => {
   const before = execFileSync('git', ['show', '874e923:assets/js/course.js'], { encoding: 'utf8' });
-  assert.equal(lessons.length, 9);
+  assert.ok(totalLessons >= 9);
   assert.deepEqual(lessons.slice(0, 8), lessonData(before));
   assert.equal(lessons[8].trail, 'primeiros-passos');
   assert.equal(lessons[8].title, 'Instalação e requisitos');
@@ -48,8 +49,8 @@ test('catálogo agrupa duas trilhas sem renumerar ou duplicar índices', () => {
   assert.match(html, /Primeiros passos/);
   assert.equal((html.match(/class="lesson-trail"/g) || []).length, 2);
   const indices = [...html.matchAll(/data-lesson="(\d+)"/g)].map(match => Number(match[1]));
-  assert.deepEqual(indices, Array.from({ length: 9 }, (_, index) => index));
-  assert.equal(new Set(indices).size, 9);
+  assert.deepEqual(indices, Array.from({ length: totalLessons }, (_, index) => index));
+  assert.equal(new Set(indices).size, totalLessons);
 });
 
 test('progresso local antigo aceita a aula nova na mesma chave e persiste na recarga', () => {
@@ -57,12 +58,12 @@ test('progresso local antigo aceita a aula nova na mesma chave e persiste na rec
   env.run('assets/js/course.js'); env.start();
   clickLesson(env, 8); toggle(env);
   assert.deepEqual(progress(env), [0, 7, 8]);
-  assert.equal(env.nodes['progress-label'].textContent, '3 de 9 aulas concluídas');
-  assert.equal(env.nodes['progress-percent'].textContent, '33%');
+  assert.equal(env.nodes['progress-label'].textContent, `3 de ${totalLessons} aulas concluídas`);
+  assert.equal(env.nodes['progress-percent'].textContent, `${Math.round(3 / totalLessons * 100)}%`);
   const reload = environment(Object.fromEntries(env.storage));
   reload.run('assets/js/course.js'); reload.start();
   assert.deepEqual(progress(reload), [0, 7, 8]);
-  assert.equal(reload.nodes['progress-label'].textContent, '3 de 9 aulas concluídas');
+  assert.equal(reload.nodes['progress-label'].textContent, `3 de ${totalLessons} aulas concluídas`);
 });
 
 test('conta configurada envia o índice 8; outra sessão recupera a conclusão', async () => {
@@ -73,7 +74,7 @@ test('conta configurada envia o índice 8; outra sessão recupera a conclusão',
   assert.equal(call.value.aluno_id, 'aluno-a');
   const other = startAccount({}, null, 'aluno-a', [{ aula_index: 8 }]); await tick();
   assert.deepEqual(progress(other.env), [8]);
-  assert.equal(other.env.nodes['progress-percent'].textContent, '11%');
+  assert.equal(other.env.nodes['progress-percent'].textContent, `${Math.round(100 / totalLessons)}%`);
 });
 
 test('constraint antiga mantém a nova conclusão na recarga e separa contas/visitante', async () => {

@@ -112,6 +112,24 @@ const lessons = [
     ],
     "exercise": "Consulte o guia oficial da opção escolhida e identifique o instalador ou a extensão e os requisitos correspondentes.",
     "expected": "Identificação da opção de ambiente, de sua origem oficial e dos requisitos aplicáveis."
+  },
+  {
+    "title": "Planos, quotas e limites de uso",
+    "category": "PRIMEIROS PASSOS",
+    "trail": "primeiros-passos",
+    "duration": "5 min (estimativa)",
+    "source": "./docs/01-primeiros-passos/planos-quotas-rate-limits.md",
+    "objective": "Distinguir métricas da API, cotas do Antigravity e comportamentos documentados sob saturação.",
+    "intro": "Uma tarefa com agente pode envolver várias chamadas; o consumo depende do trabalho realizado.",
+    "body": "<h4>Entenda as métricas</h4><p>Na Gemini API, RPM significa requisições por minuto; TPM, tokens de entrada por minuto; RPD, requisições por dia. Exceder qualquer limite aplicável pode gerar um erro de limite de uso. Esses limites são aplicados por projeto, não por chave. Consulte a <a href=\"https://ai.google.dev/gemini-api/docs/rate-limits\" target=\"_blank\" rel=\"noopener noreferrer\">documentação da Gemini API</a>.</p><h4>Confira o plano do Antigravity</h4><p>Para contas pessoais, a documentação lista Free, Google AI Plus, Google AI Pro e Google AI Ultra, com cotas e disponibilidade de modelos diferentes. O consumo varia com o trabalho do agente; tarefas complexas podem consumir mais cota.</p><p>Em Pro e Ultra, créditos adicionais podem cobrir uso além da cota básica. A opção AI Credit Overages controla esse uso automático: Never aguarda a renovação da cota; Always permite consumir créditos. Consulte o saldo e as condições atuais na <a href=\"https://antigravity.google/docs/plans\" target=\"_blank\" rel=\"noopener noreferrer\">página oficial de planos</a> e nas configurações da conta.</p><h4>Saturação e retomada</h4><p>No SDK Python do Antigravity, há tentativas automáticas com espera crescente para erros transitórios, incluindo HTTP 429. Esse comportamento é configurável; consulte o <a href=\"https://github.com/google-antigravity/antigravity-sdk-python/blob/main/skills/google-antigravity-sdk/examples/getting_started/customizing_retries.md\" target=\"_blank\" rel=\"noopener noreferrer\">exemplo oficial de retries do SDK</a>.</p><p>No agente de navegador do Antigravity App, se a cota de Gemini Flash acabar ou estiver indisponível, o agente para e pergunta como prosseguir, em vez de trocar automaticamente de modelo. Veja o escopo em <a href=\"https://antigravity.google/docs/browser\" target=\"_blank\" rel=\"noopener noreferrer\">uso do navegador</a>.</p><p>Fontes consultadas em 26/11/2026. Os limites do serviço podem mudar; consulte a documentação da modalidade utilizada.</p>",
+    "concepts": [
+      "RPM, TPM e RPD",
+      "Cotas por modalidade e consumo do agente",
+      "Créditos adicionais",
+      "Retentativas e troca de modelo"
+    ],
+    "exercise": "Consulte as fontes oficiais da modalidade que você usa e identifique onde acompanhar a cota, quando ela renova e se há uso de créditos adicionais.",
+    "expected": "Registro da modalidade consultada, da fonte e da data, distinguindo métricas da API das cotas do Antigravity."
   }
 ];
 
