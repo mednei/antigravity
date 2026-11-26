@@ -574,6 +574,29 @@ main{max-width:1320px;width:100%;margin:0 auto;padding:45px 6% 0;flex:1}
 .progress-sync-status{font-size:13px;color:var(--muted);line-height:1.6;margin:10px 0;overflow-wrap:anywhere}
 .progress-sync-status:empty{display:none}
 
+/* Acesso à conta: layout reutiliza os componentes e tokens do site. */
+.auth-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+.auth-layout>*{min-width:0}
+.auth-card{padding:28px}
+.auth-card h2{font-family:var(--display);font-size:24px;line-height:1.3;margin:0 0 12px}
+.auth-card p{font-size:16px;line-height:1.7}
+.auth-card .form-label{font-size:14px;letter-spacing:0}
+.auth-card .form-input{font-size:16px;min-height:46px}
+.auth-card .form-feedback{font-size:14px;overflow-wrap:anywhere}
+.auth-mode-switch{display:flex;gap:8px;margin:0 0 24px;flex-wrap:wrap}
+.auth-mode-switch button{flex:1;min-width:110px;min-height:44px;padding:10px 16px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);cursor:pointer;font-weight:700}
+.auth-mode-switch button[aria-pressed="true"]{background:var(--green);border-color:var(--green)}
+.auth-mode-switch button:disabled,.auth-card button:disabled{cursor:wait;opacity:.65}
+.auth-card [hidden]{display:none}
+.auth-card form{margin-top:4px}
+.auth-submit{width:100%;justify-content:center;margin-top:8px;min-height:46px}
+.auth-guest-link{display:inline-block;text-decoration:underline;text-underline-offset:3px;margin-top:18px;font-size:14px}
+.auth-session-note{padding:16px;background:#eff5e8;border-left:3px solid var(--green);border-radius:4px}
+[data-auth-label]{overflow-wrap:anywhere;min-width:0}
+@media(max-width:900px){.auth-layout{grid-template-columns:minmax(0,1fr)}.auth-card{padding:24px}}
+@media(max-width:680px){.auth-layout{gap:20px}.auth-card{padding:20px}}
+@media(max-width:370px){.auth-card{padding:16px}.auth-mode-switch{gap:6px}}
+
 /* Resources & Links */
 .resources-section{
   border-top:1px solid var(--line);

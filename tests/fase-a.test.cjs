@@ -247,3 +247,90 @@ test('cadastro envia nome em metadata; confirmação de e-mail não inventa uma 
   assert.equal(await env.sandbox.AntigravityAuth.obterUsuarioAtual(), null);
   assert.equal(calls.at(-1).scope, 'local');
 });
+
+function loginPage(options = {}) {
+  const env = environment();
+  ['auth-form','auth-feedback','auth-submit','auth-name-group','auth-name','auth-email','auth-password'].forEach(id => { env.nodes[id] = node(); });
+  const tabs = ['login','cadastro'].map(mode => node({ dataset: { authMode: mode } }));
+  env.doc.querySelectorAll = selector => selector === '[data-auth-mode]' ? tabs : [];
+  let authChange;
+  const client = { auth: {
+    onAuthStateChange(fn) { authChange = fn; },
+    async getSession() { return { data: { session: options.initialSession || null }, error: null }; },
+    async signUp(args) {
+      if (options.signUpError) throw options.signUpError;
+      const user = { id: 'conta-de-teste', user_metadata: args.options.data };
+      const session = options.confirmEmail ? null : { user };
+      if (session) authChange('SIGNED_IN', session);
+      return { data: { user, session }, error: null };
+    },
+    async signInWithPassword() {
+      if (options.loginError) return { data: {}, error: options.loginError };
+      const session = { user: { id: 'conta-de-teste' } };
+      authChange('SIGNED_IN', session);
+      return { data: { session }, error: null };
+    }
+  } };
+  env.sandbox.AntigravitySupabase = { ready: Promise.resolve(client) };
+  env.run('assets/js/auth.js'); env.start();
+  return { ...env, tabs };
+}
+
+test('alternância do formulário, cadastro sem confirmação e redirecionamento', async () => {
+  const env = loginPage(); await tick();
+  assert.equal(env.nodes['auth-name-group'].hidden, true);
+  env.tabs[1].click();
+  assert.equal(env.nodes['auth-name-group'].hidden, false);
+  assert.equal(env.nodes['auth-name'].required, true);
+  assert.equal(env.nodes['auth-password'].autocomplete, 'new-password');
+  env.nodes['auth-name'].value = 'Estudante';
+  env.nodes['auth-email'].value = 'estudo@example.invalid';
+  env.nodes['auth-password'].value = 'senha-de-teste';
+  await env.nodes['auth-form'].submit({ preventDefault() {} });
+  assert.equal(env.sandbox.location.assigned, './produtos.html');
+  assert.equal(env.nodes['auth-password'].value, '');
+});
+
+test('cadastro com confirmação aguarda e-mail e não redireciona', async () => {
+  const env = loginPage({ confirmEmail: true }); await tick();
+  env.tabs[1].click();
+  env.nodes['auth-name'].value = 'Estudante';
+  env.nodes['auth-email'].value = 'estudo@example.invalid';
+  env.nodes['auth-password'].value = 'senha-de-teste';
+  await env.nodes['auth-form'].submit({ preventDefault() {} });
+  assert.equal(env.sandbox.location.assigned, undefined);
+  assert.match(env.nodes['auth-feedback'].textContent, /Confira seu e-mail/);
+  assert.equal(env.nodes['auth-submit'].disabled, false);
+});
+
+test('erro de login aparece como texto acessível e permite nova tentativa', async () => {
+  const env = loginPage({ loginError: { code: 'invalid_credentials' } }); await tick();
+  env.nodes['auth-email'].value = 'estudo@example.invalid';
+  env.nodes['auth-password'].value = 'senha-de-teste';
+  await env.nodes['auth-form'].submit({ preventDefault() {} });
+  assert.equal(env.sandbox.location.assigned, undefined);
+  assert.equal(env.nodes['auth-feedback'].textContent, 'E-mail ou senha incorretos.');
+  assert.equal(env.nodes['auth-submit'].disabled, false);
+});
+
+test('nome na navegação usa textContent e logout não navega para login', async () => {
+  const env = environment();
+  const label = node();
+  const link = node({ querySelector: () => label });
+  env.doc.querySelectorAll = selector => selector === '[data-auth-link]' ? [link] : [];
+  let authChange;
+  const client = { auth: {
+    onAuthStateChange(fn) { authChange = fn; },
+    async getSession() { return { data: { session: { user: { id: 'conta-de-teste', user_metadata: { nome: '<img> restante' } } } }, error: null }; },
+    async signOut() { authChange('SIGNED_OUT', null); return { error: null }; }
+  } };
+  env.sandbox.AntigravitySupabase = { ready: Promise.resolve(client) };
+  env.run('assets/js/auth.js'); env.start(); await new Promise(resolve => setTimeout(resolve, 5));
+  assert.equal(label.textContent, '<img> · Sair');
+  assert.equal(label.innerHTML, '');
+  let prevented = false;
+  await link.click({ preventDefault() { prevented = true; } });
+  await new Promise(resolve => setTimeout(resolve, 5));
+  assert.equal(prevented, true);
+  assert.equal(label.textContent, 'Entrar');
+});
