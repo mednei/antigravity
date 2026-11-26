@@ -77,6 +77,8 @@ A conversão seguinte, [planos, quotas e limites](./01-primeiros-passos/planos-q
 
 Atualização do Lote 1: o catálogo agora possui **14 aulas reais**. As dez anteriores permanecem intactas e as aulas 11–14 usam a trilha `formacao`. A [pesquisa editorial do lote](./02-formacao-agentes/lote-1-verificacao.md) registra 29 itens pesquisados: 1 e 2 confirmados e removidos da tabela central; os demais mantidos no escopo ainda não comprovado. Os MDs-fonte não foram modificados. A instrução de migration acima descreve a etapa anterior: para ativação nova, os schemas A e B já aceitam 26 aulas, **sem migrations incrementais**, conforme o [README de ativação](./supabase/README.md).
 
+Atualização do Lote 2: **18 aulas reais**, índices 0–17, com as 14 anteriores preservadas. As aulas 15–18 usam a trilha `formacao`. A [pesquisa editorial do Lote 2](./02-formacao-agentes/lote-2-verificacao.md) registra 19 itens examinados, mantidos por confirmação parcial, ausência de comprovação ou lacuna de origem. O banco permanece com capacidade 0–25; nenhuma migration adicional é necessária.
+
 | Material recebido | Destino canônico |
 |---|---|
 | Módulo 1 | Fundamentos, quatro pilares, governança e validação. |

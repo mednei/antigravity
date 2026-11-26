@@ -1,0 +1,42 @@
+# Lote 2: pesquisa editorial e classificação
+
+Consulta em **26/11/2026**. As cinco fontes pedagógicas foram lidas integralmente e permanecem intactas. Nenhuma CLI agy, hook, plugin, comando de rollback ou cenário de carga foi executado durante a pesquisa.
+
+## Divisão e classificação
+
+| Aula / índice | Fonte | Entra | Não entra | Cinza |
+|---|---|---|---|---|
+| 15 / 14 — Contexto, recuperação e memória | lab-rag-e-contexto.md | Seleção de contexto, AST e pipeline conceitual de recuperação; distinção entre regras e memória; menções e /btw no escopo documentado. | Implementação interna presumida, comandos de memória, percentuais, multimodalidade e lacunas não confirmadas. | Nenhum. |
+| 16 / 15 — Terminal, filas e tarefas dependentes | lab-terminal-e-shell.md + 10-concorrencia-e-mensagens.md | Observação de saída/erro, processos contínuos, distinção fila/direção/interrupção e as duas práticas recebidas; Queued Messages delimitado à CLI. | Nomes de APIs e garantias de fila, estado compartilhado e encerramento não comprovadas. | Nenhum. |
+| 17 / 16 — Sessões, versões e restauração | 11-sessoes-versionamento-rollback.md | Conversa versus arquivos, retomada documentada e comparação de restauração em cópia de laboratório. | Shadow Git, caminhos, comandos e promessa absoluta de preservação não comprovados. | Nenhum. |
+| 18 / 17 — Validação e automação com hooks | 05-hooks-e-validacao.md | Checagens reproduzíveis, método de revisão, papel de hooks, eventos e componentes de plugin documentados. | Schema antigo, registro automático presumido e garantias de correção obrigatória. | Nenhum. |
+
+As durações 10/12/8/10 minutos são estimativas editoriais. As práticas têm origem nos MDs; não foram reconstruídos trechos ausentes. Conceitos de RAG/AST não são apresentados como implementação interna do Antigravity.
+
+## Veredito por item
+
+| Item | Veredito | Resultado e decisão | Fontes consultadas |
+|---|---|---|---|
+| 28 | Parcial | Menções a arquivos/pastas confirmadas. Não confirmado todo o catálogo literal @file/@folder/@codebase/@git/@docs/@terminal e @git:diff/staged/log nem busca semântica universal por menção. | [menções](https://antigravity.google/docs/at-mentions/) |
+| 29 | Parcial | Busca e contexto são documentados; não confirmado o conjunto Tree-sitter/AST, embeddings/cosseno, .antigravity/index/, top 5/10 e comando Rebuild Codebase Index como implementação do produto. Pipeline de recuperação entra apenas como conceito do MD. | [busca](https://antigravity.google/docs/cli/commands/codesearch); [contexto](https://antigravity.google/docs/learn/context-and-tokens/) |
+| 30 | Parcial | Compactação e gestão de contexto documentadas; não comprovados pruning automático, sumarização por outro modelo e redução de diffs superior a 80% como conjunto do runtime. Nenhum percentual foi publicado. | [contexto](https://antigravity.google/docs/learn/context-and-tokens/); [changelog](https://antigravity.google/docs/changelog) |
+| 31 | Não confirmado | Não localizados .antigravity/memory/ e agy memory list/forget/clear com o contrato descrito. Diretrizes persistentes não comprovam aprendizado ou injeção automática de fatos. | [CLI](https://antigravity.google/docs/cli/reference); [contexto](https://antigravity.google/docs/learn/context-and-tokens/) |
+| 34 | Parcial | /fork, /branch, /resume e /btw documentados. Fork da CLI conserva o workspace, não isola arquivos; /btw mantém a troca fora da conversa principal, mas a documentação distingue histórico da resposta por modalidade. Não confirmado /switch e o conjunto de garantias do original. | [sessões](https://antigravity.google/docs/cli/conversations/); [pergunta lateral](https://antigravity.google/docs/commands/btw/) |
+| 36 | Parcial | A referência inclui voz, mas não confirmado /record --with-screen nem viés semântico e transmissão direta de áudio/frames como conjunto descrito. Não publicado na aula de contexto. | [CLI](https://antigravity.google/docs/cli/reference) |
+| 40 | Não confirmado | Não localizado view_symbol_outline como API/Agent Skill com o contrato literal citado. Lista de ferramentas de hooks não valida esse nome. | [hooks](https://antigravity.google/docs/hooks/); [busca](https://antigravity.google/docs/cli/commands/codesearch) |
+| 42 | Parcial | Ferramentas atuais incluem run_command e manage_task; não confirmado o par execute_command/execute_background_command e seu contrato literal. Entra apenas a observação metodológica de saída, erro e processos. | [hooks](https://antigravity.google/docs/hooks/); [CLI](https://antigravity.google/docs/cli/reference) |
+| 44 | Parcial | Queued Messages é documentado; não confirmados Message Queue Manager, .antigravity/queue, comandos /queue list/remove/promote, drag-and-drop e garantia de atualização anterior ao queue pop como conjunto. | [configurações](https://antigravity.google/docs/settings?tab=cli) |
+| 45 | Parcial | Queue e Send Immediately são documentados na CLI; não confirmado /steer com Alt+Enter e a recomendação absoluta de sempre usá-lo em vez de Stop. Não prometida preservação universal de processos. | [configurações](https://antigravity.google/docs/settings?tab=cli); [changelog](https://antigravity.google/docs/changelog) |
+| 46 | Parcial | Há acompanhamento de tarefas de fundo, inclusive manage_task. Não confirmado /tasks kill-all, toda a tabela de telemetria e a limpeza garantida de processos zumbis do material. | [hooks](https://antigravity.google/docs/hooks/); [CLI](https://antigravity.google/docs/cli/reference) |
+| 47 | Não confirmado | Não localizados contratos Git Index Check, Process Reaper, State Snapshot ID e StateConflictError, flush automático e rejeição garantida de estado obsoleto na documentação consultada. | [CLI](https://antigravity.google/docs/cli/reference); [sessões](https://antigravity.google/docs/cli/conversations/) |
+| 48 | Parcial | Retomar sessões e seu escopo por diretório são documentados. Não confirmado o conjunto ~/.antigravity/sessions/, SQLite index.db, agy history search/resume e exportação .agysession. | [sessões](https://antigravity.google/docs/cli/conversations/); [CLI](https://antigravity.google/docs/cli/reference) |
+| 49 | Não confirmado | Não confirmado Shadow Git em .antigravity/shadow_git/, refs automáticas cp-NNN antes de toda escrita, /undo e preservação de todo trabalho manual. Revisar diffs não equivale a provar essas garantias. | [revisão](https://antigravity.google/docs/review-changes/); [sessões](https://antigravity.google/docs/cli/conversations/) |
+| 50 | Parcial | Revisão por arquivo/turno é documentada; não confirmado Painel Auditoria/Linha do Tempo com Ctrl+Shift+A, carimbos em milissegundos e Action Replay como conjunto descrito. | [revisão](https://antigravity.google/docs/review-changes/) |
+| 51 | Parcial | plugin.json, SKILL.md, skills/, rules/, MCP e hooks.json são documentados. Não confirmado o conjunto engines/capabilities, variável ${pluginRoot} e caminhos .antigravity/plugins/ do original; a documentação atual usa outros escopos/variáveis. | [manifesto](https://antigravity.google/docs/build-plugins/); [plugins](https://antigravity.google/docs/plugins/) |
+| 52 | Parcial | agy plugin install e list são documentados. Não confirmado o conjunto --global, agy bundle add google-cloud, Build with Google Bundles, catálogo auditado e Ctrl+Shift+X como instalação universal de plugins. | [plugins](https://antigravity.google/docs/plugins/); [manifesto](https://antigravity.google/docs/build-plugins/) |
+| 53 | Parcial | Eventos PreToolUse/PostToolUse e hooks.json são documentados. Não confirmado o schema antigo blocking: true/postFormat em settings.json, caminho do script e correção obrigatória de linter da apostila. Nenhum hook foi instalado ou executado. | [hooks](https://antigravity.google/docs/hooks/); [manifesto](https://antigravity.google/docs/build-plugins/) |
+| 75 | Lacuna | O Exemplo combinado de 5.1 e outros trechos não foram recebidos. Documentação do fornecedor não pode reconstruir o material do professor. Não preenchido nem publicado como seção adicional. | [Fonte recebida e lacunas](../03-laboratorios/lab-rag-e-contexto.md) |
+
+**Nenhuma remoção neste lote:** os 19 itens permanecem no registro central, pois nenhuma afirmação composta foi integralmente confirmada; confirmações parciais foram delimitadas. Isso não significa negar a existência dos recursos comprovados.
+
+O catálogo passa a 18 aulas reais, com 1–10 na Trilha principal e 11–18 em Formação em agentes. O banco já aceita 0–25; não há migration ou nova integração neste lote.

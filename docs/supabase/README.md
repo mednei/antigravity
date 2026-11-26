@@ -1,6 +1,6 @@
 # Ativação do Supabase — schemas preparados para 26 aulas
 
-O catálogo atual tem **14 aulas reais**, índices **0 a 13**. Os schemas aceitam **0 a 25**, preparando os próximos lotes sem migrations incrementais. O progresso considera o total real do array, hoje 14; a capacidade do banco não cria aulas no site.
+O catálogo atual tem **18 aulas reais**, índices **0 a 17**. Os schemas aceitam **0 a 25**, preparando os próximos lotes sem migrations incrementais. O progresso considera o total real do array, hoje 18; a capacidade do banco não cria aulas no site.
 
 Segundo o usuário, não há progresso de usuários em produção e o Supabase ainda não está configurado/ativo. Nenhum SQL ou configuração real foi executado pelo Codex nesta tarefa.
 
@@ -32,7 +32,7 @@ Esperado: `aula_index >= 0 AND aula_index <= 25` nas tabelas instaladas. Conclui
 ## Integração existente
 
 - Sem configuração ou login, estudo e progresso funcionam neste navegador com a chave `antigravity-lab-progress-v1`, mantendo um array de índices.
-- O limite do SQL não muda o percentual: uma aula concluída em 14 resulta em **7%** por arredondamento. A capacidade de 26 não altera esse denominador.
+- O limite do SQL não muda o percentual: uma aula concluída em 18 resulta em **6%** por arredondamento. A capacidade de 26 não altera esse denominador.
 - Com login, leitura remota prevalece e marcar/desmarcar envia upsert/delete por conta e aula. Caches auxiliares separam contas e visitante; nenhum progresso de visitante é importado automaticamente.
 - Em falha de rede, há feedback local e dashboard utilizável. Não existe fila persistente geral para reenvio offline; no próximo carregamento remoto com sucesso, o banco prevalece.
 - Se um banco antigo rejeitar a conclusão com erro de constraint (`23514`), o mecanismo existente de `:schema-pending:<id da conta>` preserva a conclusão local. Após corrigir o schema, desmarcar e marcar novamente envia a conclusão. Outro navegador só recebe o que foi gravado no banco.
