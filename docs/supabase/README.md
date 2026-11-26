@@ -1,6 +1,6 @@
 # Fase A — conta e progresso no Supabase
 
-Implementação de estudo: Supabase Auth e tabela de progresso, com funcionamento local quando o serviço não estiver configurado ou acessível. O catálogo existente tem **oito aulas**, índices **0 a 7**, preservados na ordem original.
+Implementação de estudo: Supabase Auth e tabela de progresso, com funcionamento local quando o serviço não estiver configurado ou acessível. O catálogo atual tem **nove aulas**, índices **0 a 8**. As oito anteriores mantêm seus índices e conteúdos.
 
 ## Preparar o projeto
 
@@ -51,7 +51,26 @@ Depois de preencher seu projeto, verificar manualmente:
 4. Usar duas contas de teste e conferir que uma não lê nem altera as linhas da outra, validando as políticas RLS na instalação real.
 5. Conferir o cadastro/login e os menus em 900px, 680px e 370px.
 
-O schema tem limite superior 7. Antes de acrescentar aulas ao catálogo, ampliar essa constraint junto com a mudança do curso.
+## Migration: primeiros passos, nove aulas
+
+Os schemas históricos A e B têm limite superior 7. Após instalar os schemas que utilizar, execute o arquivo completo [20261126-primeiros-passos.sql](./20261126-primeiros-passos.sql) no **SQL Editor → New query → Run** do mesmo projeto Supabase. A migration amplia o limite de `progresso` e, se existir, `anotacoes` para **0 a 8**, sem apagar registros ou alterar as políticas RLS. A ampliação de anotações é necessária para a Aula 09 também aceitar a funcionalidade da Fase B.
+
+Se instalar ou reaplicar algum schema histórico depois, reaplique a migration por último. Se usar apenas a Fase A, a ausência de `anotacoes` é aceita; ao instalar B posteriormente, execute novamente a migration.
+
+Sem executar a migration, o banco pode rejeitar o novo índice com erro de constraint (`23514`). A conclusão fica no cache local da própria conta e é preservada ao recarregar neste navegador; uma chave auxiliar `antigravity-lab-progress-v1:schema-pending:<id da conta>` identifica essas conclusões. A chave original continua sendo um array de índices. Não há envio automático posterior: depois da migration, desmarque e marque novamente a aula para sincronizar. Outros navegadores só recebem aulas já gravadas no banco. Essa exceção para schema antigo não altera a regra de falhas de rede da Fase A.
+
+O fallback acima é de **progresso**. As anotações continuam dependentes do Supabase; sem migration, uma tentativa na Aula 09 pode mostrar o feedback de erro existente, sem gravar a anotação. Nenhuma mudança foi feita no fluxo de anotações.
+
+Para conferir as constraints no SQL Editor após aplicar:
+
+```sql
+select conrelid::regclass as tabela, conname, pg_get_constraintdef(oid) as definicao
+from pg_constraint
+where connamespace = 'public'::regnamespace
+  and conname in ('progresso_aula_index_check', 'anotacoes_aula_index_check');
+```
+
+Esperado: limite `aula_index >= 0 AND aula_index <= 8` nas tabelas instaladas. Depois, conferir uma conclusão da Aula 09 (`aula_index = 8`) em outro navegador. Execução do SQL, testes reais e validações do aplicativo permanecem com o usuário, pendências 82 e 83.
 
 ## Fontes oficiais consultadas em 26/11/2026
 
