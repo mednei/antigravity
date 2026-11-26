@@ -1,0 +1,468 @@
+{
+  "schemaVersion": 1,
+  "courses": [
+    {
+      "id": "antigravity",
+      "title": "Antigravity Lab",
+      "source": {
+        "repository": "https://github.com/mednei/antigravity",
+        "path": "assets/js/course.js",
+        "blobSha": "7e6d8bb4837c4895364af7822c52e21da308213f",
+        "baseUrl": "https://mednei.github.io/antigravity/"
+      },
+      "contentFormat": "html",
+      "modules": [
+        {
+          "id": "principal",
+          "title": "Trilha principal",
+          "lessons": [
+            {
+              "title": "Conheça o Antigravity",
+              "category": "PRIMEIROS PASSOS",
+              "duration": "5 min",
+              "objective": "Entender a arquitetura e proposta de desenvolvimento orientado por agentes de inteligência artificial.",
+              "intro": "Entenda a proposta de trabalhar com uma ferramenta de desenvolvimento orientada por inteligência artificial.",
+              "body": "<h4>Uma nova forma de construir</h4><p>O Google Antigravity é uma plataforma de desenvolvimento que utiliza agentes de IA para ajudar em tarefas de programação. Você descreve o objetivo, acompanha o trabalho e avalia os resultados.</p><p>A IA é uma parceira de execução: a direção, as decisões e a revisão continuam sendo suas.</p>",
+              "concepts": [
+                "Agentes autônomos de código",
+                "Supervisão humana",
+                "Ciclos rápidos de prototipagem"
+              ],
+              "exercise": "Pense em um projeto simples que você gostaria de criar e escreva seu objetivo em uma frase.",
+              "expected": "Definição em uma linha de um objetivo claro de software (ex: \"Criar uma lista de compras responsiva que salva no navegador\").",
+              "id": "antigravity-001",
+              "order": 1,
+              "sourceIndex": 0
+            },
+            {
+              "title": "Prepare seu ambiente",
+              "category": "CONFIGURAÇÃO",
+              "duration": "8 min",
+              "objective": "Organizar as ferramentas fundamentais, as pastas do projeto e o controle de versões.",
+              "intro": "Organize o espaço de trabalho antes de começar a criar.",
+              "body": "<h4>Uma organização que você pode adaptar</h4><p>A organização de pastas apresentada no curso é um modelo sugerido, não uma obrigatoriedade. Você pode adaptar nomes e diretórios à sua forma de trabalhar. Caminhos exigidos por uma ferramenta devem seguir a documentação dessa ferramenta.</p><h4>Comece pelo essencial</h4><p>Acesse o site oficial do Antigravity para verificar a disponibilidade, os requisitos e as instruções de instalação atualizadas. Crie ou entre na sua conta quando solicitado.</p><ul><li>Separe uma pasta para seu projeto.</li><li>Tenha um navegador e o Git instalados, se necessário.</li><li>Evite incluir senhas ou informações privadas nos seus pedidos.</li></ul>",
+              "concepts": [
+                "Estrutura de diretórios",
+                "Controle de versão com Git",
+                "Segurança de credenciais"
+              ],
+              "exercise": "Escolha uma pasta existente ou crie uma para seu primeiro projeto e anote o que você quer construir; a organização é uma sugestão adaptável.",
+              "expected": "Local de trabalho escolhido e objetivo registrado em notas ou README, conforme a organização escolhida pelo aluno.",
+              "id": "antigravity-002",
+              "order": 2,
+              "sourceIndex": 1
+            },
+            {
+              "title": "Escreva bons prompts",
+              "category": "COMUNICAÇÃO COM IA",
+              "duration": "10 min",
+              "objective": "Dominar técnicas de engenharia de prompt aplicadas à geração e refatoração de código.",
+              "intro": "Uma boa orientação dá contexto, define o resultado e deixa claros os limites.",
+              "body": "<h4>Peça com clareza</h4><p>Descreva quem vai usar o projeto, o que ele precisa fazer e quais tecnologias você quer utilizar. Divida trabalhos maiores em pequenas etapas verificáveis.</p><p>Exemplo: “Crie uma lista de tarefas responsiva com HTML, CSS e JavaScript. Permita adicionar e concluir tarefas, e salve os dados no navegador.”</p>",
+              "concepts": [
+                "Contexto e restrições",
+                "Tarefas atômicas",
+                "Validação incremental"
+              ],
+              "exercise": "Escreva um prompt para seu projeto incluindo objetivo, público e três funcionalidades.",
+              "expected": "Prompt estruturado pronto para ser enviado ao agente de código.",
+              "id": "antigravity-003",
+              "order": 3,
+              "sourceIndex": 2
+            },
+            {
+              "title": "Construa com agentes",
+              "category": "MÃO NA MASSA",
+              "duration": "12 min",
+              "objective": "Orquestrar agentes para criação de telas, componentes e lógica de interação.",
+              "intro": "Transforme seu pedido em um projeto, acompanhando cada etapa do trabalho.",
+              "body": "<h4>Construa por partes</h4><p>Abra a pasta do projeto no ambiente e apresente seu objetivo ao agente. Comece pela estrutura básica e, depois, peça uma funcionalidade de cada vez.</p><ul><li>Leia o plano e as alterações propostas.</li><li>Teste cada funcionalidade antes de seguir.</li><li>Peça ajustes específicos quando algo não estiver certo.</li></ul>",
+              "concepts": [
+                "Iteração de código",
+                "Revisão de diffs",
+                "Implementação modular"
+              ],
+              "exercise": "Peça a criação da primeira versão do seu projeto e abra o resultado no navegador.",
+              "expected": "Código HTML, CSS e JS gerado e renderizado com sucesso no navegador.",
+              "id": "antigravity-004",
+              "order": 4,
+              "sourceIndex": 3
+            },
+            {
+              "title": "Revise e teste",
+              "category": "QUALIDADE",
+              "duration": "10 min",
+              "objective": "Auditar criticamente o código produzido quanto à responsividade, estabilidade e acessibilidade.",
+              "intro": "Um projeto bem feito não termina quando o código é gerado.",
+              "body": "<h4>Olhe com atenção</h4><p>Confira se o resultado corresponde ao pedido, leia as alterações e teste os caminhos principais. Verifique a experiência em telas grandes e pequenas.</p><ul><li>Botões e links funcionam?</li><li>O conteúdo continua legível no celular?</li><li>Há erros no console do navegador?</li></ul><p>Nunca publique credenciais ou dados sensíveis no repositório.</p>",
+              "concepts": [
+                "Acessibilidade básica",
+                "Testes responsivos em múltiplos viewports",
+                "Inspecionar console DevTools"
+              ],
+              "exercise": "Teste seu projeto em dois tamanhos de tela e registre um ponto de melhoria.",
+              "expected": "Identificação e ajuste de ao menos um elemento responsivo ou de acessibilidade.",
+              "id": "antigravity-005",
+              "order": 5,
+              "sourceIndex": 4
+            },
+            {
+              "title": "Publique seu projeto",
+              "category": "PRÓXIMO PASSO",
+              "duration": "10 min",
+              "objective": "Publicar a aplicação estática na nuvem gratuitamente utilizando GitHub Pages.",
+              "intro": "Compartilhe sua criação com o mundo usando o GitHub Pages.",
+              "body": "<h4>Da sua pasta para a internet</h4><p>Crie um repositório no GitHub e envie os arquivos do seu site. Para um site estático, mantenha o arquivo <strong>index.html</strong> na pasta que será publicada.</p><p>No repositório, abra <strong>Settings → Pages</strong>, escolha a publicação a partir de uma branch e selecione a branch e a pasta corretas. Após a publicação, acesse o endereço informado pelo GitHub.</p>",
+              "concepts": [
+                "Deploy estático",
+                "GitHub Pages",
+                "Branch de publicação e index.html"
+              ],
+              "exercise": "Publique seu projeto e abra o link em outro dispositivo para conferir o resultado.",
+              "expected": "URL pública acessível no formato https://usuario.github.io/repositorio/.",
+              "id": "antigravity-006",
+              "order": 6,
+              "sourceIndex": 5
+            },
+            {
+              "title": "Introdução ao Supabase",
+              "category": "BACKEND COMO SERVIÇO",
+              "duration": "12 min",
+              "objective": "Reconhecer os serviços do Supabase e distinguir acesso público de acesso privilegiado.",
+              "intro": "Conheça um backend como serviço antes de integrar sua aplicação.",
+              "body": "<h4>PostgreSQL e serviços prontos</h4><p>O Supabase reúne PostgreSQL gerenciado, autenticação e Storage. A chave legada anon é pública por design; permissões e Row Level Security controlam o acesso às linhas. A chave service_role é privilegiada e nunca deve estar no frontend. Nos projetos atuais, os equivalentes são publishable e secret.</p><p>Uma policy pode permitir que cada usuário autenticado leia somente suas próprias anotações. A integração real será feita em uma fase futura.</p><p>Consulte o <a href=\"./supabase.html\">Guia Supabase</a> para explorar os conceitos.</p>",
+              "concepts": [
+                "PostgreSQL gerenciado",
+                "Chave anon vs service_role (publishable vs secret nos projetos atuais)",
+                "Row Level Security"
+              ],
+              "exercise": "Crie uma conta gratuita no Supabase e explore o painel sem criar nada. Se uma seção exigir um projeto, consulte sua documentação ou demonstração.",
+              "expected": "Familiaridade com Table Editor, Authentication e Settings → API / API Keys.",
+              "id": "antigravity-007",
+              "order": 7,
+              "sourceIndex": 6
+            },
+            {
+              "title": "Introdução ao MongoDB",
+              "category": "BANCO NOSQL",
+              "duration": "15 min",
+              "objective": "Entender documentos e coleções e documentar cuidados com credenciais de banco.",
+              "intro": "Conheça o modelo documental com segurança desde o primeiro contato.",
+              "body": "<h4>Documentos, coleções e credenciais</h4><p>MongoDB organiza documentos BSON em coleções. Uma connection string contém as credenciais de um usuário do banco: nunca coloque a chamada “senha master” no código nem use o administrador na aplicação. Crie um usuário específico com o menor privilégio e restrinja o acesso por IP.</p><p>Uma opção é guardar o .env fora do projeto, por exemplo em <code>D:/projetos/credenciais/mongodb.env</code>. Esse caminho é apenas um modelo de organização, não uma obrigatoriedade; adapte o local e carregue as credenciais somente no backend. Se estiver dentro do projeto, ignore-o antes do primeiro commit. O .gitignore não remove arquivos já rastreados: use <code>git rm --cached .env</code> e registre a remoção. Se já houve push, troque a senha imediatamente, revogue acessos e revise o histórico; versões antigas continuam no Git.</p><p>Consulte o <a href=\"./mongodb.html#seguranca\">Guia MongoDB e a seção de segurança</a>. Esta aula não conecta o site ao banco.</p>",
+              "concepts": [
+                "Documentos e coleções",
+                "Princípio do menor privilégio",
+                "Rotação de senhas"
+              ],
+              "exercise": "Escreva um checklist pessoal com 5 regras de segurança para credenciais de banco.",
+              "expected": "Checklist documentado com cinco regras práticas de proteção de credenciais.",
+              "id": "antigravity-008",
+              "order": 8,
+              "sourceIndex": 7
+            },
+            {
+              "title": "Instalação e requisitos",
+              "category": "PRIMEIROS PASSOS",
+              "trail": "primeiros-passos",
+              "duration": "5 min (estimativa)",
+              "source": "./docs/01-primeiros-passos/instalacao-e-requisitos.md",
+              "objective": "Distinguir a IDE independente da extensão para VS Code e conhecer a instalação e as configurações documentadas.",
+              "intro": "Editor, extensões e preferências compõem o ambiente de desenvolvimento.",
+              "body": "<h4>Escolha o ambiente</h4><p>Você pode baixar a IDE independente do Antigravity ou usar sua extensão oficial no VS Code. Para a IDE, escolha o instalador do seu sistema no site oficial. Consulte os requisitos da opção escolhida no <a href=\"https://antigravity.google/docs/getting-started\" target=\"_blank\" rel=\"noopener noreferrer\">guia de instalação do Google</a>.</p><h4>Instale a extensão no VS Code</h4><p>O guia exige VS Code 1.90 ou posterior, em Windows, Linux ou macOS, e uma conta com acesso ao Antigravity.</p><ol><li>Abra Extensões: Ctrl+Shift+X no Windows/Linux ou Cmd+Shift+X no macOS.</li><li>Procure Google Antigravity, publicado pelo Google, e clique em Install.</li><li>Abra o ícone Antigravity e faça login. Na primeira abertura, a extensão instala o serviço local agy.</li></ol><h4>Extensões de linguagem</h4><p>A Microsoft documenta que Pylance usa Pyright para verificação de tipos. Sua <a href=\"https://github.com/microsoft/pylance-release/blob/main/FAQ.md\" target=\"_blank\" rel=\"noopener noreferrer\">FAQ oficial</a> restringe o uso de Pylance aos produtos e serviços Microsoft indicados nela.</p><h4>Ambiente remoto</h4><p>O Antigravity App, a partir da versão 2.33.0, documenta conexão SSH a hosts Linux de 64 bits com glibc 2.26 ou posterior. Consulte os demais <a href=\"https://antigravity.google/docs/ssh/\" target=\"_blank\" rel=\"noopener noreferrer\">requisitos oficiais de SSH do App</a> antes de preparar o acesso remoto.</p><h4>Ajuste suas preferências</h4><p>No VS Code, abra Settings e pesquise antigravity; a extensão também aceita configuração em settings.json. Seu painel permite conversar com o agente e revisar alterações no editor.</p><p><a href=\"https://antigravity.google/docs/ide/extensions/vscode/\" target=\"_blank\" rel=\"noopener noreferrer\">Procedimento e configurações oficiais para VS Code</a>. Fontes consultadas em 26/11/2026.</p>",
+              "concepts": [
+                "IDE independente e extensão para VS Code",
+                "Instalação pelo painel de extensões",
+                "Configurações pessoais do editor"
+              ],
+              "exercise": "Consulte o guia oficial da opção escolhida e identifique o instalador ou a extensão e os requisitos correspondentes.",
+              "expected": "Identificação da opção de ambiente, de sua origem oficial e dos requisitos aplicáveis.",
+              "id": "antigravity-009",
+              "order": 9,
+              "sourceIndex": 8
+            },
+            {
+              "title": "Planos, quotas e limites de uso",
+              "category": "PRIMEIROS PASSOS",
+              "trail": "primeiros-passos",
+              "duration": "5 min (estimativa)",
+              "source": "./docs/01-primeiros-passos/planos-quotas-rate-limits.md",
+              "objective": "Distinguir métricas da API, cotas do Antigravity e comportamentos documentados sob saturação.",
+              "intro": "Uma tarefa com agente pode envolver várias chamadas; o consumo depende do trabalho realizado.",
+              "body": "<h4>Entenda as métricas</h4><p>Na Gemini API, RPM significa requisições por minuto; TPM, tokens de entrada por minuto; RPD, requisições por dia. Exceder qualquer limite aplicável pode gerar um erro de limite de uso. Esses limites são aplicados por projeto, não por chave. Consulte a <a href=\"https://ai.google.dev/gemini-api/docs/rate-limits\" target=\"_blank\" rel=\"noopener noreferrer\">documentação da Gemini API</a>.</p><h4>Confira o plano do Antigravity</h4><p>Para contas pessoais, a documentação lista Free, Google AI Plus, Google AI Pro e Google AI Ultra, com cotas e disponibilidade de modelos diferentes. O consumo varia com o trabalho do agente; tarefas complexas podem consumir mais cota.</p><p>Em Pro e Ultra, créditos adicionais podem cobrir uso além da cota básica. A opção AI Credit Overages controla esse uso automático: Never aguarda a renovação da cota; Always permite consumir créditos. Consulte o saldo e as condições atuais na <a href=\"https://antigravity.google/docs/plans\" target=\"_blank\" rel=\"noopener noreferrer\">página oficial de planos</a> e nas configurações da conta.</p><h4>Saturação e retomada</h4><p>No SDK Python do Antigravity, há tentativas automáticas com espera crescente para erros transitórios, incluindo HTTP 429. Esse comportamento é configurável; consulte o <a href=\"https://github.com/google-antigravity/antigravity-sdk-python/blob/main/skills/google-antigravity-sdk/examples/getting_started/customizing_retries.md\" target=\"_blank\" rel=\"noopener noreferrer\">exemplo oficial de retries do SDK</a>.</p><p>No agente de navegador do Antigravity App, se a cota de Gemini Flash acabar ou estiver indisponível, o agente para e pergunta como prosseguir, em vez de trocar automaticamente de modelo. Veja o escopo em <a href=\"https://antigravity.google/docs/browser\" target=\"_blank\" rel=\"noopener noreferrer\">uso do navegador</a>.</p><p>Fontes consultadas em 26/11/2026. Os limites do serviço podem mudar; consulte a documentação da modalidade utilizada.</p>",
+              "concepts": [
+                "RPM, TPM e RPD",
+                "Cotas por modalidade e consumo do agente",
+                "Créditos adicionais",
+                "Retentativas e troca de modelo"
+              ],
+              "exercise": "Consulte as fontes oficiais da modalidade que você usa e identifique onde acompanhar a cota, quando ela renova e se há uso de créditos adicionais.",
+              "expected": "Registro da modalidade consultada, da fonte e da data, distinguindo métricas da API das cotas do Antigravity.",
+              "id": "antigravity-010",
+              "order": 10,
+              "sourceIndex": 9
+            }
+          ]
+        },
+        {
+          "id": "formacao",
+          "title": "Formação em agentes",
+          "lessons": [
+            {
+              "title": "Contas, perfis e workspaces",
+              "category": "FORMAÇÃO EM AGENTES",
+              "trail": "formacao",
+              "duration": "5 min (estimativa)",
+              "sources": [
+                "./docs/01-primeiros-passos/contas-perfis-workspaces.md"
+              ],
+              "objective": "Organizar conta, postura de trabalho e ambientes de estudo e produção, protegendo credenciais.",
+              "intro": "Organizar conta, postura de trabalho e ambientes de estudo e produção, protegendo credenciais.",
+              "body": "<h4>Credenciais fora do código</h4><p>O princípio do material é não escrever senhas em arquivos de configuração nem na linha de comando. Quando possível, mantenha credenciais fora da pasta do projeto. A organização de pastas é um modelo sugerido: o aluno pode escolher outros nomes e locais, preservando os cuidados com credenciais e os caminhos exigidos pela ferramenta utilizada. Os <a href=\"./mongodb.html#seguranca\">cuidados do guia MongoDB</a> e o <a href=\"./supabase.html\">guia Supabase</a> continuam como referências, sem duplicar seus exemplos.</p><h4>Conta, perfil e ambiente</h4><p>O material propõe separar a postura de estudo da de produção. Essa organização de trabalho não comprova a existência de perfis automáticos com políticas próprias no produto.</p><p>O <a href=\"https://antigravity.google/docs/install/\" target=\"_blank\" rel=\"noopener noreferrer\">guia oficial de autenticação</a> documenta login por conta Google e fluxos distintos conforme a modalidade. Na CLI, há autenticação com chave da Gemini API sob configuração específica; isso não equivale a um fallback automático da IDE.</p><h4>Workspace e permissões</h4><p>O workspace delimita o contexto do projeto; as regras e fronteiras de acesso devem ser consideradas junto com a governança. Autenticar uma conta e definir as permissões do trabalho são decisões diferentes.</p>",
+              "concepts": [
+                "Proteção de credenciais",
+                "Separação entre estudo e produção",
+                "Conta e contexto do projeto"
+              ],
+              "exercise": "Faça uma leitura orientada dos cuidados com credenciais e da separação de ambientes descritos no material, usando os guias existentes como consulta.",
+              "expected": "Identificação dos cuidados com credenciais e da distinção entre conta, postura de trabalho e ambiente do projeto.",
+              "id": "antigravity-011",
+              "order": 11,
+              "sourceIndex": 10
+            },
+            {
+              "title": "Arquitetura do agente e ambientes de trabalho",
+              "category": "FORMAÇÃO EM AGENTES",
+              "trail": "formacao",
+              "duration": "8 min (estimativa)",
+              "sources": [
+                "./docs/02-formacao-agentes/01-fundamentos-plataforma-agentica.md",
+                "./docs/02-formacao-agentes/02-os-4-pilares.md"
+              ],
+              "objective": "Distinguir modelo, harness e ferramentas, relacionando-os às quatro frentes didáticas do curso.",
+              "intro": "Distinguir modelo, harness e ferramentas, relacionando-os às quatro frentes didáticas do curso.",
+              "body": "<h4>Três componentes</h4><ul><li><strong>Modelo de linguagem:</strong> raciocínio, planejamento e hipóteses de código.</li><li><strong>Harness:</strong> orquestração da sessão, contexto, políticas e delegação.</li><li><strong>Ambiente e ferramentas:</strong> operações sobre arquivos, terminal, busca e navegador, conforme os recursos disponíveis.</li></ul><h4>Como uma ação acontece</h4><p>O modelo isolado não opera disco, rede ou janelas. Ele solicita chamadas estruturadas; o ambiente valida e executa as ferramentas e devolve os resultados para a decisão seguinte.</p><h4>Quatro frentes didáticas</h4><ul><li>Gestão de agentes: acompanhar tarefas e decisões que exigem revisão humana.</li><li>Editor: examinar código e alterações.</li><li>Terminal: interagir com tarefas pelo shell.</li><li>Integração programática: acionar trabalho por software.</li></ul><p>Essa divisão organiza o material; não é uma nomenclatura comercial oficial.</p><p>A CLI <code>agy</code>, a consulta <code>agy --version</code> e a interface de terminal estão no <a href=\"https://antigravity.google/docs/getting-started/\" target=\"_blank\" rel=\"noopener noreferrer\">guia inicial</a>. O <a href=\"https://antigravity.google/docs/sdk/overview/\" target=\"_blank\" rel=\"noopener noreferrer\">SDK Python oficial</a> oferece integração programática; o <a href=\"https://codelabs.developers.google.com/agy-cli-sdk-code-review?hl=en\" target=\"_blank\" rel=\"noopener noreferrer\">codelab do Google</a> mostra revisão de Pull Requests em CI.</p>",
+              "concepts": [
+                "Modelo, harness e ambiente",
+                "Chamadas estruturadas de ferramentas",
+                "Quatro frentes como organização didática"
+              ],
+              "exercise": "Relacione, por leitura orientada, os três componentes da arquitetura às quatro frentes apresentadas no material.",
+              "expected": "Distinção entre produzir uma hipótese, coordenar o trabalho e executar uma operação por ferramenta.",
+              "id": "antigravity-012",
+              "order": 12,
+              "sourceIndex": 11
+            },
+            {
+              "title": "Ciclo, regras e permissões",
+              "category": "FORMAÇÃO EM AGENTES",
+              "trail": "formacao",
+              "duration": "8 min (estimativa)",
+              "sources": [
+                "./docs/02-formacao-agentes/03-ciclo-agentico-e-governanca.md"
+              ],
+              "objective": "Acompanhar o ciclo de execução e distinguir princípios de engenharia, regras operacionais e permissões.",
+              "intro": "Acompanhar o ciclo de execução e distinguir princípios de engenharia, regras operacionais e permissões.",
+              "body": "<h4>O ciclo de execução</h4><p>Objetivo → observação dos arquivos → planejamento → seleção de ferramentas → execução → análise do resultado → correção ou conclusão.</p><p>O ambiente aplica a política de acesso às chamadas. Saída, erros e código de retorno alimentam a decisão seguinte; os detalhes dependem da ferramenta disponível.</p><h4>Princípios e regras</h4><p>O material distingue postura de engenharia de regras operacionais do projeto. Propõe preferir funções puras e imutabilidade quando possível, justificar dependências e documentar padrões de arquitetura, dados, frontend e validação.</p><p>A <a href=\"https://antigravity.google/docs/rules/\" target=\"_blank\" rel=\"noopener noreferrer\">documentação atual de regras</a> reconhece AGENTS.md e GEMINI.md, com escopos de projeto e globais. Isso não comprova os caminhos antigos da apostila nem uma precedência presumida entre arquivos.</p><h4>Autonomia acompanha o risco</h4><p>Defina o grau de autonomia e as permissões conforme o trabalho. Instruções ao modelo e diretivas interpretadas pelo ambiente têm papéis diferentes.</p><p>No App, o preset Request Review exige revisão de comandos de terminal. Os controles e escopos atuais estão em <a href=\"https://antigravity.google/docs/agent-settings/\" target=\"_blank\" rel=\"noopener noreferrer\">configurações do agente</a>. Uma regra escrita não substitui a política efetiva de acesso.</p>",
+              "concepts": [
+                "Ciclo de execução e retorno das ferramentas",
+                "Princípios e regras operacionais",
+                "Permissões proporcionais ao risco"
+              ],
+              "exercise": "Faça a leitura do ciclo e dos princípios propostos, distinguindo orientação ao agente de permissão aplicada pelo ambiente.",
+              "expected": "Identificação das etapas do ciclo, das regras do projeto e das decisões de acesso que dependem do ambiente.",
+              "id": "antigravity-013",
+              "order": 13,
+              "sourceIndex": 12
+            },
+            {
+              "title": "Planos, artefatos e relatório de entrega",
+              "category": "FORMAÇÃO EM AGENTES",
+              "trail": "formacao",
+              "duration": "8 min (estimativa)",
+              "sources": [
+                "./docs/01-primeiros-passos/planos-quotas-rate-limits.md",
+                "./docs/02-formacao-agentes/04-artefatos-e-walkthrough.md"
+              ],
+              "objective": "Transformar demanda, plano e entrega em informações revisáveis, considerando também o consumo do trabalho.",
+              "intro": "Transformar demanda, plano e entrega em informações revisáveis, considerando também o consumo do trabalho.",
+              "body": "<h4>Da demanda ao plano</h4><p>A conversa alinha o trabalho; os artefatos tornam plano, decisões e entrega revisáveis. Notas provisórias e hipóteses têm finalidade diferente de um plano apresentado para revisão.</p><p>O plano proposto pelo material reúne problema e contexto, alterações por arquivo, estratégia de validação e riscos ou efeitos colaterais. O fluxo é demanda → inspeção → plano → revisão humana → execução.</p><h4>Entrega com evidências</h4><p>O walkthrough reúne resumo, mapa das alterações, trechos relevantes, resultados das verificações e evidências visuais quando aplicáveis. Um relato de conclusão deve ser confrontado com os resultados apresentados.</p><p>A documentação oficial descreve o <a href=\"https://antigravity.google/docs/implementation-plan/\" target=\"_blank\" rel=\"noopener noreferrer\">plano e seus comentários</a> e o <a href=\"https://antigravity.google/docs/walkthrough/\" target=\"_blank\" rel=\"noopener noreferrer\">walkthrough</a>. Comentários permitem ajustar o plano; isso não comprova todos os atalhos ou mecanismos automáticos citados no original.</p><h4>Planejamento e consumo</h4><p>Uma tarefa com agente pode encadear várias chamadas. RPM, TPM e RPD são as métricas apresentadas no material para discutir consumo. A Aula 10 concentra a consulta de planos e limites; não se deve atribuir a todos os planos os limites de outra modalidade.</p>",
+              "concepts": [
+                "Plano de implementação revisável",
+                "Relatório de entrega e evidências",
+                "Comentários para ajustar o plano",
+                "Consumo em chamadas encadeadas"
+              ],
+              "exercise": "Solicite um validador de CPF com histórico de consultas e acompanhe plano, revisão, execução e relatório, conforme a prática proposta no material.",
+              "expected": "Plano revisável, alterações acompanhadas e relatório de entrega com resultados das verificações, sem presumir aprovação ou execução automática.",
+              "id": "antigravity-014",
+              "order": 14,
+              "sourceIndex": 13
+            },
+            {
+              "title": "Contexto, recuperação e memória",
+              "category": "FORMAÇÃO EM AGENTES",
+              "trail": "formacao",
+              "duration": "10 min (estimativa)",
+              "sources": [
+                "./docs/03-laboratorios/lab-rag-e-contexto.md"
+              ],
+              "objective": "Selecionar contexto relevante e distinguir recuperação de informação, regras e memória.",
+              "intro": "Selecionar contexto relevante e distinguir recuperação de informação, regras e memória.",
+              "body": "<h4>Escolha o contexto da tarefa</h4><p>O material discute atenção em contextos longos, latência e consumo de tokens. A proposta é recuperar trechos relevantes em vez de enviar indiscriminadamente todo o projeto.</p><h4>Estrutura e recuperação</h4><p>AST é a estrutura sintática de um programa. A leitura estrutural permite organizar funções, classes, métodos e imports e concentrar a inspeção nos símbolos relevantes.</p><ol><li>Dividir o código em trechos com significado, como funções e classes.</li><li>Representar esses trechos por embeddings.</li><li>Comparar a consulta com as representações.</li><li>Recuperar os trechos mais relacionados para a tarefa.</li></ol><p>Esse pipeline explica o conceito de recuperação; não descreve uma implementação interna comprovada do Antigravity.</p><h4>Regras e memória</h4><p>Regras são diretrizes prescritivas. Memória reúne fatos e observações. Esses papéis não demonstram aprendizado ou persistência automática no produto.</p><p>A <a href=\"https://antigravity.google/docs/at-mentions/\" target=\"_blank\" rel=\"noopener noreferrer\">documentação de menções</a> descreve como apontar arquivos e pastas com @. Para a pergunta lateral da prática, <a href=\"https://antigravity.google/docs/commands/btw/\" target=\"_blank\" rel=\"noopener noreferrer\">/btw</a> mantém a troca fora do histórico principal. É um recurso com comportamento próprio, não garantia de isolamento separado das permissões da sessão.</p>",
+              "concepts": [
+                "Seleção de contexto",
+                "AST e recuperação por embeddings como conceitos",
+                "Regras e memória",
+                "Pergunta lateral com escopo documentado"
+              ],
+              "exercise": "Compare o contexto antes e depois de uma pergunta lateral sobre valores padrão mutáveis em Python, conforme o objetivo da prática recebida. Use a documentação da modalidade para consultar o contexto disponível.",
+              "expected": "Comparação registrada do contexto principal e da pergunta lateral, distinguindo o que foi observado de hipóteses sobre memória ou indexação.",
+              "id": "antigravity-015",
+              "order": 15,
+              "sourceIndex": 14
+            },
+            {
+              "title": "Terminal, filas e tarefas dependentes",
+              "category": "FORMAÇÃO EM AGENTES",
+              "trail": "formacao",
+              "duration": "12 min (estimativa)",
+              "sources": [
+                "./docs/03-laboratorios/lab-terminal-e-shell.md",
+                "./docs/02-formacao-agentes/10-concorrencia-e-mensagens.md"
+              ],
+              "objective": "Observar execução, erros e resultados, coordenando tarefas dependentes com base no estado real.",
+              "intro": "Observar execução, erros e resultados, coordenando tarefas dependentes com base no estado real.",
+              "body": "<h4>Observe antes de corrigir</h4><p>Execução, saída, erro e correção fazem parte do trabalho no terminal. Uma verificação pontual termina e devolve um resultado; servidores e observadores de arquivos podem permanecer ativos e precisam de acompanhamento próprio.</p><h4>Fila, direção e interrupção</h4><p>O material distingue deixar uma demanda seguinte na fila, corrigir a direção do trabalho em andamento e interromper uma execução. São decisões diferentes: antes de iniciar uma tarefa dependente, considere os arquivos e o resultado deixados pela anterior.</p><p>Na CLI, a opção Queued Messages distingue Queue de Send Immediately. O escopo e os controles atuais estão nas <a href=\"https://antigravity.google/docs/settings?tab=cli\" target=\"_blank\" rel=\"noopener noreferrer\">configurações oficiais</a>; não se presume uma garantia universal de preservação de processos.</p><h4>Dois exercícios do material</h4><p>Primeiro, uma calculadora recebe uma lista com números e a string “trinta”. Observe o erro de soma e peça a correção para ignorar valores não convertíveis.</p><p>Depois, solicite um programa que calcule primos até 50.000 e registre o tempo. A documentação seguinte deve usar o resultado efetivamente obtido, sem inventar medições.</p>",
+              "concepts": [
+                "Saída e erro de execução",
+                "Processos pontuais e contínuos",
+                "Fila, direcionamento e interrupção",
+                "Dependência entre tarefas"
+              ],
+              "exercise": "Execute a prática da calculadora e acompanhe a correção. Na prática de primos até 50.000, solicite em seguida instruções e tempo médio, conferindo se o documento usa medições reais; não apresente uma média sem medições que a sustentem.",
+              "expected": "Erro observado e correção da calculadora; documento da segunda tarefa coerente com os resultados medidos da primeira.",
+              "id": "antigravity-016",
+              "order": 16,
+              "sourceIndex": 15
+            },
+            {
+              "title": "Sessões, versões e restauração",
+              "category": "FORMAÇÃO EM AGENTES",
+              "trail": "formacao",
+              "duration": "8 min (estimativa)",
+              "sources": [
+                "./docs/02-formacao-agentes/11-sessoes-versionamento-rollback.md"
+              ],
+              "objective": "Distinguir o histórico da conversa do estado dos arquivos e conferir uma restauração em laboratório.",
+              "intro": "Distinguir o histórico da conversa do estado dos arquivos e conferir uma restauração em laboratório.",
+              "body": "<h4>Conversa e arquivos são estados diferentes</h4><p>Desfazer uma mensagem no chat não equivale a restaurar arquivos no disco. Apagar uma mensagem também não demonstra recuperação do código.</p><ul><li>Rollback de conversa altera o histórico ou o contexto.</li><li>Rollback de arquivos altera o conteúdo no sistema de arquivos.</li></ul><h4>Retomar e explorar alternativas</h4><p>O material propõe retomar tarefas e explorar caminhos alternativos de conversa. Na CLI, o <a href=\"https://antigravity.google/docs/cli/conversations/\" target=\"_blank\" rel=\"noopener noreferrer\">gerenciamento de conversas</a> documenta /resume e sessões relacionadas ao diretório de trabalho. Retomar a conversa não comprova o isolamento dos arquivos de uma ramificação.</p><h4>Compare o que foi restaurado</h4><p>O objetivo é recuperar alterações preservando o trabalho manual anterior e inspecionar as ações realizadas. Examine as diferenças e compare os arquivos antes e depois; a <a href=\"https://antigravity.google/docs/review-changes/\" target=\"_blank\" rel=\"noopener noreferrer\">documentação de revisão</a> é uma referência para avaliar mudanças.</p><p>A prática deve ocorrer em uma cópia de laboratório. Não se presume um mecanismo automático capaz de preservar toda alteração manual.</p>",
+              "concepts": [
+                "Histórico de conversa e estado de arquivos",
+                "Retomada de sessão",
+                "Comparação antes/depois",
+                "Preservação do trabalho manual"
+              ],
+              "exercise": "Em uma cópia de laboratório, crie um arquivo com alterações manuais, solicite uma mudança e compare o conteúdo antes e depois de uma restauração. Use somente o mecanismo documentado e disponível no ambiente escolhido.",
+              "expected": "Registro do que mudou na conversa e nos arquivos, verificando se o trabalho manual foi preservado, sem presumir o resultado.",
+              "id": "antigravity-017",
+              "order": 17,
+              "sourceIndex": 16
+            },
+            {
+              "title": "Validação e automação com hooks",
+              "category": "FORMAÇÃO EM AGENTES",
+              "trail": "formacao",
+              "duration": "10 min (estimativa)",
+              "sources": [
+                "./docs/02-formacao-agentes/05-hooks-e-validacao.md"
+              ],
+              "objective": "Avaliar entregas com verificações reproduzíveis e compreender o papel dos hooks e dos procedimentos reutilizáveis.",
+              "intro": "Avaliar entregas com verificações reproduzíveis e compreender o papel dos hooks e dos procedimentos reutilizáveis.",
+              "body": "<h4>Engenharia valida o resultado</h4><p>O material contrapõe geração probabilística a verificações reproduzíveis. Considere linters, checagens estáticas, formatadores, verificadores de tipos, testes e cobertura conforme a tarefa.</p><p>Planejar → executar → verificar → corrigir quando necessário → apresentar evidências para revisão. Não aceite uma tarefa como pronta apenas porque o agente declarou sucesso.</p><h4>Hooks no ciclo de trabalho</h4><p>Hooks associam scripts a momentos do trabalho para preparar ou verificar alterações. A <a href=\"https://antigravity.google/docs/hooks/\" target=\"_blank\" rel=\"noopener noreferrer\">documentação atual de hooks</a> descreve eventos como PreToolUse e PostToolUse, antes e depois de uma ferramenta. Esses eventos não confirmam o schema antigo citado na apostila.</p><h4>Operação e procedimento</h4><p>Uma ferramenta é uma operação; uma habilidade ou procedimento encadeia operações. Empacotar procedimentos evita repetir a distribuição manual de regras e integrações entre projetos.</p><p>O <a href=\"https://antigravity.google/docs/build-plugins/\" target=\"_blank\" rel=\"noopener noreferrer\">guia de plugins</a> documenta manifesto plugin.json, habilidades em SKILL.md e hooks.json. A existência desses componentes não comprova qualquer configuração presumida de plugin ou hook.</p>",
+              "concepts": [
+                "Verificações reproduzíveis",
+                "Evidências para revisão",
+                "Eventos de hooks com escopo documentado",
+                "Ferramentas e procedimentos reutilizáveis"
+              ],
+              "exercise": "Observe um script de verificação receber os arquivos de uma tarefa e retornar seu resultado, conforme a prática proposta. Registre a automação somente depois de conferir eventos e formatos documentados; não crie configuração presumida.",
+              "expected": "Resultado da verificação registrado e apresentado para revisão, com distinção entre execução manual e automação de hook efetivamente configurada.",
+              "id": "antigravity-018",
+              "order": 18,
+              "sourceIndex": 17
+            },
+            {
+              "title": "MCP e integrações",
+              "category": "FORMAÇÃO EM AGENTES",
+              "trail": "formacao",
+              "duration": "10 min (estimativa)",
+              "sources": [
+                "./docs/02-formacao-agentes/06-mcp-integracoes.md"
+              ],
+              "objective": "Distinguir cliente, servidor, capacidades e autorização em uma integração MCP.",
+              "intro": "Distinguir cliente, servidor, capacidades e autorização em uma integração MCP.",
+              "body": "<h4>Cliente e servidores</h4><p>O material apresenta MCP como protocolo aberto de integração entre um cliente e servidores que expõem recursos e ferramentas. O cliente utiliza as capacidades anunciadas; esse modelo permite expandir as ferramentas disponíveis para um agente.</p><h4>Conexão não é autorização</h4><p>Evite segredos escritos diretamente nas configurações e separe autenticação de uso das ferramentas. Conectar um servidor não concede, por si só, autorização para qualquer operação.</p><p>A <a href=\"https://antigravity.google/docs/mcp/\" target=\"_blank\" rel=\"noopener noreferrer\">documentação do Antigravity</a> descreve configuração MCP e OAuth com PKCE para servidores remotos compatíveis. O suporte depende da modalidade e do servidor; não é uma garantia universal de isolamento ou ocultação automática de segredos.</p><p>A <a href=\"https://modelcontextprotocol.io/specification/latest/basic/transports\" target=\"_blank\" rel=\"noopener noreferrer\">especificação de transportes</a> distingue stdio e Streamable HTTP. O transporte define como as mensagens são entregues; um processo local pode ter outros acessos, conforme suas permissões.</p><h4>Consulta em laboratório</h4><p>O objetivo da prática é consultar um estoque em SQLite descartável: identificar o produto de maior preço e o valor total. Confirme um servidor compatível e sua documentação antes de instalar ou configurar a integração. Os nomes de banco e pastas do exercício são exemplos adaptáveis.</p>",
+              "concepts": [
+                "Cliente, servidor e capacidades MCP",
+                "Autenticação e autorização",
+                "Transportes e permissões",
+                "Consulta a banco descartável"
+              ],
+              "exercise": "Em um SQLite de laboratório, com servidor compatível e configuração documentada, pergunte qual produto tem maior preço e qual o valor total do estoque. Use somente os dados descartáveis do exercício.",
+              "expected": "Respostas conferidas com os dados do laboratório, identificando a ferramenta consultada e as permissões necessárias, sem acesso a dados reais.",
+              "id": "antigravity-019",
+              "order": 19,
+              "sourceIndex": 18
+            },
+            {
+              "title": "Trabalho com múltiplos agentes",
+              "category": "FORMAÇÃO EM AGENTES",
+              "trail": "formacao",
+              "duration": "10 min (estimativa)",
+              "sources": [
+                "./docs/03-laboratorios/lab-multi-agentes.md"
+              ],
+              "objective": "Dividir trabalho com escopo definido e consolidar resultados sem presumir isolamento automático.",
+              "intro": "Dividir trabalho com escopo definido e consolidar resultados sem presumir isolamento automático.",
+              "body": "<h4>Divida responsabilidades</h4><p>O material propõe distribuir tarefas com escopo definido e consolidar cada frente. Seus exemplos incluem testes de faturamento, análise de dependências de um legado e investigação de um erro de produção.</p><h4>Delegar não dispensa conferir</h4><p>Observe o que cada frente recebeu, os resultados apresentados e como o retorno é consolidado. Os exemplos ilustram divisão de trabalho, sem comprovar paralelismo ou isolamento automático no ambiente utilizado.</p><p>A <a href=\"https://antigravity.google/docs/subagents/\" target=\"_blank\" rel=\"noopener noreferrer\">documentação de subagentes do Antigravity</a> descreve delegação e opções de workspace, incluindo herdar, compartilhar e criar worktree. Essa distinção exige conferir o modo efetivamente usado; uma worktree não significa risco zero nem substitui revisão.</p><h4>Prática recebida</h4><p>Delegue uma auditoria de segurança de um arquivo e um plano de documentação. Acompanhe o trabalho e confira o relatório consolidado. Reutilize o ciclo e as permissões da Aula 13 e a coordenação de tarefas da Aula 16.</p>",
+              "concepts": [
+                "Escopo de cada frente",
+                "Delegação e consolidação",
+                "Workspace compartilhado ou separado",
+                "Revisão dos resultados"
+              ],
+              "exercise": "No ambiente de laboratório escolhido, delegue a auditoria de segurança de um arquivo e um plano de documentação; observe os retornos e confira a consolidação, conforme a prática proposta.",
+              "expected": "Escopos identificados e retorno consolidado conferido, distinguindo o isolamento observado das capacidades apenas presumidas.",
+              "id": "antigravity-020",
+              "order": 20,
+              "sourceIndex": 19
+            },
+            {
+              "title": "Validação no navegador",
+              "category": "FORMAÇÃO EM AGENTES",
+              "trail": "formacao",
+              "duration": "10 min (estimativa)",
+              "sources": [
+                "./docs/03-laboratorios/lab-navegador-sandbox.md"
+              ],
+              "objective": "Acompanhar uma interação real com formulário e reunir evidências do resultado no navegador.",
+              "intro": "Acompanhar uma interação real com formulário e reunir evidências do resultado no navegador.",
+              "body": "<h4>Da página à evidência</h4><p>A prática original propõe criar uma página de laboratório com formulário simples, servir por HTTP, abrir no navegador, preencher um campo, enviar e confirmar a mensagem de sucesso.</p><h4>Organização adaptável</h4><p>A pasta <code>public/</code> e a porta <code>8080</code> são exemplos do exercício, não uma obrigatoriedade. O aluno pode escolher outra organização de pastas e outra porta disponível, ajustando o caminho servido e a URL de acesso. Isso não altera caminhos que uma ferramenta realmente exija.</p><h4>O que observar</h4><p>Confira navegação, preenchimento, clique e mensagem resultante. Reúna evidência visual e examine erros no console e falhas de rede, como proposto no material.</p><p>A <a href=\"https://antigravity.google/docs/browser/\" target=\"_blank\" rel=\"noopener noreferrer\">documentação de navegador do Antigravity</a> distingue navegador integrado e conexão com Chrome conforme modalidade e disponibilidade. A existência desse recurso não comprova os nomes de ferramentas ou um sandbox universal citados na apostila.</p><p>Reutilize a Aula 16 para acompanhar o servidor e a Aula 14 para apresentar as evidências da entrega.</p>",
+              "concepts": [
+                "Interação real com formulário",
+                "Pasta e porta como exemplos",
+                "Mensagem de sucesso e evidência visual",
+                "Console e rede"
+              ],
+              "exercise": "Crie uma página de laboratório com formulário simples. Solicite ao agente servir a pasta escolhida por HTTP, abrir sua URL, preencher o campo, enviar e confirmar a mensagem de sucesso. Você pode adotar public/ e 8080 como modelo ou adaptá-los.",
+              "expected": "Resultado do envio conferido no navegador, evidência visual registrada e observações de console/rede quando aplicáveis.",
+              "id": "antigravity-021",
+              "order": 21,
+              "sourceIndex": 20
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
