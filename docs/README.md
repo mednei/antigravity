@@ -75,6 +75,8 @@ Na conversão dos MDs em aulas, `VERIFICAR` é uma tarefa editorial do Codex: co
 
 A conversão seguinte, [planos, quotas e limites](./01-primeiros-passos/planos-quotas-rate-limits-verificacao.md), mantém esse padrão: uma aula no índice 9, fontes e escopos documentados, MD original preservado. O catálogo passa a dez aulas; aplicar a [migration atual](./supabase/20261126-planos-quotas.sql) por último, conforme o [README do Supabase](./supabase/README.md).
 
+Atualização do Lote 1: o catálogo agora possui **14 aulas reais**. As dez anteriores permanecem intactas e as aulas 11–14 usam a trilha `formacao`. A [pesquisa editorial do lote](./02-formacao-agentes/lote-1-verificacao.md) registra 29 itens pesquisados: 1 e 2 confirmados e removidos da tabela central; os demais mantidos no escopo ainda não comprovado. Os MDs-fonte não foram modificados. A instrução de migration acima descreve a etapa anterior: para ativação nova, os schemas A e B já aceitam 26 aulas, **sem migrations incrementais**, conforme o [README de ativação](./supabase/README.md).
+
 | Material recebido | Destino canônico |
 |---|---|
 | Módulo 1 | Fundamentos, quatro pilares, governança e validação. |
