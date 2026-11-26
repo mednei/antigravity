@@ -63,3 +63,5 @@ O schema tem limite superior 7. Antes de acrescentar aulas ao catálogo, ampliar
 - [Políticas RLS](https://supabase.com/docs/guides/database/postgres/row-level-security).
 
 As pendências de verificação real estão no [registro único](../pendencias-verificacao.md), itens 76 a 78.
+
+A Fase B acrescenta anotações com um [schema e roteiro separados](./fase-b-anotacoes.md), reutilizando esta configuração. Ela não altera a tabela de progresso nem encerra as pendências da Fase A.

@@ -243,6 +243,291 @@ function saveLessonProgress(index, done) {
   });
 }
 
+// Anotações ficam no Supabase; rascunhos existem somente na memória desta página.
+const lessonNotes = (() => {
+  const contexts = new Map();
+  const columns = 'id,aula_index,texto,print_url,criado_em,atualizado_em';
+  let active = null;
+  let lastUserId = null;
+
+  function authState() {
+    return window.AntigravityAuth ? window.AntigravityAuth.getState() : {};
+  }
+
+  function sameAccount(context) {
+    const state = authState();
+    return state.user && state.client && state.user.id === context.userId;
+  }
+
+  function element(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  function imageURL(value) {
+    if (!value || !value.trim()) return null;
+    try {
+      const url = new URL(value.trim());
+      return ['https:', 'http:'].includes(url.protocol) && !url.username && !url.password ? url.href : null;
+    } catch (error) { return null; }
+  }
+
+  function resetDraft(context) {
+    context.editId = null;
+    context.text = '';
+    context.url = '';
+    context.invalid = null;
+  }
+
+  function notify(context, message, error = false) {
+    context.notice = { message, error };
+  }
+
+  function noteCard(context, note) {
+    const card = element('article', 'lesson-note-card');
+    const date = new Date(note.criado_em);
+    const time = element('time', 'lesson-note-date', Number.isNaN(date.getTime()) ? 'Data indisponível' : date.toLocaleString('pt-BR'));
+    if (!Number.isNaN(date.getTime())) time.dateTime = date.toISOString();
+    card.appendChild(time);
+    const text = typeof note.texto === 'string' ? note.texto : '';
+    if (text) card.appendChild(element('p', 'lesson-note-text', text));
+    const url = typeof note.print_url === 'string' ? imageURL(note.print_url) : null;
+    if (url) {
+      const image = element('img', 'lesson-note-image');
+      image.alt = `Print anexado à anotação da Aula ${String(context.index + 1).padStart(2, '0')}`;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      image.referrerPolicy = 'no-referrer';
+      const unavailable = element('p', 'lesson-note-image-error', 'Não foi possível carregar o print. Use o link para abrir a imagem.');
+      unavailable.hidden = true;
+      image.addEventListener('error', () => { image.hidden = true; unavailable.hidden = false; });
+      image.src = url;
+      card.appendChild(image);
+      card.appendChild(unavailable);
+      const link = element('a', 'lesson-note-image-link', 'Abrir print em nova aba');
+      link.href = url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      card.appendChild(link);
+    }
+    const actions = element('div', 'lesson-note-actions');
+    const edit = element('button', 'secondary-button', 'Editar');
+    edit.type = 'button';
+    edit.disabled = context.busy || context.loading;
+    edit.addEventListener('click', () => {
+      if (context.busy || context.loading || !sameAccount(context)) return;
+      context.editId = note.id;
+      context.text = text;
+      context.url = typeof note.print_url === 'string' ? note.print_url : '';
+      context.invalid = null;
+      notify(context, 'Editando anotação. Salve as alterações ou cancele a edição.');
+      paint(context);
+      if (active && active.context === context) active.text.focus();
+    });
+    const remove = element('button', 'secondary-button lesson-note-delete', 'Excluir');
+    remove.type = 'button';
+    remove.disabled = context.busy || context.loading;
+    remove.addEventListener('click', () => removeNote(context, note.id));
+    actions.appendChild(edit);
+    actions.appendChild(remove);
+    card.appendChild(actions);
+    return card;
+  }
+
+  function paint(context) {
+    if (!active || active.context !== context || !sameAccount(context)) return;
+    const view = active;
+    view.text.value = context.text;
+    view.url.value = context.url;
+    view.text.disabled = context.busy;
+    view.url.disabled = context.busy;
+    view.text.setAttribute('aria-invalid', String(context.invalid === 'text'));
+    view.url.setAttribute('aria-invalid', String(context.invalid === 'url'));
+    view.form.setAttribute('aria-busy', String(context.busy));
+    view.save.disabled = context.busy || context.loading;
+    view.save.textContent = context.busy ? 'Aguarde…' : context.editId ? 'Salvar alterações' : 'Salvar anotação';
+    view.cancel.hidden = !context.editId;
+    view.cancel.disabled = context.busy;
+    view.retry.hidden = !context.loadError;
+    view.retry.disabled = context.busy || context.loading;
+    view.feedback.textContent = context.notice ? context.notice.message : '';
+    view.feedback.className = context.notice
+      ? `form-feedback is-visible ${context.notice.error ? 'error' : 'info'}` : 'form-feedback';
+    view.list.setAttribute('aria-busy', String(context.loading));
+    view.list.replaceChildren();
+    if (!context.entries.length) {
+      view.list.appendChild(element('p', 'lesson-notes-empty', context.loading
+        ? 'Carregando anotações…' : context.loadError
+          ? 'A lista não pôde ser carregada.' : 'Você ainda não tem anotações nesta aula.'));
+    }
+    context.entries.forEach(note => view.list.appendChild(noteCard(context, note)));
+  }
+
+  async function load(context) {
+    if (context.loading || context.busy || !sameAccount(context)) return;
+    context.loading = true;
+    notify(context, 'Carregando suas anotações…');
+    paint(context);
+    try {
+      const { data, error } = await context.client.from('anotacoes').select(columns)
+        .eq('aluno_id', context.userId).eq('aula_index', context.index)
+        .order('criado_em', { ascending: false }).order('id', { ascending: false });
+      if (error) throw error;
+      if (!sameAccount(context)) return;
+      context.entries = (data || []).filter(note => typeof note.id === 'string' && note.aula_index === context.index);
+      context.loaded = true;
+      context.loadError = false;
+      notify(context, `${context.entries.length} anotação(ões) nesta aula.`);
+    } catch (error) {
+      context.loadError = true;
+      notify(context, 'Não foi possível carregar suas anotações. Verifique a conexão e tente novamente.', true);
+    } finally {
+      context.loading = false;
+      paint(context);
+    }
+  }
+
+  async function save(context) {
+    if (context.busy || context.loading || !sameAccount(context)) return;
+    const text = context.text.trim();
+    const rawURL = context.url.trim();
+    const url = imageURL(rawURL);
+    context.invalid = null;
+    if (!text && !rawURL) {
+      context.invalid = 'text';
+      notify(context, 'Escreva uma observação ou informe a URL de um print.', true);
+      paint(context);
+      return;
+    }
+    if (text.length > 10000 || rawURL.length > 2048 || (rawURL && !url)) {
+      context.invalid = text.length > 10000 ? 'text' : 'url';
+      notify(context, context.invalid === 'text'
+        ? 'A observação deve ter no máximo 10.000 caracteres.'
+        : 'Informe uma URL de imagem HTTP ou HTTPS válida, sem usuário ou senha e com até 2.048 caracteres.', true);
+      paint(context);
+      return;
+    }
+    const editId = context.editId;
+    context.busy = true;
+    notify(context, 'Salvando anotação…');
+    paint(context);
+    try {
+      const values = { texto: text, print_url: url, atualizado_em: new Date().toISOString() };
+      const request = editId
+        ? context.client.from('anotacoes').update(values).eq('id', editId)
+          .eq('aluno_id', context.userId).eq('aula_index', context.index)
+        : context.client.from('anotacoes').insert({ ...values, aluno_id: context.userId, aula_index: context.index });
+      const { data, error } = await request.select(columns).single();
+      if (error || !data || typeof data.id !== 'string') throw error || new Error('Anotação não retornada.');
+      if (!sameAccount(context)) return;
+      context.entries = [data, ...context.entries.filter(note => note.id !== data.id)]
+        .sort((a, b) => new Date(b.criado_em).getTime() - new Date(a.criado_em).getTime());
+      resetDraft(context);
+      notify(context, editId ? 'Anotação atualizada.' : 'Anotação salva.');
+    } catch (error) {
+      notify(context, 'Não foi possível salvar a anotação. Seu texto continua no formulário; tente novamente.', true);
+    } finally {
+      context.busy = false;
+      paint(context);
+    }
+  }
+
+  async function removeNote(context, id) {
+    if (context.busy || context.loading || !sameAccount(context)) return;
+    if (!window.confirm('Excluir esta anotação? A exclusão não pode ser desfeita.')) return;
+    context.busy = true;
+    notify(context, 'Excluindo anotação…');
+    paint(context);
+    try {
+      const { data, error } = await context.client.from('anotacoes').delete().eq('id', id)
+        .eq('aluno_id', context.userId).eq('aula_index', context.index).select('id').maybeSingle();
+      if (error || !data) throw error || new Error('Anotação não encontrada.');
+      if (!sameAccount(context)) return;
+      context.entries = context.entries.filter(note => note.id !== id);
+      if (context.editId === id) resetDraft(context);
+      notify(context, 'Anotação excluída.');
+    } catch (error) {
+      notify(context, 'Não foi possível excluir a anotação. Tente novamente.', true);
+    } finally {
+      context.busy = false;
+      paint(context);
+    }
+  }
+
+  function render(root, index) {
+    if (!root) return;
+    const state = authState();
+    const userId = state.user && state.client ? state.user.id : null;
+    if (userId !== lastUserId) { contexts.clear(); active = null; lastUserId = userId; }
+    root.replaceChildren(element('h4', 'lesson-notes-title', 'MINHAS ANOTAÇÕES'));
+    if (!userId) {
+      active = null;
+      const invitation = element('p', 'lesson-notes-invitation');
+      const link = element('a', '', 'Entre para salvar suas anotações');
+      link.href = './login.html';
+      invitation.appendChild(link);
+      root.appendChild(invitation);
+      return;
+    }
+
+    const key = `${userId}:${index}`;
+    if (!contexts.has(key)) contexts.set(key, {
+      userId, index, client: state.client, entries: [], text: '', url: '', editId: null,
+      busy: false, loading: false, loaded: false, loadError: false, notice: null, invalid: null
+    });
+    const context = contexts.get(key);
+    const switched = !active || active.context !== context;
+    const prefix = `lesson-note-${index}`;
+    const form = element('form', 'lesson-notes-form');
+    form.noValidate = true;
+    const textLabel = element('label', 'form-label', 'Observação');
+    textLabel.htmlFor = `${prefix}-text`;
+    const text = element('textarea', 'form-textarea');
+    text.id = textLabel.htmlFor;
+    text.rows = 4;
+    text.maxLength = 10000;
+    text.setAttribute('aria-describedby', `${prefix}-feedback`);
+    text.addEventListener('input', () => { context.text = text.value; });
+    const urlLabel = element('label', 'form-label', 'URL do print (opcional)');
+    urlLabel.htmlFor = `${prefix}-url`;
+    const url = element('input', 'form-input');
+    url.type = 'url';
+    url.id = urlLabel.htmlFor;
+    url.inputMode = 'url';
+    url.maxLength = 2048;
+    url.setAttribute('aria-describedby', `${prefix}-feedback`);
+    url.addEventListener('input', () => { context.url = url.value; });
+    const actions = element('div', 'lesson-note-actions');
+    const saveButton = element('button', 'primary-button', 'Salvar anotação');
+    saveButton.type = 'submit';
+    const cancel = element('button', 'secondary-button', 'Cancelar edição');
+    cancel.type = 'button';
+    cancel.addEventListener('click', () => { resetDraft(context); context.notice = null; paint(context); });
+    actions.appendChild(saveButton);
+    actions.appendChild(cancel);
+    [textLabel, text, urlLabel, url, actions].forEach(child => form.appendChild(child));
+    form.addEventListener('submit', event => { event.preventDefault(); return save(context); });
+    const feedback = element('div', 'form-feedback');
+    feedback.id = `${prefix}-feedback`;
+    feedback.setAttribute('role', 'alert');
+    feedback.setAttribute('aria-live', 'polite');
+    feedback.setAttribute('aria-atomic', 'true');
+    const retry = element('button', 'secondary-button', 'Tentar carregar novamente');
+    retry.type = 'button';
+    retry.addEventListener('click', () => load(context));
+    const list = element('div', 'lesson-notes-list');
+    list.setAttribute('aria-label', 'Anotações desta aula');
+    [form, feedback, retry, list].forEach(child => root.appendChild(child));
+    active = { context, root, form, text, url, save: saveButton, cancel, feedback, retry, list };
+    paint(context);
+    if (!context.loaded || switched) void load(context);
+  }
+
+  return { render };
+})();
+
 let selected = 0;
 
 function renderIcons() {
@@ -309,6 +594,7 @@ function renderCourseDashboard() {
         <p>${lesson.exercise}</p>
         <div class="exercise-expected"><strong>Resultado esperado:</strong> ${lesson.expected}</div>
       </div>
+      <section class="lesson-notes" data-lesson-notes aria-label="Minhas anotações"></section>
       <div class="detail-actions">
         <button class="complete-button ${done ? 'is-complete' : ''}" type="button" id="complete-button">
           <i data-lucide="${done ? 'circle-check' : 'check'}"></i>
@@ -321,6 +607,7 @@ function renderCourseDashboard() {
         </a>
       </div>
     `;
+    lessonNotes.render(detail.querySelector('[data-lesson-notes]'), selected);
   }
 
   updateProgressUI();

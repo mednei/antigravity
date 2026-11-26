@@ -105,3 +105,7 @@ Nenhum arquivo inteiro ficou sem classificação. As lacunas acima não foram pr
 ## Implementação do site: Fase A
 
 A integração opcional de conta e progresso com Supabase tem [instruções próprias](./supabase/README.md) e [schema SQL](./supabase/fase-a-schema.sql). A instalação e a verificação no projeto real ficam com o responsável pelo site; o registro único acompanha as pendências 76 a 78. Os conceitos e comandos específicos de Antigravity da trilha acima mantêm seu status editorial.
+
+## Implementação do site: Fase B
+
+As anotações por aula, com texto e URL de print, têm [instruções próprias](./supabase/fase-b-anotacoes.md), [schema SQL](./supabase/fase-b-schema.sql) e [registro ant_02](../registros/ant/ant_02_fase-b-anotacoes.md). Upload direto fica adiado. Instalação e todas as validações desta fase ficam com o usuário; pendências 79 a 81 no registro único.
